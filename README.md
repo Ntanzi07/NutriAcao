@@ -1,3 +1,6 @@
+# NutriView
+## The objective of this project is to create a website to promote healthy eating habits and help people adopt a better dietary routine
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

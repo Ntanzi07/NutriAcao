@@ -13,17 +13,9 @@ module.exports = {
       },
       colors: {
         "black-100": "#2B2C35",
-        "primary-green": {
-          DEFAULT: "#99cc00",
-          100: "#ecffe6",
-        },
-        "secondary-color":"#cc9900",
-        "secondary-orange": "#f79761",
-        "light-white": {
-          DEFAULT: "rgba(59,60,152,0.03)",
-          100: "rgba(59,60,152,0.02)",
-        },
-        grey: "#747A88",
+        "primary-green": "#8FB339",
+        "secondary-color":"#4B5842",
+        "primary-bg": "#E9F5DB",
       },
       backgroundImage: {
         'pattern': "url('/pattern.png')",

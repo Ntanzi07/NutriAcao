@@ -7,7 +7,7 @@ const CustomBotton = ({ title, containerStyles, handleClick, btnType}: CustomBot
   return (
     <button
       disabled={false}
-      type= 'button'
+      type= {btnType || 'button'}
       className={`custom-btn ${containerStyles}`}
       onClick={handleClick}
     >

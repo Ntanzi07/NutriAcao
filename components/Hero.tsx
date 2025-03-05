@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import CustomBotton from "./CustomBotton"
+import CustomButton from "./CustomButton"
 
 const Hero = () => {
   return (
@@ -14,9 +14,9 @@ const Hero = () => {
           Explore como uma alimentação balanceada pode transformar sua saúde e bem-estar
         </p>
 
-        <CustomBotton
+        <CustomButton
           title="Saiba Mais"
-          containerStyles="bg-secondary-color text-white mt-10"
+          containerStyles="bg-secondary-color text-white mt-10 py-3 px-6"
           handleClick={() => { }}
         />
       </div>

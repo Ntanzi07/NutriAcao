@@ -43,7 +43,7 @@ body{
 
 /* START: Hero styles */
 .hero {
-  @apply flex lg:flex-row flex-col relative h-screen items-center z-0 mx-auto ;
+  @apply flex lg:flex-row flex-col relative h-screen justify-around items-center z-0 mx-auto ;
 }
 
 .hero__text-container{
@@ -62,7 +62,7 @@ body{
 }
 
 .hero__video-container {
-  @apply xl:flex-[2] lg:flex-[1.4] flex w-full lg:h-[75vh] h-[40vw] overflow-hidden ;
+  @apply xl:flex-[2] lg:flex-[1.4] flex w-full lg:h-[75vh] h-[40vh] overflow-hidden ;
 }
 
 .hero__video {
@@ -70,7 +70,7 @@ body{
 }
 /* END: Hero styles */
 
-/* START: Footer styles */
+/* START: Header styles */
 .header__button{
   @apply  text-secondary-color py-2 px-3;
 
@@ -82,7 +82,7 @@ body{
 .header__button-login{
   @apply text-primary-bg bg-secondary-color rounded-full py-2 px-6
 }
-/* END: Hero styles */
+/* END: Header styles */
 
 /* START: Footer styles */
 .footer__button-email{
@@ -106,19 +106,19 @@ body{
   @apply top-[-20px] text-[16px] text-gray-200;
 }
 
-.underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background-color: #333;
-  transform: scaleX(0);
-  transition: all 0.3s ease;
+/* END: Footer styles */
+
+/* Start: About styles */
+
+.about__title{
+  @apply 2xl:text-[72px] lg:text-[55px] text-[50px] text-primary-green;; 
 }
 
-.input-container input[type="text"]:focus ~ .underline,
-.input-container input[type="text"]:valid ~ .underline {
-  transform: scaleX(1);
+.about__text-container{
+  @apply flex flex-col gap-5 lg:w-[350px] w-[400px] text-secondary-color;
 }
-/* END: Footer styles */
+.about__text-container h2{
+  @apply text-[35px];
+}
+
+/* END: About styles */

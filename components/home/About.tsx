@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <section className=' flex flex-col gap-10 padding-x padding-y'>
+    <section className=' flex flex-col gap-10 padding-x py-16'>
       <h1 className='about__title'>Sobre o <b>NutriAção</b></h1>
       <div className='flex flex-wrap justify-around gap-10'>
         <div className='about__text-container'>

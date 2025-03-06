@@ -111,7 +111,7 @@ body{
 /* Start: About styles */
 
 .about__title{
-  @apply 2xl:text-[72px] lg:text-[55px] text-[50px] text-primary-green;; 
+  @apply 2xl:text-[72px] lg:text-[55px] text-[50px] text-primary-green;
 }
 
 .about__text-container{
@@ -122,3 +122,18 @@ body{
 }
 
 /* END: About styles */
+
+/* Start: Nutricionista styles */
+
+.nutri__title{
+  @apply 2xl:text-[72px] lg:text-[55px] text-[50px] text-primary-bg; 
+}
+
+.nutri__text-container{
+  @apply flex flex-col gap-5 lg:w-[350px] w-[400px] text-primary-bg;
+}
+.nutri__text-container h2{
+  @apply text-[35px];
+}
+
+/* END: Nutricionista styles */

@@ -22,7 +22,7 @@ const Hero = () => {
       </div>
 
       <div className="hero__video-container">
-        <video src={require('../public/videos/heroTest.mp4')} autoPlay muted loop className="hero__video"/>
+        <video src={require('../public/videos/heroTest.mp4')} autoPlay muted playsInline disablePictureInPicture loop className="hero__video"/>
       </div>
     </div>
   )

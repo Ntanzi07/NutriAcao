@@ -9,10 +9,10 @@ const Footer = () => {
     <div className='bg-secondary-color py-10 items-center flex flex-col padding-x'>
       <div className='flex flex-row justify-between items-center w-full gap-5 md:flex-nowrap flex-wrap'>
         <Image
-          src="/logo.svg"
+          src="/logo.png"
           alt="Nutriação logo"
-          width={118}
-          height={18}
+          width={150}
+          height={150}
           className="object-contain"
         />
         <p className='footer__text'>Assine agora a newsletter e receba todas as novidades por e-mail</p>

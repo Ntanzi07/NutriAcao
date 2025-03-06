@@ -9,10 +9,10 @@ const Navbar = () => {
       <nav className='max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4'>
         <Link href="/" className="flex justify-center items-center">
           <Image
-            src="/logos2.png"
+            src="/logo2.png"
             alt="Nutriação logo"
-            width={118}
-            height={18}
+            width={150}
+            height={150}
             className="object-contain"
           />
         </Link>

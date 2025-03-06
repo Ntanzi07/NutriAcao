@@ -40,6 +40,11 @@ body{
 .custom-btn {
   @apply flex flex-row relative justify-center items-center;
 }
+
+#detach-button-host {
+  display: none !important;
+}
+
 /* END: General styles */
 
 /* START: Hero styles */
@@ -63,7 +68,7 @@ body{
 }
 
 .hero__video-container {
-  @apply xl:flex-[2] lg:flex-[1.4] flex w-full lg:h-[75vh] h-[40vh] overflow-hidden ;
+  @apply xl:flex-[2] lg:flex-[1.4] flex w-full lg:h-[75vh] h-[40vh] overflow-hidden lg:rounded-l-3xl;
 }
 
 .hero__video {

@@ -14,5 +14,4 @@ export {
   About,
   Nutricionista,
   StartAI
-  
 }

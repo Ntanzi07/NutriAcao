@@ -5,11 +5,11 @@ import Link from 'next/link'
 
 const Navbar = () => {
   return (
-    <header className='w-full lg:absolute relative z-10 '>
+    <header className='w-full lg:absolute relative z-10'>
       <nav className='max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4'>
         <Link href="/" className="flex justify-center items-center">
           <Image
-            src="/logo.svg"
+            src="/logos2.png"
             alt="Nutriação logo"
             width={118}
             height={18}

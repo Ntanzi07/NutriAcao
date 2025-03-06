@@ -14,8 +14,8 @@ module.exports = {
       colors: {
         "black-100": "#2B2C35",
         "primary-green": "#8FB339",
-        "secondary-color":"#4B5842",
-        "primary-bg": "#E9F5DB",
+        "secondary-color":"#70663e",
+        "primary-bg": "#f4f4eb",
       },
       backgroundImage: {
         'pattern': "url('/pattern.png')",

@@ -6,27 +6,26 @@ const Nutricionista = () => {
     <section className='relative bg-secondary-color z-[-2]'>
       <Image src="/food.jpg" alt='food' fill className='object-cover z-[-1] brightness-[0.5]' />
       <div className=' flex flex-col gap-10 padding-x py-16 z-10'>
-        <h1 className='nutri__title'>Sobre o <b>NutriAção</b></h1>
+        <h1 className='nutri__title'>Seu Nutricionista Virtual <b>24/7</b></h1>
         <div className='flex flex-wrap justify-around gap-10'>
           <div className='nutri__text-container'>
-            <h2>Personalização Excepcional</h2>
+            <h2>Acesso Imediato</h2>
             <p>
-              Nossa abordagem Personalizada adapta planos de nutrição às necessidades especificas de cada usuário
-              , utilizando dados detalhados para oferecer soluções verdadeiramente individualizadas.
+              Obtenha respostas instantâneas para suas perguntas sobre nutrição a qualquer hora, em qualquer lugar.
             </p>
           </div>
           <div className='nutri__text-container'>
-            <h2>Tecnologia e Humanização</h2>
+            <h2>Interativo e Engajador</h2>
             <p>
-              Combinamos tecnologia avançada e expertise humana para proporcionar suporte personalizado,
-              otimizando a saúde de nossos usuários com uma experiência rica e acolhedora.
+              Nossa tecnologia de IA simula uma conversa real com um nutricionista, tornando o aprendizado 
+              sobre nutrição divertido e acessível.
             </p>
           </div>
           <div className='nutri__text-container'>
-            <h2>Inovação e Excelência</h2>
+            <h2>Suporte Personalizado</h2>
             <p>
-              Lideramos o setor de nutrição com inovação contínuas e excelência no atendimento ao cliente,
-              sempre estabelecendo novos padrões de qualidade e eficácia.
+              Nosso chat considera suas informações pessoais para oferecer conselhos adaptados,
+              ajudando você a tomar decisões alimentares mais informadas.
             </p>
           </div>
         </div>

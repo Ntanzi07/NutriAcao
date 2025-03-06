@@ -115,7 +115,7 @@ body{
 }
 
 .about__text-container{
-  @apply flex flex-col gap-5 lg:w-[350px] w-[400px] text-secondary-color;
+  @apply flex flex-col gap-5 lg:w-[350px] w-full text-secondary-color;
 }
 .about__text-container h2{
   @apply text-[2em];
@@ -130,7 +130,7 @@ body{
 }
 
 .nutri__text-container{
-  @apply flex flex-col gap-5 lg:w-[350px] w-[400px] text-primary-bg;
+  @apply flex flex-col gap-5 lg:w-[350px] w-full text-primary-bg;
 }
 .nutri__text-container h2{
   @apply text-[2em];

@@ -63,10 +63,6 @@ body{
   @apply text-[1.5em] text-secondary-color font-light mt-5;
 }
 
-.hero__button {
-  @apply py-1 px-6;
-}
-
 .hero__video-container {
   @apply xl:flex-[2] lg:flex-[1.4] flex w-full lg:h-[75vh] h-[40vh] overflow-hidden lg:rounded-l-3xl;
 }
@@ -78,7 +74,7 @@ body{
 
 /* START: Header styles */
 .header__button{
-  @apply  text-secondary-color py-2 px-3;
+  @apply  text-secondary-color py-2 px-3 underline;
 
 }
 .header__button:hover{
@@ -144,20 +140,58 @@ body{
 
 /* END: Nutricionista styles */
 
-/* Start: OurValues styles */
-.ourvalues {
-  @apply flex flex-col relative h-screen justify-center items-start z-0 mx-auto padding-x;
+/* Start: whoweare styles */
+.whoweare {
+  @apply padding-x lg:h-screen flex flex-col py-[5rem] gap-5;
+}
+.whoweare__hero {
+  @apply relative overflow-hidden rounded-[4rem];
 }
 
-.ourvalues__title{
-  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-green; 
+.whoweare__title{
+  @apply 2xl:text-[4em] lg:text-[3.2em] sm:text-[2.9em] text-[2.3em] text-primary-bg drop-shadow-2xl; 
 }
 
-.ourvalues__subtitle {
-  @apply lg:text-[1.5em] lg:max-w-[70%] text-[1em];
+.whoweare__subtitle {
+  @apply lg:text-[1.3em] lg:max-w-[70%] text-[1.1em] text-secondary-color;
 }
 
-.ourvalues__card-container{
-  @apply flex flex-row flex-wrap;
+.whoweare__text{
+  @apply flex flex-col gap-5 padding-x text-center items-center;
 }
-/* END: OurValues styles */
+
+
+/* END: whoweare styles */
+
+/* Start: equipe styles */
+.equipe {
+  @apply padding-x ;
+}
+
+.equipe__text {
+  @apply lg:text-[3.5em] text-[3em] text-primary-green;
+}
+
+.equipe__card-container{
+  @apply w-full flex flex-row gap-5 flex-wrap justify-around;
+}
+/* END: equipe styles */
+
+/* Start: cards styles */
+
+.card{
+  @apply flex flex-col gap-5 w-auto p-3 rounded-[1.75rem];
+}
+
+.card__image-container{
+  @apply relative w-[250px] h-[250px] overflow-hidden rounded-[1rem] justify-center;
+}
+
+.card__text-container{
+  @apply flex flex-col items-center justify-around text-secondary-color;
+}
+
+.card__name{
+  @apply lg:text-[1.6em] text-[1.4em];
+}
+/* END: cards styles */

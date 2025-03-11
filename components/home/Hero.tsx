@@ -17,7 +17,7 @@ const Hero = () => {
         <Link href="/quemSomos">
           <CustomButton
             title="Saiba Mais"
-            containerStyles="bg-secondary-color text-white mt-10 py-3 px-6"
+            containerStyles="bg-secondary-color underline text-white mt-10 py-3 px-6"
             handleClick={() => { }}
           />
         </Link>

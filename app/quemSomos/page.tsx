@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { OurValues, Vision, WhoWeAre } from "@/components/quemSomos";
+import { OurValues, Vision, WhoWeAre, Equipe} from "@/components/quemSomos";
 
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      <OurValues />
-      <Vision />
       <WhoWeAre />
+      <Equipe />
+      <Vision />
+      <OurValues />
     </main>
   );
 }

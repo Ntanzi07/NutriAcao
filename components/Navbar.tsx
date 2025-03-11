@@ -11,17 +11,17 @@ const Navbar = () => {
           <Image
             src="/logo2.png"
             alt="Nutriação logo"
-            width={150}
-            height={150}
+            width={120}
+            height={120}
             className="object-contain"
           />
         </Link>
         <div className='flex flex-row gap-1'>
-        <Link href="/quemSomos"><CustomButton title='Quem somos' btnType="button" containerStyles='header__button'/></Link>
-        <Link href="/CalculadoraTMB"><CustomButton title='Calculadora TMB' btnType="button" containerStyles='header__button'/></Link>
-        <Link href="/ChatBot"><CustomButton title='Chat Bot' btnType="button" containerStyles='header__button'/></Link>
-        <Link href="/Blog"><CustomButton title='Blog' btnType="button" containerStyles='header__button'/></Link>
-        <CustomButton title='sing in' btnType="button" containerStyles='header__button-login'/>
+          <Link href="/quemSomos"><CustomButton title='Quem somos' btnType="button" containerStyles='header__button' /></Link>
+          <Link href="/CalculadoraTMB"><CustomButton title='Calculadora TMB' btnType="button" containerStyles='header__button' /></Link>
+          <Link href="/ChatBot"><CustomButton title='Chat Bot' btnType="button" containerStyles='header__button' /></Link>
+          <Link href="/Blog"><CustomButton title='Blog' btnType="button" containerStyles='header__button' /></Link>
+          <CustomButton title='sing in' btnType="button" containerStyles='header__button-login' />
         </div>
       </nav>
     </header>

@@ -56,7 +56,7 @@ body{
   @apply lg:flex-1 flex flex-col items-start justify-center padding-y padding-x;
 }
 .hero__title {
-  @apply lg:text-[3.2em] text-[2.9em] text-primary-green;
+  @apply 2xl:text-[4.5em] lg:text-[3.2em] text-[2.9em] text-primary-green;
 }
 
 .hero__subtitle {
@@ -117,14 +117,14 @@ body{
 /* Start: About styles */
 
 .about__title{
-  @apply lg:text-[3.2em] text-[2.9em] text-primary-green;
+  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-green;
 }
 
 .about__text-container{
   @apply flex flex-col gap-5 lg:w-[350px] w-full text-secondary-color;
 }
 .about__text-container h2{
-  @apply text-[2em];
+  @apply 2xl:text-[2.5em] text-[2em];
 }
 
 /* END: About styles */
@@ -132,14 +132,32 @@ body{
 /* Start: Nutricionista styles */
 
 .nutri__title{
-  @apply lg:text-[3.2em] text-[2.9em] text-primary-bg; 
+  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-bg; 
 }
 
 .nutri__text-container{
   @apply flex flex-col gap-5 lg:w-[350px] w-full text-primary-bg;
 }
 .nutri__text-container h2{
-  @apply text-[2em];
+  @apply 2xl:text-[2.5em] text-[2em];
 }
 
 /* END: Nutricionista styles */
+
+/* Start: OurValues styles */
+.ourvalues {
+  @apply flex flex-col relative h-screen justify-center items-start z-0 mx-auto padding-x;
+}
+
+.ourvalues__title{
+  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-green; 
+}
+
+.ourvalues__subtitle {
+  @apply lg:text-[1.5em] lg:max-w-[70%] text-[1em];
+}
+
+.ourvalues__card-container{
+  @apply flex flex-row flex-wrap;
+}
+/* END: OurValues styles */

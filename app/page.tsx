@@ -1,4 +1,5 @@
-import { About, Hero, Nutricionista, StartAI } from "@/components";
+
+import { Hero, About, Nutricionista, StartAI} from "@/components/home";
 import Image from "next/image";
 
 export default function Home() {

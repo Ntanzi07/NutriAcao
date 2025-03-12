@@ -160,12 +160,11 @@ body{
   @apply flex flex-col gap-5 padding-x text-center items-center;
 }
 
-
 /* END: whoweare styles */
 
 /* Start: equipe styles */
 .equipe {
-  @apply padding-x ;
+  @apply padding-x padding-y;
 }
 
 .equipe__text {
@@ -195,3 +194,26 @@ body{
   @apply lg:text-[1.6em] text-[1.4em];
 }
 /* END: cards styles */
+
+/* Start: ourValues styles */
+.ourvalues {
+  @apply flex justify-between bg-primary-green text-primary-bg h-[70vh] gap-5;
+}
+
+.ourvalues__text-container {
+  @apply flex-[2] flex flex-col gap-5 padding-x h-full justify-center;
+}
+
+.ourvalues__title {
+  @apply lg:text-[3.5em] text-[3em];
+}
+
+.ourvalues__item{
+  @apply bg-secondary-color py-2 px-5 rounded-full flex gap-2 text-[1.7em];
+}
+
+.ourvalues__image-container{
+  @apply  hidden lg:flex xl:flex-1 flex-[2] relative w-[500px] h-full overflow-hidden;
+}
+/* END: ourValues styles */
+

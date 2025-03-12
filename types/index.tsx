@@ -12,3 +12,7 @@ export interface CustomCardProps {
   style: string;
   path: string;
 }
+
+export interface OurValuesItenProps {
+  text: string;
+}

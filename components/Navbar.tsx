@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import CustomButton from './CustomButton'
 import Link from 'next/link'
+import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
   return (
@@ -21,7 +22,16 @@ const Navbar = () => {
           <Link href="/calculadoraTMB"><CustomButton title='Calculadora TMB' btnType="button" containerStyles='header__button' /></Link>
           <Link href="/chatbot"><CustomButton title='Chat Bot' btnType="button" containerStyles='header__button' /></Link>
           <Link href="/blog"><CustomButton title='Blog' btnType="button" containerStyles='header__button' /></Link>
-          <CustomButton title='sing in' btnType="button" containerStyles='header__button-login' />
+          <ClerkProvider>
+            <SignedOut>
+              <SignInButton>
+                <button className='header__button-login custom-btn'>Sign in</button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton/>
+            </SignedIn>
+          </ClerkProvider>
         </div>
       </nav>
     </header>

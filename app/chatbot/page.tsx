@@ -1,9 +1,12 @@
 import { Chat } from "@/components/chatbot";
+import ConvexClientProvider from "@/providers/ConvexClientProvider";
 
 export default function ChatBot() {
   return (
-    <main className="overflow-hidden">
-      <Chat />
-    </main>
+    <ConvexClientProvider>
+      <main className="overflow-hidden">
+        <Chat />
+      </main>
+    </ConvexClientProvider>
   );
 }

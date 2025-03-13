@@ -17,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className="relative">
-        <ConvexClientProvider>
           {children}
-        </ConvexClientProvider>
       </body>
     </html>
   );

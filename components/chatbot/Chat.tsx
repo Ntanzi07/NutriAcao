@@ -45,7 +45,6 @@ const Chat = () => {
             {msg.content}
           </div>
         ))}
-        <div>a</div>
 
       </div>
 

@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
 // "gpt-4o"
-const model = "Phi-3.5-MoE-instruct"
+// "Phi-3.5-MoE-instruct"
+const model = "gpt-4o"
 
 export async function POST(req: Request) {
   const { message } = await req.json();
@@ -15,10 +16,29 @@ export async function POST(req: Request) {
   const response = await client.chat.completions.create({
     model: model,
     messages: [
-      { role: "system", content: "You are a helpful Nutricionist, your name is Sarah, and is happy to help the user with a healthly alimentation." },
-      { role: "user", content: message }
+      {
+        role: "system",
+        content:
+          "You are a helpful Nutritionist, your name is Sarah",
+      },
+      { role: "user", content: message },
     ],
+    stream: true,
+    stream_options: {include_usage: true}
   });
 
-  return NextResponse.json({ reply: response.choices[0].message.content });
+  const stream = new ReadableStream({
+    async start(controller) {
+      for await (const chunk of response) {
+        const text = chunk.choices[0]?.delta?.content || "";
+        const encoder = new TextEncoder();
+        controller.enqueue(encoder.encode(text));
+      }
+      controller.close();
+    },
+  });
+
+  return new Response(stream, {
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
 }

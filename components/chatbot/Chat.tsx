@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import ReactMarkdown from "react-markdown";
 
 const Chat = () => {
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
@@ -43,6 +44,7 @@ const Chat = () => {
           return updatedMessages;
         });
       }
+      console.log(messages);
     } catch (error) {
       console.error('Error fetching response:', error);
       setMessages((prev) => [...prev, { role: 'assistant', content: 'Error: Unable to fetch response.' }]);
@@ -52,32 +54,37 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen py-20 px-4">
-      {/* Chat Display */}
-      <div className="flex flex-col h-full border p-3 rounded bg-white overflow-auto px-4">
+    <div className="flex flex-col h-screen py-20 ">
+      <div className="flex flex-col h-full p-3 padding-x rounded overflow-auto px-4">
+        <div className={`markdonw-content-firstmessage`}>
+          Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!
+        </div>
         {messages.map((msg, index) => (
-          <div key={index} className={`mb-2 p-2 w-fit max-w-[90%] rounded ${msg.role === 'user' ? 'bg-blue-300 self-end' : 'bg-gray-300 text-left'}`}>
-            {msg.content}
+          <div key={index} className={`markdonw-content ${msg.role === 'user' ? 'markdonw-content-user' : 'markdonw-content-ai'}`}>
+            <ReactMarkdown>
+              {msg.content}
+            </ReactMarkdown>
           </div>
         ))}
       </div>
 
-      {/* Input Field */}
-      <div className="flex items-center mt-4">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="flex-1 p-2 border rounded"
-          placeholder="Type a message..."
-        />
-        <button
-          onClick={handleSendMessage}
-          className="ml-2 p-2 bg-blue-500 text-white rounded disabled:bg-gray-400"
-          disabled={loading}
-        >
-          {loading ? '...' : 'Send'}
-        </button>
+      <div className="padding-x mt-4">
+        <div className='chat__input-container'>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="chat__input"
+            placeholder="Pergunte alguma coisa..."
+          />
+          <button
+            onClick={handleSendMessage}
+            className="ml-2 py-2 px-4 bg-primary-green text-white rounded-full disabled:bg-gray-400"
+            disabled={loading}
+          >
+            {loading ? '...' : 'Send'}
+          </button>
+        </div>
       </div>
     </div>
   );

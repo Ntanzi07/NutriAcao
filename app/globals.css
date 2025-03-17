@@ -217,3 +217,48 @@ body{
 }
 /* END: ourValues styles */
 
+/* Start: ChatBot styles */
+
+.chat__input-container{
+  @apply flex items-center bg-secondary-color py-2 px-4 rounded-full;
+}
+
+.chat__input{
+  @apply flex-1 text-primary-bg p-2 border-none rounded bg-transparent;
+}
+.chat__input:focus{
+  @apply outline-none;
+}
+
+.markdonw-content {
+  @apply py-2 px-4 w-fit rounded-full text-[1.1em];
+}
+
+.markdonw-content-firstmessage{
+  @apply  w-fit h-fit items-center text-center self-center text-[1.5em] max-w-[600px] mb-4;
+}
+
+.markdonw-content-user {
+  @apply bg-primary-green self-end mb-4;
+}
+
+.markdonw-content-ai {
+  @apply text-left;
+}
+
+.markdonw-content-ai p{
+  @apply mb-4;
+}
+
+.markdonw-content-ai ul, ol{
+  @apply mb-4 ml-[40px] list-disc;
+}
+
+.markdonw-content-ai h3{
+  @apply text-lg mb-4;
+}
+
+.markdonw-content-ai hr{
+  @apply bg-primary-green rounded-full border-none my-[20px] h-[3px];
+}
+/* END: ChatBot styles */

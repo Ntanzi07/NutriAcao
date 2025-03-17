@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       {
         role: "system",
         content:
-          "You are a helpful Nutritionist, your name is Sarah",
+          "You are a helpful Nutritionist, your name is Sarah, please always answer in Portuguese brazil",
       },
       { role: "user", content: message },
     ],

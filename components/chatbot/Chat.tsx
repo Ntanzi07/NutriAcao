@@ -55,7 +55,7 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col h-screen py-20 ">
-      <div className="flex flex-col h-full p-3 padding-x rounded overflow-auto px-4">
+      <div className="flex flex-col h-full rounded overflow-auto lg:px-[20vw] padding-x">
         <div className={`markdonw-content-firstmessage`}>
           Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!
         </div>
@@ -68,7 +68,7 @@ const Chat = () => {
         ))}
       </div>
 
-      <div className="padding-x mt-4">
+      <div className="lg:px-[20vw] padding-x mt-4">
         <div className='chat__input-container'>
           <input
             type="text"

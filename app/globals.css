@@ -12,7 +12,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
   @apply bg-primary-bg;
 }
 
@@ -49,12 +49,13 @@ body{
 
 /* START: Hero styles */
 .hero {
-  @apply flex lg:flex-row flex-col relative h-screen justify-around items-center z-0 mx-auto ;
+  @apply flex lg:flex-row flex-col relative h-screen justify-around items-center z-0 mx-auto;
 }
 
-.hero__text-container{
+.hero__text-container {
   @apply lg:flex-1 flex flex-col items-start justify-center padding-y padding-x;
 }
+
 .hero__title {
   @apply 2xl:text-[4.5em] lg:text-[3.2em] text-[2.9em] text-primary-green;
 }
@@ -68,31 +69,34 @@ body{
 }
 
 .hero__video {
-  @apply object-cover w-full ;
+  @apply object-cover w-full;
 }
+
 /* END: Hero styles */
 
 /* START: Header styles */
-.header__button{
-  @apply  text-secondary-color py-2 px-3 underline;
+.header__button {
+  @apply text-secondary-color py-2 px-3 underline;
 
 }
-.header__button:hover{
-  @apply  text-primary-bg bg-secondary-color 
+
+.header__button:hover {
+  @apply text-primary-bg bg-secondary-color
 }
 
-.header__button-login{
+.header__button-login {
   @apply text-primary-bg bg-secondary-color rounded-full py-2 px-6
 }
+
 /* END: Header styles */
 
 /* START: Footer styles */
-.footer__button-email{
+.footer__button-email {
   @apply text-primary-bg bg-primary-green rounded-full py-1 px-6
 }
 
-.footer__text{
-  @apply text-primary-bg 
+.footer__text {
+  @apply text-primary-bg
 }
 
 .footer__input {
@@ -103,8 +107,8 @@ body{
   @apply absolute top-[5px] left-[0] transition-all duration-300 ease-in-out text-[18px];
 }
 
-.footer__input:focus ~ .footer__label,
-.footer__input:invalid ~ .footer__label {
+.footer__input:focus~.footer__label,
+.footer__input:invalid~.footer__label {
   @apply top-[-20px] text-[16px] text-gray-200;
 }
 
@@ -112,14 +116,15 @@ body{
 
 /* Start: About styles */
 
-.about__title{
+.about__title {
   @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-green;
 }
 
-.about__text-container{
+.about__text-container {
   @apply flex flex-col gap-5 lg:w-[350px] w-full text-secondary-color;
 }
-.about__text-container h2{
+
+.about__text-container h2 {
   @apply 2xl:text-[2.5em] text-[2em];
 }
 
@@ -127,14 +132,15 @@ body{
 
 /* Start: Nutricionista styles */
 
-.nutri__title{
-  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-bg; 
+.nutri__title {
+  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-bg;
 }
 
-.nutri__text-container{
+.nutri__text-container {
   @apply flex flex-col gap-5 lg:w-[350px] w-full text-primary-bg;
 }
-.nutri__text-container h2{
+
+.nutri__text-container h2 {
   @apply 2xl:text-[2.5em] text-[2em];
 }
 
@@ -144,19 +150,20 @@ body{
 .whoweare {
   @apply padding-x lg:h-screen flex flex-col py-[5rem] gap-5;
 }
+
 .whoweare__hero {
   @apply relative overflow-hidden rounded-[4rem];
 }
 
-.whoweare__title{
-  @apply 2xl:text-[4em] lg:text-[3.2em] sm:text-[2.9em] text-[2.3em] text-primary-bg drop-shadow-2xl; 
+.whoweare__title {
+  @apply 2xl:text-[4em] lg:text-[3.2em] sm:text-[2.9em] text-[2.3em] text-primary-bg drop-shadow-2xl;
 }
 
 .whoweare__subtitle {
   @apply lg:text-[1.3em] lg:max-w-[70%] text-[1.1em] text-secondary-color;
 }
 
-.whoweare__text{
+.whoweare__text {
   @apply flex flex-col gap-5 padding-x text-center items-center;
 }
 
@@ -171,28 +178,30 @@ body{
   @apply lg:text-[3.5em] text-[3em] text-primary-green;
 }
 
-.equipe__card-container{
+.equipe__card-container {
   @apply w-full flex flex-row gap-5 flex-wrap justify-around;
 }
+
 /* END: equipe styles */
 
 /* Start: cards styles */
 
-.card{
+.card {
   @apply flex flex-col gap-5 w-auto p-3 rounded-[1.75rem];
 }
 
-.card__image-container{
+.card__image-container {
   @apply relative w-[250px] h-[250px] overflow-hidden rounded-[1rem] justify-center;
 }
 
-.card__text-container{
+.card__text-container {
   @apply flex flex-col items-center justify-around text-secondary-color;
 }
 
-.card__name{
+.card__name {
   @apply lg:text-[1.6em] text-[1.4em];
 }
+
 /* END: cards styles */
 
 /* Start: ourValues styles */
@@ -208,25 +217,29 @@ body{
   @apply lg:text-[3.5em] text-[3em];
 }
 
-.ourvalues__item{
+.ourvalues__item {
   @apply bg-secondary-color py-2 px-5 rounded-full flex gap-2 text-[1.7em];
 }
 
-.ourvalues__image-container{
-  @apply  hidden lg:flex xl:flex-1 flex-[2] relative w-[500px] h-full overflow-hidden;
+.ourvalues__image-container {
+  @apply hidden lg:flex xl:flex-1 flex-[2] relative w-[500px] h-full overflow-hidden;
 }
+
 /* END: ourValues styles */
 
 /* Start: ChatBot styles */
 
-.chat__input-container{
-  @apply flex items-center bg-secondary-color py-2 px-4 rounded-full;
+.chat__input-container {
+  @apply flex items-end bg-secondary-color py-2 px-4 rounded-3xl;
 }
 
-.chat__input{
-  @apply flex-1 text-primary-bg p-2 border-none rounded bg-transparent;
+.chat__input {
+  @apply flex-1 flex text-primary-bg py-2 
+  px-4 resize-none overflow-hidden border-none 
+  rounded bg-transparent h-[10px] items-end;
 }
-.chat__input:focus{
+
+.chat__input:focus {
   @apply outline-none;
 }
 
@@ -234,8 +247,8 @@ body{
   @apply py-2 px-4 w-fit rounded-full text-[1.1em];
 }
 
-.markdonw-content-firstmessage{
-  @apply  w-fit h-fit items-center text-center self-center text-[1.5em] max-w-[600px] mb-4;
+.markdonw-content-firstmessage {
+  @apply w-fit h-fit items-center text-center self-center text-[1.5em] max-w-[600px] mb-4;
 }
 
 .markdonw-content-user {
@@ -246,19 +259,21 @@ body{
   @apply text-left;
 }
 
-.markdonw-content-ai p{
+.markdonw-content-ai p {
   @apply mb-4;
 }
 
-.markdonw-content-ai ul, ol{
+.markdonw-content-ai ul,
+ol {
   @apply mb-4 ml-[40px] list-disc;
 }
 
-.markdonw-content-ai h3{
+.markdonw-content-ai h3 {
   @apply text-lg mb-4;
 }
 
-.markdonw-content-ai hr{
+.markdonw-content-ai hr {
   @apply bg-primary-green rounded-full border-none my-[20px] h-[3px];
 }
+
 /* END: ChatBot styles */

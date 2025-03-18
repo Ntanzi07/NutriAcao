@@ -1,12 +1,26 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from "react-markdown";
 
 const Chat = () => {
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const adjustHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "10px";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Expand dynamically
+    }
+  };
+
+  useEffect(() => {
+    adjustHeight();
+  }, [input]);
+
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
@@ -53,9 +67,18 @@ const Chat = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen py-20 ">
-      <div className="flex flex-col h-full rounded overflow-auto lg:px-[20vw] padding-x">
+      <div className={`flex flex-col h-full rounded overflow-auto lg:px-[20vw] padding-x 
+        ${(messages.length === 0) ? 'justify-center' : 'justify-start'}`
+      }>
         <div className={`markdonw-content-firstmessage`}>
           Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!
         </div>
@@ -70,12 +93,13 @@ const Chat = () => {
 
       <div className="lg:px-[20vw] padding-x mt-4">
         <div className='chat__input-container'>
-          <input
-            type="text"
+          <textarea
+            ref={textareaRef}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
             className="chat__input"
             placeholder="Pergunte alguma coisa..."
+            onChange={(e) => { setInput(e.target.value) }}
+            onKeyDown={handleKeyDown}
           />
           <button
             onClick={handleSendMessage}

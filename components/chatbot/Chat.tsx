@@ -3,7 +3,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from "react-markdown";
 
-const Chat = () => {
+type Props = {
+  chatid: string | null,
+}
+
+const Chat = ({ chatid }: Props) => {
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -75,7 +79,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen py-20 ">
+    <div className="flex flex-col w-full h-screen py-20 ">
       <div className={`flex flex-col h-full rounded overflow-auto lg:px-[20vw] padding-x 
         ${(messages.length === 0) ? 'justify-center' : 'justify-start'}`
       }>

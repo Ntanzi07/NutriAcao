@@ -17,9 +17,9 @@ export default function ChatBot() {
   return (
     <ConvexClientProvider>
       <main className="flex overflow-hidden">
-        <button className={`lg:inline hidden absolute top-5 left-5 
+        <button className={`absolute top-5 left-5 
           ${activedOptions
-            ? 'rotate-180'
+            ? 'hidden rotate-180'
             : 'rotate-0 '}`
         } onClick={() => setActivedOptions(!activedOptions)}>
           <svg width="60" height="60" className="fill-secondary-color" viewBox="0 0 128 128">

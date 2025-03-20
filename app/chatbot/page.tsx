@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function ChatBot() {
   const id = useSearchParams().get("userid");
-  const [activedOptions, setActivedOptions] = useState(false);
+  const [activedOptions, setActivedOptions] = useState(true);
 
   function changeOption() {
     setActivedOptions(!activedOptions);

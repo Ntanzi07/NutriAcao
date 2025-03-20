@@ -1,7 +1,10 @@
 'use client'
 
+import { api } from '@/convex/_generated/api'
 import { UserButton } from '@clerk/nextjs'
+import { useQuery } from 'convex/react'
 import React, { useState } from 'react'
+import DMConversationItem from './DMConversationItem'
 
 type Props = {
   activedOptions: boolean,
@@ -10,7 +13,7 @@ type Props = {
 
 const ChatOptions = ({ activedOptions, setOptions }: Props) => {
 
-  // const [activedOptions, setActivedOptions] = useState(false);
+  const conversations = useQuery(api.conversations.get)
 
   const userButtonAppearance = {
     elements: {
@@ -48,15 +51,18 @@ const ChatOptions = ({ activedOptions, setOptions }: Props) => {
           </div>
         </div>
 
-        <div className='flex flex-col'>
-          <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Ontem</h3>
-          <div className='rounded-lg w-full px-2 py-2 hover:bg-secondary-color'>
-            chat 1 ok
-          </div>
-          <div className='rounded-lg w-full px-2 py-2 hover:bg-secondary-color'>
-            chat 1 ok
-          </div>
-        </div>
+        {conversations
+          ? conversations.length === 0
+            ? <p>Sem conversa</p>
+            : conversations.map((conversations) => {
+              return <DMConversationItem 
+              key={conversations._id} 
+              id={conversations._id}
+              text={conversations.name}
+              />
+            })
+          : <p>carregando...</p>
+        }
 
       </div>
     </div>

@@ -17,7 +17,7 @@ export default function ChatBot() {
   return (
     <ConvexClientProvider>
       <main className="flex overflow-hidden">
-        <button className={`absolute top-5 left-5 
+        <button className={`absolute top-5 left-5 bg-primary-bg rounded-full
           ${activedOptions
             ? 'hidden rotate-180'
             : 'rotate-0 '}`

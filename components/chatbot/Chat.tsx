@@ -104,8 +104,8 @@ const Chat = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col w-full h-screen py-20 items-center">
-      <div className='flex justify-center h-full w-full overflow-auto'>
+    <div className="flex flex-col w-full h-screen pb-10 items-center">
+      <div className='flex justify-center h-full w-full overflow-auto pt-20'>
         <div className={`flex max-w-[60rem] flex-col h-full rounded overflow-visible padding-x 
         ${(messages.length === 1) ? 'justify-center' : 'justify-start'}`
         }>

@@ -41,17 +41,8 @@ const ChatOptions = (props: Props) => {
         </button>
       </div>
       <hr className={`bg-secondary-color rounded-full border-none h-[2px] ${props.activedOptions ? 'inline' : 'lg:inline hidden'}`} />
-      <div className={` flex-col gap-4 px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
-        <div className='flex flex-col'>
-          <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Hoje</h3>
-          <div className='rounded-lg w-full px-2 py-2 hover:bg-secondary-color'>
-            chat 1 ok
-          </div>
-          <div className='rounded-lg w-full px-2 py-2 hover:bg-secondary-color'>
-            chat 1 ok
-          </div>
-        </div>
-
+      <div className={` flex-col px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
+          <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Seus chats:</h3>
         {conversations
           ? conversations.length === 0
             ? <p>Sem conversa</p>

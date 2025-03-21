@@ -24,9 +24,9 @@ const ChatOptions = (props: Props) => {
     },
   };
   return (
-    <div className={`chatOptions overflow-hidden lg:border-r-2 w-[20rem] ${props.activedOptions
-      ? 'lg:w-[450px] left-0 bg-primary-bg border-r-2'
-      : 'lg:left-0 lg:w-0 left-[-20rem]'}`
+    <div className={`chatOptions overflow-hidden lg:border-r-2 w-[18rem] ${props.activedOptions
+      ? 'lg:w-[400px] left-0 bg-primary-bg border-r-2'
+      : 'lg:left-0 lg:w-0 left-[-18rem]'}`
     } >
       <div className='flex justify-between items-center px-3'>
         <UserButton appearance={userButtonAppearance} />

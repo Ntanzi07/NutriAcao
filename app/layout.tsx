@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer, Navbar } from "@/components";
-import ConvexClientProvider from "@/providers/ConvexClientProvider";
-
 
 export const metadata: Metadata = {
   title: "NutriAção",

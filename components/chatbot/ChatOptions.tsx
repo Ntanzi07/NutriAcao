@@ -24,9 +24,11 @@ const ChatOptions = (props: Props) => {
     },
   };
   return (
-    <div className={`chatOptions overflow-hidden lg:border-r-2 w-[18rem] ${props.activedOptions
-      ? 'lg:w-[400px] left-0 bg-primary-bg border-r-2'
-      : 'lg:left-0 lg:w-0 left-[-18rem]'}`
+    <div className={`chatOptions overflow-hidden w-[18rem] bg-primary-bg
+      ${props.activedOptions
+        ? 'lg:w-[400px] left-0 border-r-[2px]'
+        : 'lg:left-0 lg:w-0 left-[-18rem] border-r-0'
+      }`
     } >
       <div className='flex justify-between items-center px-3'>
         <UserButton appearance={userButtonAppearance} />
@@ -42,16 +44,16 @@ const ChatOptions = (props: Props) => {
       </div>
       <hr className={`bg-secondary-color rounded-full border-none h-[2px] ${props.activedOptions ? 'inline' : 'lg:inline hidden'}`} />
       <div className={` flex-col px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
-          <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Seus chats:</h3>
+        <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Seus chats:</h3>
         {conversations
           ? conversations.length === 0
             ? <p>Sem conversa</p>
             : conversations.map((conversations) => {
-              return <DMConversationItem 
-              key={conversations._id} 
-              id={conversations._id}
-              text={conversations.firstMessage}
-              actived={(conversations._id === props.chatid)}
+              return <DMConversationItem
+                key={conversations._id}
+                id={conversations._id}
+                text={conversations.firstMessage}
+                actived={(conversations._id === props.chatid)}
               />
             })
           : <p>carregando...</p>

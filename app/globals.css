@@ -285,7 +285,7 @@ ol {
 
 .chatOptions {
   @apply gap-5 lg:relative absolute h-screen padding-y 
-  flex flex-col border-solid lg:border-r-[3px]
+  flex flex-col border-solid
   border-secondary-color transition-all ease-in-out duration-300;
 }
 

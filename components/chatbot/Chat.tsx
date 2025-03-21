@@ -1,18 +1,31 @@
 'use client'
 
+import { api } from '@/convex/_generated/api';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from "react-markdown";
+import { useMutation } from 'convex/react';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   chatid: string | null,
 }
 
-const Chat = ({ chatid }: Props) => {
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+const Chat = (props: Props) => {
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>([
+    {
+      role: "system",
+      content:
+        "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
+    }
+  ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  // Create conversation mutation
+  const createConversation = useMutation(api.convertation.create);
 
   const adjustHeight = () => {
     if (textareaRef.current) {
@@ -25,19 +38,33 @@ const Chat = ({ chatid }: Props) => {
     adjustHeight();
   }, [input]);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  },[messages])
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage = { role: 'user', content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const updatedMessages = [...messages, userMessage]
+    setMessages(updatedMessages);
     setInput('');
     setLoading(true);
+
+    if (props.chatid === null) {
+      const firstMessage = updatedMessages?.[1]?.content || "Hello!";
+
+      createConversation({ firstMessage })
+        .then((conversation) => {
+          router.push(`/chatbot?${conversation._id}`);
+        })
+        .catch((error) => console.error("Error creating conversation:", error));
+    }
 
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify(updatedMessages),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -47,7 +74,7 @@ const Chat = ({ chatid }: Props) => {
       const decoder = new TextDecoder();
       let botMessage = { role: 'assistant', content: '' };
 
-      setMessages((prev) => [...prev, botMessage]); // Add bot message placeholder
+      setMessages((prev) => [...prev, botMessage]);
 
       while (true) {
         const { value, done } = await reader?.read() ?? {};
@@ -55,14 +82,12 @@ const Chat = ({ chatid }: Props) => {
 
         botMessage.content += decoder.decode(value, { stream: true });
 
-        // Update last bot message in real-time
         setMessages((prev) => {
           const updatedMessages = [...prev];
           updatedMessages[updatedMessages.length - 1] = botMessage;
           return updatedMessages;
         });
       }
-      console.log(messages);
     } catch (error) {
       console.error('Error fetching response:', error);
       setMessages((prev) => [...prev, { role: 'assistant', content: 'Error: Unable to fetch response.' }]);
@@ -80,19 +105,19 @@ const Chat = ({ chatid }: Props) => {
 
   return (
     <div className="flex flex-col w-full h-screen py-20 items-center">
-      <div className={`flex max-w-[60rem] w-[100%] flex-col h-full rounded overflow-auto padding-x 
-        ${(messages.length === 0) ? 'justify-center' : 'justify-start'}`
-      }>
-        <div className={`markdonw-content-firstmessage`}>
-          Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!
+      <div className='flex justify-center h-full w-full overflow-auto'>
+        <div className={`flex max-w-[60rem] flex-col h-full rounded overflow-visible padding-x 
+        ${(messages.length === 1) ? 'justify-center' : 'justify-start'}`
+        }>
+          {messages.map((msg, index) => (
+            <div key={index} className={`${index === 0 ? 'markdonw-content-firstmessage' : 'markdonw-content'} ${msg.role === 'user' ? 'markdonw-content-user' : 'markdonw-content-ai'}`}>
+              <ReactMarkdown>
+                {msg.content}
+              </ReactMarkdown>
+            </div>
+          ))}
+           <div ref={messagesEndRef} />
         </div>
-        {messages.map((msg, index) => (
-          <div key={index} className={`markdonw-content ${msg.role === 'user' ? 'markdonw-content-user' : 'markdonw-content-ai'}`}>
-            <ReactMarkdown>
-              {msg.content}
-            </ReactMarkdown>
-          </div>
-        ))}
       </div>
 
       <div className="padding-x mt-4 max-w-[60rem] w-[100%]">

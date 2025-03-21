@@ -19,34 +19,46 @@ export const get = query({
             throw new ConvexError("User not founded")
         }
 
-        const conversationMember = await ctx.db
-            .query("conversationMember")
-            .withIndex("by_memberId", q => q.eq
-                ("memberId", currentUser._id))
+        const conversations = await ctx.db
+            .query("conversations")
+            .withIndex("by_userId", q => q
+                .eq("userId", currentUser._id))
             .collect();
 
-        const conversations = Promise.all(conversationMember?.map
-            (async membership => {
-                const conversation = await ctx.db.get(membership.conversationId);
+        if (!conversations) {
+            throw new ConvexError("Conversation could not be found");
+        }
 
-                if (!conversation) {
-                    throw new ConvexError("Conversation could not be found");
-                }
+        return conversations
 
-                return conversation;
-            })
-        );
+        // const conversationMember = await ctx.db
+        //     .query("conversationMember")
+        //     .withIndex("by_memberId", q => q.eq
+        //         ("memberId", currentUser._id))
+        //     .collect();
 
-        const conversationWithDetails = await Promise.all((await conversations)
-            .map(async (conversation, index) => {
-                const conversationMemberships = await ctx.db
-                    .query("conversationMember")
-                    .withIndex("by_conversationId", (q) =>
-                        q.eq("conversationId", conversation?._id)
-                    ).collect();
-                return conversation
-            })
-        );
-        return conversationWithDetails;
+        // const conversations = Promise.all(conversationMember?.map
+        //     (async membership => {
+        //         const conversation = await ctx.db.get(membership.conversationId);
+
+        //         if (!conversation) {
+        //             throw new ConvexError("Conversation could not be found");
+        //         }
+
+        //         return conversation;
+        //     })
+        // );
+
+        // const conversationWithDetails = await Promise.all((await conversations)
+        //     .map(async (conversation, index) => {
+        //         const conversationMemberships = await ctx.db
+        //             .query("conversationMember")
+        //             .withIndex("by_conversationId", (q) =>
+        //                 q.eq("conversationId", conversation?._id)
+        //             ).collect();
+        //         return conversation
+        //     })
+        // );
+        // return conversationWithDetails;
     },
 })

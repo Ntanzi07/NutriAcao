@@ -7,11 +7,12 @@ import React, { useState } from 'react'
 import DMConversationItem from './DMConversationItem'
 
 type Props = {
+  chatid: string | null,
   activedOptions: boolean,
   setOptions: () => void,
 }
 
-const ChatOptions = ({ activedOptions, setOptions }: Props) => {
+const ChatOptions = (props: Props) => {
 
   const conversations = useQuery(api.conversations.get)
 
@@ -23,24 +24,24 @@ const ChatOptions = ({ activedOptions, setOptions }: Props) => {
     },
   };
   return (
-    <div className={`chatOptions overflow-hidden lg:border-r-2 w-[20rem] ${activedOptions
+    <div className={`chatOptions overflow-hidden lg:border-r-2 w-[20rem] ${props.activedOptions
       ? 'lg:w-[450px] left-0 bg-primary-bg border-r-2'
       : 'lg:left-0 lg:w-0 left-[-20rem]'}`
     } >
       <div className='flex justify-between items-center px-3'>
         <UserButton appearance={userButtonAppearance} />
         <button className={`
-          ${activedOptions
+          ${props.activedOptions
             ? 'rotate-180'
             : 'rotate-0'}`
-        } onClick={setOptions}>
+        } onClick={props.setOptions}>
           <svg width="60" height="60" className="fill-secondary-color" viewBox="0 0 128 128">
             <path d="M58.12,35.88a3,3,0,0,0-4.24,4.24L77.76,64,53.88,87.88a3,3,0,1,0,4.24,4.24l26-26a3,3,0,0,0,0-4.24Z" />
           </svg>
         </button>
       </div>
-      <hr className={`bg-secondary-color rounded-full border-none h-[2px] ${activedOptions ? 'inline' : 'lg:inline hidden'}`} />
-      <div className={` flex-col gap-4 px-3 text-nowrap ${activedOptions ? 'flex' : 'lg:flex hidden'}`}>
+      <hr className={`bg-secondary-color rounded-full border-none h-[2px] ${props.activedOptions ? 'inline' : 'lg:inline hidden'}`} />
+      <div className={` flex-col gap-4 px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
         <div className='flex flex-col'>
           <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Hoje</h3>
           <div className='rounded-lg w-full px-2 py-2 hover:bg-secondary-color'>
@@ -58,7 +59,8 @@ const ChatOptions = ({ activedOptions, setOptions }: Props) => {
               return <DMConversationItem 
               key={conversations._id} 
               id={conversations._id}
-              text={conversations.name}
+              text={conversations.firstMessage}
+              actived={(conversations._id === props.chatid)}
               />
             })
           : <p>carregando...</p>

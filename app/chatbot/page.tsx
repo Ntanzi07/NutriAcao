@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function ChatBot() {
-  const id = useSearchParams().get("userid");
+  const id = useSearchParams().get("id");
   const [activedOptions, setActivedOptions] = useState(true);
 
   function changeOption() {
@@ -26,7 +26,7 @@ export default function ChatBot() {
             <path d="M58.12,35.88a3,3,0,0,0-4.24,4.24L77.76,64,53.88,87.88a3,3,0,1,0,4.24,4.24l26-26a3,3,0,0,0,0-4.24Z" />
           </svg>
         </button>
-        <ChatOptions activedOptions={activedOptions} setOptions={changeOption} />
+        <ChatOptions chatid={id} activedOptions={activedOptions} setOptions={changeOption} />
         <Chat chatid={id} />
       </main>
     </ConvexClientProvider>

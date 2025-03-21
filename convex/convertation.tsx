@@ -40,3 +40,33 @@ export const get = query({
         return { conversation }
     },
 })
+
+export const create = mutation({
+    args:{
+        firstMessage: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) {
+            throw new ConvexError("Unautthorized");
+        }
+
+        const currentUser = await getUserByClerkId({
+            ctx, clerkId: identity.subject
+        })
+
+        if (!currentUser) {
+            throw new ConvexError("User not founded")
+        }
+
+        const conversation = await ctx.db.insert(
+            "conversations", {
+                userId: currentUser._id,
+                firstMessage: args.firstMessage,
+                
+            }
+        )
+        return {_id: conversation }
+    }
+})

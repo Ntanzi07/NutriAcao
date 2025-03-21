@@ -3,34 +3,26 @@ import OpenAI from "openai";
 
 // "gpt-4o"
 // "Phi-3.5-MoE-instruct"
-const model = "gpt-4o"
+const model = "Phi-3.5-MoE-instruct"
 
 export async function POST(req: Request) {
-  const { message } = await req.json();
-
+  const messages = await req.json();
   const client = new OpenAI({
     baseURL: "https://models.inference.ai.azure.com",
     apiKey: process.env.GITHUB_TOKEN
   });
-
   const response = await client.chat.completions.create({
     model: model,
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are a helpful Nutritionist, your name is Sarah, please always answer in Portuguese brazil",
-      },
-      { role: "user", content: message },
-    ],
+    messages: messages,
     stream: true,
-    stream_options: {include_usage: true}
+    stream_options: { include_usage: true }
   });
 
   const stream = new ReadableStream({
     async start(controller) {
       for await (const chunk of response) {
         const text = chunk.choices[0]?.delta?.content || "";
+
         const encoder = new TextEncoder();
         controller.enqueue(encoder.encode(text));
       }

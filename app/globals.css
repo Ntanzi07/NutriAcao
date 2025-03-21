@@ -250,6 +250,9 @@ body {
 .markdonw-content-firstmessage {
   @apply w-fit h-fit items-center text-center self-center text-[1.5em] max-w-[600px] mb-4;
 }
+.markdonw-content-firstmessage p{
+  @apply text-center;
+}
 
 .markdonw-content-user {
   @apply bg-primary-green self-end mb-4;

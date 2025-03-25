@@ -26,7 +26,7 @@ const Chat = (props: Props) => {
 
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -67,11 +67,11 @@ const Chat = (props: Props) => {
     }
   }, [props.chatid, conversations]);
 
-  const handleUpdate = async (newMessages: Message[]) => {
+  const handleUpdate = async (idchat: Id<"conversations">, newMessages: Message[]) => {
     try {
       await updateMessage({
-        conversationId: props.chatid as Id<"conversations">,
-        messages: newMessages 
+        conversationId: idchat,
+        messages: newMessages
       });
     } catch (error) {
       console.error("Failed to update messages:", error);
@@ -80,54 +80,66 @@ const Chat = (props: Props) => {
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
-
+  
     const userMessage = { role: 'user', content: input };
-    const updatedMessages = [...messages, userMessage]
+    const updatedMessages = [...messages, userMessage];
+    
     setMessages(updatedMessages);
     setInput('');
     setLoading(true);
-
-    if (props.chatid === null) {
-      const firstMessage = updatedMessages?.[1]?.content || "New Conversation!!";
-
-      createConversation({ firstMessage, messages: updatedMessages })
-        .then((conversation) => {
-          router.push(`/chatbot?id=${conversation._id}`);
-        })
-        .catch((error) => console.error("Error creating conversation:", error));
-    }
-
+  
+    let currentChatId = props.chatid; // Store the current chat ID
+  
     try {
+      // Handle new conversation case
+      if (currentChatId === null) {
+        const firstMessage = updatedMessages?.[1]?.content || "New Conversation!!";
+        
+        const conversation = await createConversation({ 
+          firstMessage, 
+          messages: updatedMessages 
+        });
+        
+        currentChatId = conversation._id; // Update with the new ID
+        router.push(`/chatbot?id=${currentChatId}`);
+      }
+  
+      // Get AI response
       const response = await fetch('/api/chat', {
         method: 'POST',
         body: JSON.stringify(updatedMessages),
         headers: { 'Content-Type': 'application/json' },
       });
-
+  
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
+  
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let botMessage = { role: 'assistant', content: '' };
-
+  
       setMessages((prev) => [...prev, botMessage]);
-
+  
       while (true) {
         const { value, done } = await reader?.read() ?? {};
         if (done) break;
-
+  
         botMessage.content += decoder.decode(value, { stream: true });
-
+  
         setMessages((prev) => {
           const updatedMessages = [...prev];
           updatedMessages[updatedMessages.length - 1] = botMessage;
-          handleUpdate(updatedMessages);
           return updatedMessages;
         });
+  
+        // Update with the current ID (either existing or newly created)
+        handleUpdate(currentChatId as Id<"conversations">, [...updatedMessages, botMessage]);
       }
     } catch (error) {
-      console.error('Error fetching response:', error);
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'Error: Unable to fetch response.' }]);
+      console.error('Error:', error);
+      setMessages((prev) => [...prev, { 
+        role: 'assistant', 
+        content: 'Error: Unable to fetch response.' 
+      }]);
     } finally {
       setLoading(false);
     }

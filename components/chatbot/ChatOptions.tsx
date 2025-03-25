@@ -3,7 +3,7 @@
 import { api } from '@/convex/_generated/api'
 import { UserButton } from '@clerk/nextjs'
 import { useQuery } from 'convex/react'
-import React, { useState } from 'react'
+import React from 'react'
 import DMConversationItem from './DMConversationItem'
 
 type Props = {
@@ -13,8 +13,7 @@ type Props = {
 }
 
 const ChatOptions = (props: Props) => {
-
-  const conversations = useQuery(api.conversations.get)
+  const conversations = useQuery(api.conversations.get);
 
   const userButtonAppearance = {
     elements: {
@@ -55,7 +54,7 @@ const ChatOptions = (props: Props) => {
                 text={conversations.firstMessage}
                 actived={(conversations._id === props.chatid)}
               />
-            })
+            }).reverse()
           : <p>carregando...</p>
         }
 

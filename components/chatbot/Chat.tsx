@@ -3,11 +3,16 @@
 import { api } from '@/convex/_generated/api';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from "react-markdown";
-import { useMutation } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { useRouter } from 'next/navigation';
+import { Id } from '@/convex/_generated/dataModel';
 
 type Props = {
   chatid: string | null,
+}
+interface Message {
+  role: string;
+  content: string;
 }
 
 const Chat = (props: Props) => {
@@ -18,14 +23,17 @@ const Chat = (props: Props) => {
         "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
     }
   ]);
+
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Create conversation mutation
+  const conversations = useQuery(api.conversations.get);
   const createConversation = useMutation(api.convertation.create);
+  const updateMessage = useMutation(api.convertation.update);
 
   const adjustHeight = () => {
     if (textareaRef.current) {
@@ -40,7 +48,35 @@ const Chat = (props: Props) => {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  },[messages])
+  }, [messages])
+
+  useEffect(() => {
+    if (!conversations) return
+
+    if (props.chatid) {
+      const foundConversation = conversations?.find(c => c._id === props.chatid);
+
+      if (foundConversation) {
+        setMessages(foundConversation.messages);
+      } else {
+        setMessages([{
+          role: "system",
+          content: "Conversation not found, starting new one..."
+        }]);
+      }
+    }
+  }, [props.chatid, conversations]);
+
+  const handleUpdate = async (newMessages: Message[]) => {
+    try {
+      await updateMessage({
+        conversationId: props.chatid as Id<"conversations">,
+        messages: newMessages 
+      });
+    } catch (error) {
+      console.error("Failed to update messages:", error);
+    }
+  };
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
@@ -52,11 +88,11 @@ const Chat = (props: Props) => {
     setLoading(true);
 
     if (props.chatid === null) {
-      const firstMessage = updatedMessages?.[1]?.content || "Hello!";
+      const firstMessage = updatedMessages?.[1]?.content || "New Conversation!!";
 
-      createConversation({ firstMessage })
+      createConversation({ firstMessage, messages: updatedMessages })
         .then((conversation) => {
-          router.push(`/chatbot?${conversation._id}`);
+          router.push(`/chatbot?id=${conversation._id}`);
         })
         .catch((error) => console.error("Error creating conversation:", error));
     }
@@ -85,6 +121,7 @@ const Chat = (props: Props) => {
         setMessages((prev) => {
           const updatedMessages = [...prev];
           updatedMessages[updatedMessages.length - 1] = botMessage;
+          handleUpdate(updatedMessages);
           return updatedMessages;
         });
       }
@@ -116,7 +153,7 @@ const Chat = (props: Props) => {
               </ReactMarkdown>
             </div>
           ))}
-           <div ref={messagesEndRef} />
+          <div ref={messagesEndRef} />
         </div>
       </div>
 

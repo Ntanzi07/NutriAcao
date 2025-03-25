@@ -1,6 +1,4 @@
-import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel'
-import { useQuery } from 'convex/react';
 import Link from 'next/link';
 import React from 'react'
 
@@ -17,7 +15,7 @@ const DMConversationItem = (props: Props) => {
       className={`rounded-lg w-full px-2 py-2 hover:text-primary-bg
       hover:bg-secondary-color transition-all duration-150 
       ${props.actived
-          ? 'bg-secondary-color my-2 text-primary-bg'
+          ? 'bg-secondary-color my-1 text-primary-bg'
           : null
         }`
       }

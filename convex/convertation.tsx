@@ -1,6 +1,7 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { getUserByClerkId } from "./_utils";
+import { messageValidator } from "./schema";
 
 export const get = query({
     args: {
@@ -42,8 +43,9 @@ export const get = query({
 })
 
 export const create = mutation({
-    args:{
+    args: {
         firstMessage: v.string(),
+        messages: v.array(messageValidator),
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -62,11 +64,40 @@ export const create = mutation({
 
         const conversation = await ctx.db.insert(
             "conversations", {
-                userId: currentUser._id,
-                firstMessage: args.firstMessage,
-                
-            }
+            userId: currentUser._id,
+            firstMessage: args.firstMessage,
+            messages: args.messages,
+        }
         )
-        return {_id: conversation }
+        return { _id: conversation }
+    }
+})
+
+
+export const update = mutation({
+    args: {
+        conversationId: v.id("conversations"),
+        messages: v.array(messageValidator),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) {
+            throw new ConvexError("Unautthorized");
+        }
+
+        const currentUser = await getUserByClerkId({
+            ctx, clerkId: identity.subject
+        })
+
+        if (!currentUser) {
+            throw new ConvexError("User not founded")
+        }
+
+        const conversation = await ctx.db.get(args.conversationId);
+        if (!conversation) throw new Error("Conversation not found");
+
+        await ctx.db.patch(conversation._id, { messages: args.messages });
+        return { _id: conversation }
     }
 })

@@ -7,8 +7,9 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function ChatBot() {
-  const id = useSearchParams().get("id");
   const [activedOptions, setActivedOptions] = useState(true);
+
+  const id = useSearchParams().get("id");
 
   function changeOption() {
     setActivedOptions(!activedOptions);

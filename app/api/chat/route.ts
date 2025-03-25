@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 // "gpt-4o"
 // "Phi-3.5-MoE-instruct"
-const model = "Phi-3.5-MoE-instruct"
+const model = "gpt-4o"
 
 export async function POST(req: Request) {
   const messages = await req.json();

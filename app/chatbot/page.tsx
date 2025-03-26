@@ -4,7 +4,7 @@ import { Chat } from "@/components/chatbot";
 import ChatOptions from "@/components/chatbot/ChatOptions";
 import ConvexClientProvider from "@/providers/ConvexClientProvider";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ChatBot() {
   const [activedOptions, setActivedOptions] = useState(true);
@@ -28,7 +28,7 @@ export default function ChatBot() {
           </svg>
         </button>
         <ChatOptions chatid={id} activedOptions={activedOptions} setOptions={changeOption} />
-        <Chat chatid={id} />
+        <Chat chatid={id}/>
       </main>
     </ConvexClientProvider>
   );

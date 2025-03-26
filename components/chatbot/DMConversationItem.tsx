@@ -2,6 +2,9 @@ import { Id } from '@/convex/_generated/dataModel'
 import Link from 'next/link';
 import React from 'react'
 import Image from 'next/image';
+import { useMutation } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   id: Id<"conversations">;
@@ -10,6 +13,13 @@ type Props = {
 }
 
 const DMConversationItem = (props: Props) => {
+  const router = useRouter();
+  const deleteMessage = useMutation(api.convertation.deleteConversation);
+
+  const deleteFunc = () => {
+    deleteMessage({ conversationId: props.id });
+    router.push('/chatbot');
+  }
 
   return (
     <div className={`chatbot__itens 
@@ -21,7 +31,7 @@ const DMConversationItem = (props: Props) => {
         className={`chatbot__itens-textlink`}>
         <p className='chatbot__itens-text'>{props.text ? props.text : "tex"}</p>
       </Link>
-      <button className='chatbot__itens-bututon hover:bg-red-500'>
+      <button className='chatbot__itens-bututon hover:bg-red-500' onClick={deleteFunc}>
         <svg className='fill-primary-bg p-[5px]' height="25px" width="25px" viewBox="0 0 460.775 460.775">
           <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
 	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55

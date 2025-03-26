@@ -23,7 +23,6 @@ const Chat = (props: Props) => {
         "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
     }
   ]);
-
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [isWriting, setIsWriting] = useState(false);
@@ -54,7 +53,7 @@ const Chat = (props: Props) => {
   useEffect(() => {
     if (!conversations) return
     
-    if (props.chatid && !isWriting) {
+    if (!isWriting) {
       const foundConversation = conversations?.find(c => c._id === props.chatid);
 
       if (foundConversation) {
@@ -62,7 +61,8 @@ const Chat = (props: Props) => {
       } else {
         setMessages([{
           role: "system",
-          content: "Conversation not found, starting new one..."
+          content:
+            "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
         }]);
       }
     }

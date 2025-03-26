@@ -73,6 +73,32 @@ export const create = mutation({
     }
 })
 
+export const deleteConversation = mutation({
+    args: {
+        conversationId: v.id("conversations"),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) {
+            throw new ConvexError("Unautthorized");
+        }
+
+        const currentUser = await getUserByClerkId({
+            ctx, clerkId: identity.subject
+        })
+
+        if (!currentUser) {
+            throw new ConvexError("User not founded")
+        }
+
+        const conversation = await ctx.db.get(args.conversationId);
+        if (!conversation) throw new Error("Conversation not found");
+
+        await ctx.db.delete(args.conversationId);
+    }
+})
+
 
 export const update = mutation({
     args: {

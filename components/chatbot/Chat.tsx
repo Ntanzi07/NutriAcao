@@ -26,6 +26,7 @@ const Chat = (props: Props) => {
 
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isWriting, setIsWriting] = useState(false);
   
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -52,8 +53,8 @@ const Chat = (props: Props) => {
 
   useEffect(() => {
     if (!conversations) return
-
-    if (props.chatid) {
+    
+    if (props.chatid && !isWriting) {
       const foundConversation = conversations?.find(c => c._id === props.chatid);
 
       if (foundConversation) {
@@ -87,6 +88,7 @@ const Chat = (props: Props) => {
     setMessages(updatedMessages);
     setInput('');
     setLoading(true);
+    setIsWriting(true);
   
     let currentChatId = props.chatid; // Store the current chat ID
   
@@ -141,6 +143,7 @@ const Chat = (props: Props) => {
       }]);
     } finally {
       setLoading(false);
+      setIsWriting(false);
     }
   };
 

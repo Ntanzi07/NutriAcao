@@ -297,6 +297,14 @@ ol {
   @apply flex-1  overflow-hidden py-2;
 }
 
+.button__newchat{
+  @apply hidden opacity-0 bg-secondary-color hover:bg-primary-green py-2 px-4 rounded-xl 
+  transition-all duration-150 self-center text-primary-bg text-nowrap w-[90%];
+}
+
+.actived{
+  @apply inline opacity-100;
+}
 
 .chatbot__itens-text{
   @apply  text-transparent bg-clip-text 
@@ -310,7 +318,7 @@ ol {
 
 .chatbot__itens-text-active .chatbot__itens-text{
   @apply font-semibold text-transparent bg-clip-text 
-  bg-gradient-to-r from-primary-bg from-80% via-primary-bg via-80% to-transparent ;
+  bg-gradient-to-r from-primary-bg from-90% via-primary-bg via-90% to-transparent ;
 }
 
 .chatbot__itens-button{

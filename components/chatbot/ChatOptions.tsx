@@ -5,6 +5,7 @@ import { UserButton } from '@clerk/nextjs'
 import { useQuery } from 'convex/react'
 import React from 'react'
 import DMConversationItem from './DMConversationItem'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   chatid: string | null,
@@ -14,6 +15,7 @@ type Props = {
 
 const ChatOptions = (props: Props) => {
   const conversations = useQuery(api.conversations.get);
+  const router = useRouter();
 
   const userButtonAppearance = {
     elements: {
@@ -42,6 +44,7 @@ const ChatOptions = (props: Props) => {
         </button>
       </div>
       <hr className={`bg-secondary-color rounded-full border-none h-[2px] ${props.activedOptions ? 'inline' : 'lg:inline hidden'}`} />
+      <button className={`button__newchat ${props.chatid ? 'actived' : null}`} onClick={() => router.push('/chatbot')}>Novo chat</button>
       <div className={` flex-col px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
         <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Seus chats:</h3>
         {conversations

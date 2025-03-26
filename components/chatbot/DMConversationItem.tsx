@@ -32,7 +32,7 @@ const DMConversationItem = (props: Props) => {
         <p className='chatbot__itens-text'>{props.text ? props.text : "tex"}</p>
       </Link>
       <button className='chatbot__itens-button' onClick={deleteFunc}>
-        <svg className='fill-primary-bg p-[5px]' height="25px" width="25px" viewBox="0 0 460.775 460.775">
+        <svg className='fill-primary-bg p-[5px]' height="22px" width="22px" viewBox="0 0 460.775 460.775">
           <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
 	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
 	c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
@@ -42,7 +42,7 @@ const DMConversationItem = (props: Props) => {
         </svg>
       </button>
       <button className='chatbot__itens-button'>
-        <svg className='fill-primary-bg p-[4px]' viewBox="0 0 48 48" width="25px" height="25px">
+        <svg className='fill-primary-bg p-[4px]' viewBox="0 0 48 48" width="22px" height="22px">
           <path d="M 36 5.0097656 C 34.205301 5.0097656 32.410791 5.6901377 31.050781 7.0507812 L 8.9160156 29.183594 
       C 8.4960384 29.603571 8.1884588 30.12585 8.0253906 30.699219 L 5.0585938 41.087891 A 1.50015 1.50015 0 0 0 6.9121094 
       42.941406 L 17.302734 39.974609 A 1.50015 1.50015 0 0 0 17.304688 39.972656 C 17.874212 39.808939 18.39521 39.50518 

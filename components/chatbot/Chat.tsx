@@ -130,8 +130,7 @@ const Chat = (props: Props) => {
           updatedMessages[updatedMessages.length - 1] = botMessage;
           return updatedMessages;
         });
-  
-        // Update with the current ID (either existing or newly created)
+        
         handleUpdate(currentChatId as Id<"conversations">, [...updatedMessages, botMessage]);
       }
     } catch (error) {
@@ -159,7 +158,7 @@ const Chat = (props: Props) => {
         ${(messages.length === 1) ? 'justify-center' : 'justify-start'}`
         }>
           {messages.map((msg, index) => (
-            <div key={index} className={`${index === 0 ? 'markdonw-content-firstmessage' : 'markdonw-content'} ${msg.role === 'user' ? 'markdonw-content-user' : 'markdonw-content-ai'}`}>
+            <div key={index} className={`${index === 0 ? 'markdown-content-firstmessage' : 'markdown-content'} ${msg.role === 'user' ? 'markdown-content-user' : 'markdown-content-ai'}`}>
               <ReactMarkdown>
                 {msg.content}
               </ReactMarkdown>

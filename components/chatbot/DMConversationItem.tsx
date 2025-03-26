@@ -12,7 +12,7 @@ const DMConversationItem = (props: Props) => {
 
   return (
     <Link href={`/chatbot?id=${props.id}`}
-      className={`rounded-lg w-full px-2 py-2 hover:text-primary-bg
+      className={`rounded-lg w-full overflow-hidden px-2 py-2 hover:text-primary-bg
       hover:bg-secondary-color transition-all duration-150 
       ${props.actived
           ? 'bg-secondary-color my-1 text-primary-bg'

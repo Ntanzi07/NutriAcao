@@ -313,12 +313,12 @@ ol {
   bg-gradient-to-r from-primary-bg from-80% via-primary-bg via-80% to-transparent ;
 }
 
-.chatbot__itens-bututon{
+.chatbot__itens-button{
   @apply hidden opacity-0 rounded-lg border-solid border-2 text-primary-bg
-  transition-all duration-100 text-center; 
+  transition-all duration-100 text-center hover:bg-primary-green; 
 }
 
-.chatbot__itens:hover .chatbot__itens-bututon{
+.chatbot__itens:hover .chatbot__itens-button{
   @apply inline opacity-100;
 }
 

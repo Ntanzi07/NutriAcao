@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useRouter } from 'next/navigation';
+import { Dialog, Tooltip } from 'radix-ui';
 
 type Props = {
   id: Id<"conversations">;
@@ -31,7 +32,10 @@ const DMConversationItem = (props: Props) => {
         className={`chatbot__itens-textlink`}>
         <p className='chatbot__itens-text'>{props.text ? props.text : "tex"}</p>
       </Link>
-      <button className='chatbot__itens-button' onClick={deleteFunc}>
+
+      <Dialog.Root>
+		<Dialog.Trigger asChild>
+			<button className='chatbot__itens-button'>
         <svg className='fill-primary-bg p-[5px]' height="22px" width="22px" viewBox="0 0 460.775 460.775">
           <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
 	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
@@ -41,6 +45,28 @@ const DMConversationItem = (props: Props) => {
 	c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
         </svg>
       </button>
+		</Dialog.Trigger>
+		<Dialog.Portal>
+			<Dialog.Overlay className="DialogOverlay" />
+			<Dialog.Content className="DialogContent">
+				<Dialog.Title className="DialogTitle">Deletar conversa</Dialog.Title>
+				<Dialog.Description className="DialogDescription">
+					Tem certeza que quer excluir sua conversa ?
+				</Dialog.Description>
+
+        <div className='flex justify-end gap-3'>
+          <Dialog.Close asChild>
+            <button className="DialogButton" onClick={deleteFunc}>Sim</button>
+          </Dialog.Close>
+          <Dialog.Close asChild>
+            <button className="DialogButton">Não</button>
+          </Dialog.Close>
+        </div>
+	
+			</Dialog.Content>
+		</Dialog.Portal>
+	</Dialog.Root>
+
       {/* <button className='chatbot__itens-button'>
         <svg className='fill-primary-bg p-[4px]' viewBox="0 0 48 48" width="22px" height="22px">
           <path d="M 36 5.0097656 C 34.205301 5.0097656 32.410791 5.6901377 31.050781 7.0507812 L 8.9160156 29.183594 

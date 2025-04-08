@@ -6,6 +6,7 @@ import { useQuery } from 'convex/react'
 import React from 'react'
 import DMConversationItem from './DMConversationItem'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 type Props = {
   chatid: string | null,
@@ -19,7 +20,7 @@ const ChatOptions = (props: Props) => {
 
   const userButtonAppearance = {
     elements: {
-      userButtonAvatarBox: "w-[50px] h-[50px]", // Custom width and height
+      userButtonAvatarBox: "w-[60px] h-[60px]", // Custom width and height
       userButtonPopoverCard: "bg-blue-100", // Custom background for the popover card
       userButtonPopoverActionButton: "", // Custom text color for action buttons
     },
@@ -31,8 +32,16 @@ const ChatOptions = (props: Props) => {
         : 'lg:left-0 lg:w-0 left-[-18rem] border-r-0'
       }`
     } >
-      <div className='flex justify-between items-center px-3'>
-        <UserButton appearance={userButtonAppearance} />
+      <div className='flex items-center px-3'>
+        <div className='flex h-14'>
+          <Image
+            src="/logo2.png"
+            alt="Nutriação logo"
+            width={300}
+            height={300}
+            className="object-contain"
+          />
+        </div>
         <button className={`
           ${props.activedOptions
             ? 'rotate-180'
@@ -43,9 +52,8 @@ const ChatOptions = (props: Props) => {
           </svg>
         </button>
       </div>
-      <hr className={`bg-secondary-color rounded-full border-none h-[2px] ${props.activedOptions ? 'inline' : 'lg:inline hidden'}`} />
-      <button className={`button__newchat ${props.chatid ? 'actived' : null}`} onClick={() => router.push('/chatbot')}>Novo chat</button>
-      <div className={` flex-col px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
+      <button className={`button__newchat`} onClick={() => router.push('/chatbot')}>Novo chat</button>
+      <div className={`flex-1 flex-col px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
         <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Seus chats:</h3>
         {conversations
           ? conversations.length === 0
@@ -60,7 +68,15 @@ const ChatOptions = (props: Props) => {
             }).reverse()
           : <p>carregando...</p>
         }
-
+      </div>
+      <div className='flex justify-between items-center px-3'>
+        <UserButton appearance={userButtonAppearance} />
+        <button className={`
+          ${props.activedOptions
+            ? 'rotate-180'
+            : 'rotate-0'}`
+        } onClick={props.setOptions}>
+        </button>
       </div>
     </div>
   )

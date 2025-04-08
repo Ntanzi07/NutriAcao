@@ -99,7 +99,6 @@ export const deleteConversation = mutation({
     }
 })
 
-
 export const update = mutation({
     args: {
         conversationId: v.id("conversations"),

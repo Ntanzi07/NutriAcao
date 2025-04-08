@@ -41,7 +41,7 @@ const DMConversationItem = (props: Props) => {
 	c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
         </svg>
       </button>
-      <button className='chatbot__itens-button'>
+      {/* <button className='chatbot__itens-button'>
         <svg className='fill-primary-bg p-[4px]' viewBox="0 0 48 48" width="22px" height="22px">
           <path d="M 36 5.0097656 C 34.205301 5.0097656 32.410791 5.6901377 31.050781 7.0507812 L 8.9160156 29.183594 
       C 8.4960384 29.603571 8.1884588 30.12585 8.0253906 30.699219 L 5.0585938 41.087891 A 1.50015 1.50015 0 0 0 6.9121094 
@@ -54,7 +54,7 @@ const DMConversationItem = (props: Props) => {
       39.316406 L 10.910156 31.521484 A 1.50015 1.50015 0 0 0 10.910156 31.519531 C 10.933086 31.438901 10.975086 31.366709 
       11.037109 31.304688 L 29.111328 13.232422 z"/>
         </svg>
-      </button>
+      </button> */}
     </div>
   )
 }

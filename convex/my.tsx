@@ -19,16 +19,11 @@ export const get = query({
             throw new ConvexError("User not founded")
         }
 
-        const conversations = await ctx.db
-            .query("conversations")
-            .withIndex("by_userId", q => q
-                .eq("userId", currentUser._id))
-            .collect();
+        const user = await ctx.db
+        .query("users")
+        .withIndex("by_clerkId", q => q.eq("clerkId", identity.subject))
+        .unique();
 
-        if (!conversations) {
-            throw new ConvexError("Conversation could not be found");
-        }
-
-        return conversations
+        return user;
     },
 })

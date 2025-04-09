@@ -1,7 +1,7 @@
 'use client'
 
 import { api } from '@/convex/_generated/api'
-import { UserButton } from '@clerk/nextjs'
+import UserButton from './UserButton'
 import { useQuery } from 'convex/react'
 import React from 'react'
 import DMConversationItem from './DMConversationItem'
@@ -18,13 +18,6 @@ const ChatOptions = (props: Props) => {
   const conversations = useQuery(api.conversations.get);
   const router = useRouter();
 
-  const userButtonAppearance = {
-    elements: {
-      userButtonAvatarBox: "w-[60px] h-[60px]", // Custom width and height
-      userButtonPopoverCard: "bg-blue-100", // Custom background for the popover card
-      userButtonPopoverActionButton: "", // Custom text color for action buttons
-    },
-  };
   return (
     <div className={`chatOptions overflow-hidden w-[18rem] bg-primary-bg
       ${props.activedOptions
@@ -70,7 +63,7 @@ const ChatOptions = (props: Props) => {
         }
       </div>
       <div className='flex justify-between items-center px-3'>
-        <UserButton appearance={userButtonAppearance} />
+        <UserButton/>
         <button className={`
           ${props.activedOptions
             ? 'rotate-180'

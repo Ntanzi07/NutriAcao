@@ -16,6 +16,7 @@ import type {
 import type * as conversations from "../conversations.js";
 import type * as convertation from "../convertation.js";
 import type * as http from "../http.js";
+import type * as my from "../my.js";
 import type * as user from "../user.js";
 import type * as _utils from "../_utils.js";
 
@@ -31,6 +32,7 @@ declare const fullApi: ApiFromModules<{
   conversations: typeof conversations;
   convertation: typeof convertation;
   http: typeof http;
+  my: typeof my;
   user: typeof user;
   _utils: typeof _utils;
 }>;

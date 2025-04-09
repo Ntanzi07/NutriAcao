@@ -64,12 +64,6 @@ const ChatOptions = (props: Props) => {
       </div>
       <div className='flex justify-between items-center px-3'>
         <UserButton/>
-        <button className={`
-          ${props.activedOptions
-            ? 'rotate-180'
-            : 'rotate-0'}`
-        } onClick={props.setOptions}>
-        </button>
       </div>
     </div>
   )

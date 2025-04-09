@@ -337,7 +337,7 @@ ol {
 .DialogContent {
   @apply bg-primary-bg rounded-lg shadow-md fixed top-1/2 left-1/2
   transform -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[500px]
-  max-h-[85vh] p-[25px] animate-[contentShow_150ms_cubic-bezier(0.16,1,0.3,1)];
+  max-h-[85vh] animate-[contentShow_150ms_cubic-bezier(0.16,1,0.3,1)];
 }
 .DialogContent:focus {
 	outline: none;
@@ -367,10 +367,9 @@ ol {
 	vertical-align: middle;
 	overflow: hidden;
 	user-select: none;
-	width: 45px;
-	height: 45px;
+	width: 55px;
+	height: 55px;
 	border-radius: 100%;
-	background-color: var(--black-a3);
 }
 
 .AvatarImage {
@@ -393,4 +392,33 @@ ol {
 	font-weight: 500;
 }
 
+.IconButton {
+  @apply appearance-none rounded-full h-[30px] w-[30px] inline-flex items-center justify-center text-primary-green absolute top-[10px] right-[10px];
+}
+
+.IconButton:hover {
+  @apply bg-primary-green text-white;
+}
+
+.IconButton:focus {
+  @apply outline-none ring-2 ring-primary-green;
+}
+
+.avatarbutton {
+  @apply hover:bg-secondary-color py-2 px-3 gap-2 rounded-lg items-center flex transition-all duration-150;
+}
+
+.avatarbutton h3{
+  @apply text-[1em] text-black transition-all duration-150;
+}
+.avatarbutton:hover h3{
+  @apply text-white;
+}
+
+.avatarbutton p{
+  @apply text-[0.8em] text-gray-600 transition-all duration-150;
+}
+.avatarbutton:hover p{
+  @apply text-gray-300;
+}
 /* END: ChatOptions styles */

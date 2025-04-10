@@ -7,17 +7,21 @@ import UserCalculator from './UserCalculator'
 type Props = {}
 
 const UserOptions = (props: Props) => {
-    const [actived, setActived] = useState('Dashboard');
-    const items = [{ name: 'Dashboard', page: <UserPage /> }, { name: 'Config', page: <UserConfig /> }, { name: 'Test', page: <UserCalculator /> }];
+    const items = [
+        { name: 'Dashboard', page: <UserPage />, text: <>Seu <strong>Dashboard</strong></> },
+        { name: 'Configurações', page: <UserConfig />, text: <>Suas <strong>Configurações</strong></> },
+        { name: 'Calculadora', page: <UserCalculator />, text: <>Calculadora de <strong>Macro e calorias</strong></> }
+    ];
+    const [actived, setActived] = useState(items[0]);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setActived(e.currentTarget.innerText);
+        setActived(items.find(item => item.name === e.currentTarget.innerText) || items[0]);
     }
 
     return (
         <div className='flex gap-1'>
             <div className='flex flex-col gap-2 min-h-[400px] min-w-[250px] px-5 py-3'>
-                <h3 className='text-[1.3em]'>Your <strong>{actived}</strong></h3>
+                <h3 className='text-[1.3em]'>{actived.text}</h3>
                 <Separator.Root
                     className="h-[1px] w-auto bg-secondary-color"
                     decorative
@@ -25,7 +29,7 @@ const UserOptions = (props: Props) => {
                 />
                 {items.map((item, index) => (
                     <button id={item.name} onClick={handleClick} key={index} className={`userOptionButton 
-                        ${actived === item.name
+                        ${actived.name === item.name
                             ? 'hidden'
                             : 'inline'}`
                     }>
@@ -38,7 +42,7 @@ const UserOptions = (props: Props) => {
                 decorative
                 orientation="vertical"
             />
-            {items.find(item => item.name === actived)?.page}
+            {items.find(item => item.name === actived.name)?.page}
         </div>
     )
 }

@@ -12,6 +12,13 @@ export default defineSchema({
     imageUrl: v.string(),
     clerkId: v.string(),
     email: v.string(),
+    idade: v.optional(v.string()),
+    altura: v.optional(v.string()),
+    sexo: v.optional(v.string()),
+    peso: v.optional(v.string()),
+    atividades: v.optional(v.string()),
+    calculoBasal: v.optional(v.number()),
+
   })
     .index("by_email", ["email"])
     .index("by_clerkId", ["clerkId"]),

@@ -35,10 +35,10 @@ const UserButton = (props: Props) => {
                 <Dialog.Content className="DialogContent">
                     <Dialog.Close asChild>
                         <button className="IconButton" aria-label="Close">
-                            <Cross2Icon className="h-6 w-6 " />
+                            <Cross2Icon className="h-6 w-6" />
                         </button>
                     </Dialog.Close>
-                    <UserOptions user={user}/>
+                    <UserOptions />
                 </Dialog.Content>
             </Dialog.Portal>
         </Dialog.Root>

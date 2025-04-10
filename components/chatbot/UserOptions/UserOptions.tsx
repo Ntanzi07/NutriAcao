@@ -1,58 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UserPage from './UserPage'
-import { Avatar, Dialog, Separator } from 'radix-ui'
-import { Id } from '@/convex/_generated/dataModel'
+import { Separator } from 'radix-ui'
+import UserConfig from './UserConfig'
+import UserCalculator from './UserCalculator'
 
-type Props = {
-    user: {
-        _id: Id<"users">;
-        _creationTime: number;
-        email: string;
-        username: string;
-        imageUrl: string;
-        clerkId: string;
-    } | null | undefined
-}
+type Props = {}
 
 const UserOptions = (props: Props) => {
+    const [actived, setActived] = useState('Dashboard');
+    const items = [{ name: 'Dashboard', page: <UserPage /> }, { name: 'Config', page: <UserConfig /> }, { name: 'Test', page: <UserCalculator /> }];
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setActived(e.currentTarget.innerText);
+    }
+
     return (
         <div className='flex gap-1'>
-            <div className='flex flex-col gap-2 h-[400px] px-5 py-3'>
-                <div className='flex items-center gap-2'>
-                    <Avatar.Root className="AvatarRoot">
-                        <Avatar.Image
-                            className="AvatarImage"
-                            src={props.user?.imageUrl}
-                            alt={props.user?.username}
-                        />
-                        <Avatar.Fallback className="AvatarFallback" delayMs={600}>
-                            {props.user?.username.charAt(0)}
-                        </Avatar.Fallback>
-                    </Avatar.Root>
-                    <Dialog.DialogTitle className='text-[1.2em]'>{props.user?.username}</Dialog.DialogTitle>
-                </div>
+            <div className='flex flex-col gap-2 min-h-[400px] min-w-[250px] px-5 py-3'>
+                <h3 className='text-[1.3em]'>Your <strong>{actived}</strong></h3>
                 <Separator.Root
                     className="h-[1px] w-auto bg-secondary-color"
                     decorative
                     orientation="horizontal"
                 />
-                <div className='w-full flex'>
-                    <button className=''>teste</button>
-                </div>
-                <div className='w-full flex'>
-                    <button className=''>teste</button>
-                </div>
-                <div className='w-full flex'>
-                    <button className=''>teste</button>
-                </div>
-
+                {items.map((item, index) => (
+                    <button id={item.name} onClick={handleClick} key={index} className={`userOptionButton 
+                        ${actived === item.name
+                            ? 'hidden'
+                            : 'inline'}`
+                    }>
+                        {item.name}
+                    </button>
+                ))}
             </div>
             <Separator.Root
                 className="h-auto w-[1px] bg-secondary-color"
                 decorative
                 orientation="vertical"
             />
-            <UserPage />
+            {items.find(item => item.name === actived)?.page}
         </div>
     )
 }

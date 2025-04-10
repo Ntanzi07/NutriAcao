@@ -336,7 +336,7 @@ ol {
 
 .DialogContent {
   @apply bg-primary-bg rounded-lg shadow-md fixed top-1/2 left-1/2
-  transform -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[500px]
+  transform -translate-x-1/2 -translate-y-1/2 max-w-[85vh]
   max-h-[85vh] animate-[contentShow_150ms_cubic-bezier(0.16,1,0.3,1)];
 }
 .DialogContent:focus {
@@ -420,5 +420,9 @@ ol {
 }
 .avatarbutton:hover p{
   @apply text-gray-300;
+}
+
+.userOptionButton {
+  @apply w-full  rounded-lg px-3 py-1 hover:bg-secondary-color hover:text-primary-bg transition-all duration-150;
 }
 /* END: ChatOptions styles */

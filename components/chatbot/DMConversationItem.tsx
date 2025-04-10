@@ -48,7 +48,7 @@ const DMConversationItem = (props: Props) => {
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="DialogOverlay" />
-          <Dialog.Content className="DialogContent">
+          <Dialog.Content className="DialogContent w-[500px] py-3 px-5">
             <Dialog.Title className="DialogTitle">Deletar conversa</Dialog.Title>
             <Dialog.Description className="DialogDescription">
               Tem certeza que quer excluir sua conversa ?

@@ -19,8 +19,8 @@ const UserOptions = (props: Props) => {
     }
 
     return (
-        <div className='flex gap-1'>
-            <div className='flex flex-col gap-2 min-h-[400px] min-w-[250px] px-5 py-3'>
+        <div className='flex gap-1 h-full'>
+            <div className='flex flex-col gap-2 w-[300px] px-5 py-3'>
                 <h3 className='text-[1.3em]'>{actived.text}</h3>
                 <Separator.Root
                     className="h-[1px] w-auto bg-secondary-color"

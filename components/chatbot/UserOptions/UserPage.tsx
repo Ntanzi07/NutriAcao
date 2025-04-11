@@ -9,7 +9,7 @@ const UserPage = (props: Props) => {
     const user = useQuery(api.my.get);
     
     return (
-        <div className='px-5 py-3 h-[700px] w-[600px]'>
+        <div className='px-5 py-3 w-[600px]'>
             <div className='flex items-center gap-2'>
                 <Avatar.Root className="AvatarRoot">
                     <Avatar.Image

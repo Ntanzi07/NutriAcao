@@ -32,7 +32,7 @@ const UserButton = (props: Props) => {
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className="DialogOverlay" />
-                <Dialog.Content className="DialogContent">
+                <Dialog.Content className="DialogContent h-full w-full">
                     <Dialog.Close asChild>
                         <button className="IconButton" aria-label="Close">
                             <Cross2Icon className="h-6 w-6" />

@@ -1,5 +1,6 @@
 'use client'
 
+import { Separator } from 'radix-ui';
 import React, { useState } from 'react'
 
 type Props = {}
@@ -20,6 +21,7 @@ const UserCalculator = (props: Props) => {
   });
 
   const [resultado, setResultado] = useState(0);
+  const [TMB, setTMB] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,10 +52,11 @@ const UserCalculator = (props: Props) => {
     const duracaoAerobicoNum = parseInt(duracaoAerobico);
 
     // TMB (Mifflin-St Jeor)
-    let TMB =
+    setTMB(
       sexo === "masculino"
         ? 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum + 5
-        : 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum - 161;
+        : 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum - 161
+    )
 
     // Multiplicador da atividade diária
     const fatoresAtividade = [
@@ -88,12 +91,17 @@ const UserCalculator = (props: Props) => {
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Calculadora de TDEE</h1>
-      <div className="">
+    <div className="mt-10 flex-1 px-10 flex flex-col overflow-y-auto overflow-hidden">
+      <h1 className="text-[1.5em] font-bold">Calculadora de TDEE</h1>
+      <Separator.Root
+        className="h-[1px] w-auto bg-secondary-color"
+        decorative
+        orientation="horizontal"
+      />
+      <div className="flex flex-col gap-5 mt-3 text-[1.1em]">
         <fieldset>
-          <div className="flex gap-2 w-full justify-between pr-2">
-            <legend className="font-semibold">Sexo:</legend>
+          <div className="flex gap-2 w-full">
+            <legend className="font-semibold ">Sexo:</legend>
             <label className="flex items-center gap-1">
               <input
                 type="radio"
@@ -117,24 +125,26 @@ const UserCalculator = (props: Props) => {
           </div>
         </fieldset>
 
-        <label>
-          Peso (kg):
-          <input name="peso" type="number" value={form.peso} onChange={handleChange} className="w-full" />
-        </label>
+        <div className='flex justify-between gap-5'>
+          <label className='flex w-fit items-center gap-2'>
+            <legend className="font-semibold ">Peso (kg):</legend>
+            <input name="peso" min={0} max={400} type="number" value={form.peso} onChange={handleChange} className=" bg-transparent border-b-2 border-black" />
+          </label>
 
-        <label>
-          Altura (cm):
-          <input name="altura" type="number" value={form.altura} onChange={handleChange} className="w-full" />
-        </label>
+          <label className='flex items-center gap-2'>
+            <legend className="font-semibold ">Altura (cm):</legend>
+            <input name="altura" min={0} max={260} type="number" value={form.altura} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+          </label>
 
-        <label>
-          Idade:
-          <input name="idade" type="number" value={form.idade} onChange={handleChange} className="w-full" />
-        </label>
+          <label className='flex items-center gap-2'>
+            <legend className="font-semibold ">Idade:</legend>
+            <input name="idade" min={0} max={120} type="number" value={form.idade} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+          </label>
+        </div>
 
         <fieldset>
+          <legend className="font-semibold">Atividade diária:</legend>
           <div className="flex gap-2 w-full justify-between pr-2">
-            <legend className="font-semibold">Atividade diária:</legend>
             <label className="flex items-center gap-1">
               <input
                 type="radio"
@@ -168,15 +178,14 @@ const UserCalculator = (props: Props) => {
           </div>
         </fieldset>
 
-
-        <label>
-          Frequência de musculação (por semana):
-          <input name="freqMusculacao" type="number" value={form.freqMusculacao} onChange={handleChange} className="w-full" />
+        <label className='flex gap-3 justify-between'>
+          <legend className="font-semibold text-wrap">Frequência de musculação (por semana):</legend>
+          <input name="freqMusculacao" min={0} max={28} type="number" value={form.freqMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
         </label>
 
-        <label>
-          Duração média do treino de musculação (min):
-          <input name="duracaoMusculacao" type="number" value={form.duracaoMusculacao} onChange={handleChange} className="w-full" />
+        <label className='flex gap-3 justify-between'>
+          <legend className="font-semibold text-wrap">Duração média do treino de musculação (min):</legend>
+          <input name="duracaoMusculacao" min={0} max={1000} type="number" value={form.duracaoMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
         </label>
 
         <fieldset>
@@ -215,14 +224,14 @@ const UserCalculator = (props: Props) => {
           </div>
         </fieldset>
 
-        <label>
-          Frequência de aeróbicos (por semana):
-          <input name="freqAerobico" type="number" value={form.freqAerobico} onChange={handleChange} className="w-full" />
+        <label className='flex gap-3 justify-between'>
+          <legend className="font-semibold text-wrap">Frequência de aeróbicos (por semana):</legend>
+          <input name="freqAerobico" min={0} max={28} type="number" value={form.freqAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
         </label>
 
-        <label>
-          Duração média dos aeróbicos (min):
-          <input name="duracaoAerobico" type="number" value={form.duracaoAerobico} onChange={handleChange} className="w-full" />
+        <label className='flex gap-3 justify-between'>
+          <legend className="font-semibold text-wrap">Duração média dos aeróbicos (min):</legend>
+          <input name="duracaoAerobico" min={0} max={1000} type="number" value={form.duracaoAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
         </label>
 
         <fieldset>
@@ -272,6 +281,11 @@ const UserCalculator = (props: Props) => {
       {resultado && (
         <div className="mt-4 text-lg">
           <strong>Seu TDEE é:</strong> {resultado} kcal/dia
+        </div>
+      )}
+      {TMB && (
+        <div className="mt-4 text-lg">
+          <strong>Seu TMB é:</strong> {TMB} kcal/dia
         </div>
       )}
     </div>

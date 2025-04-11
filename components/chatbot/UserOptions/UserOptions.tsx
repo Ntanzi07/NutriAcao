@@ -9,8 +9,8 @@ type Props = {}
 const UserOptions = (props: Props) => {
     const items = [
         { name: 'Dashboard', page: <UserPage />, text: <>Seu <strong>Dashboard</strong></> },
+        { name: 'Calculadora', page: <UserCalculator />, text: <>Calculadora de <strong>Macro e calorias</strong></> },
         { name: 'Configurações', page: <UserConfig />, text: <>Suas <strong>Configurações</strong></> },
-        { name: 'Calculadora', page: <UserCalculator />, text: <>Calculadora de <strong>Macro e calorias</strong></> }
     ];
     const [actived, setActived] = useState(items[0]);
 

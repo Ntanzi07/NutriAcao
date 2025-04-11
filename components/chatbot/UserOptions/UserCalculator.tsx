@@ -5,38 +5,101 @@ import React, { useState } from 'react'
 type Props = {}
 
 const UserCalculator = (props: Props) => {
-  const [formData, setFormData] = useState({
-    sex: '',
-    height: '',
-    weight: '',
-    age: '',
-    outExerc: '',
+  const [form, setForm] = useState({
+    sexo: "masculino",
+    peso: "70",
+    altura: "175",
+    idade: "25",
+    atividadeDiaria: 0,
+    freqMusculacao: "3",
+    duracaoMusculacao: "60",
+    intensidadeMusculacao: 0,
+    freqAerobico: "2",
+    duracaoAerobico: "30",
+    intensidadeAerobico: 0,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const [resultado, setResultado] = useState(0);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Submitted Data:', formData);
+  const calcularTDEE = () => {
+    const {
+      sexo,
+      peso,
+      altura,
+      idade,
+      atividadeDiaria,
+      freqMusculacao,
+      duracaoMusculacao,
+      intensidadeMusculacao,
+      freqAerobico,
+      duracaoAerobico,
+      intensidadeAerobico,
+    } = form;
+
+    const pesoNum = parseFloat(peso);
+    const alturaNum = parseFloat(altura);
+    const idadeNum = parseInt(idade);
+    const freqMusculacaoNum = parseInt(freqMusculacao);
+    const duracaoMusculacaoNum = parseInt(duracaoMusculacao);
+    const freqAerobicoNum = parseInt(freqAerobico);
+    const duracaoAerobicoNum = parseInt(duracaoAerobico);
+
+    // TMB (Mifflin-St Jeor)
+    let TMB =
+      sexo === "masculino"
+        ? 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum + 5
+        : 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum - 161;
+
+    // Multiplicador da atividade diária
+    const fatoresAtividade = [
+      1.2,    //sedentario
+      1.35,   //moderado
+      1.5,    //ativo
+    ]
+
+    const multAtividade = fatoresAtividade[atividadeDiaria];
+
+    // Intensidade musculação
+    const intensidadeMusculacaoMap = [
+      5,    //leve
+      7,    //moderada
+      9,    //alta
+    ]
+    const kcalMusculacao =
+      freqMusculacaoNum * duracaoMusculacaoNum * intensidadeMusculacaoMap[intensidadeMusculacao] * 0.1 * pesoNum / 7;
+
+    // Intensidade aeróbico
+    const intensidadeAerobicoMap = [
+      4,    //leve
+      7,    //moderada
+      10,   //alta
+    ]
+    const kcalAerobico =
+      freqAerobicoNum * duracaoAerobicoNum * intensidadeAerobicoMap[intensidadeAerobico] * 0.1 * pesoNum / 7;
+
+    const TDEE = TMB * multAtividade + kcalMusculacao + kcalAerobico;
+
+    setResultado(Number.parseFloat(TDEE.toFixed(2)));
   };
 
   return (
-    <div className='w-full p-4'>
-      <h2>Calculadora</h2>
-      <form id='calcTDEE' onSubmit={handleSubmit} className="flex flex-col gap-4 py-4 w-full rounded-lg">
-        <h3 className='font-bold text-[1.2em]'>Calcule seu gasto calórico diário (TDEE)</h3>
+    <div className="p-4 max-w-2xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Calculadora de TDEE</h1>
+      <div className="">
         <fieldset>
           <div className="flex gap-2 w-full justify-between pr-2">
             <legend className="font-semibold">Sexo:</legend>
             <label className="flex items-center gap-1">
               <input
                 type="radio"
-                name="sex"
-                value="male"
-                checked={formData.sex === 'male'}
+                name="sexo"
+                value="masculino"
+                checked={form.sexo === "masculino"}
                 onChange={handleChange}
               />
               Masculino
@@ -44,84 +107,175 @@ const UserCalculator = (props: Props) => {
             <label className="flex items-center gap-1">
               <input
                 type="radio"
-                name="sex"
-                value="female"
-                checked={formData.sex === 'female'}
+                name="sexo"
+                value="feminino"
+                checked={form.sexo === "feminino"}
                 onChange={handleChange}
               />
               Feminino
             </label>
+          </div>
+        </fieldset>
+
+        <label>
+          Peso (kg):
+          <input name="peso" type="number" value={form.peso} onChange={handleChange} className="w-full" />
+        </label>
+
+        <label>
+          Altura (cm):
+          <input name="altura" type="number" value={form.altura} onChange={handleChange} className="w-full" />
+        </label>
+
+        <label>
+          Idade:
+          <input name="idade" type="number" value={form.idade} onChange={handleChange} className="w-full" />
+        </label>
+
+        <fieldset>
+          <div className="flex gap-2 w-full justify-between pr-2">
+            <legend className="font-semibold">Atividade diária:</legend>
             <label className="flex items-center gap-1">
               <input
                 type="radio"
-                name="sex"
-                value="other"
-                checked={formData.sex === 'other'}
-                onChange={handleChange}
+                name="atividadeDiaria"
+                value={0}
+                checked={form.atividadeDiaria === 0}
+                onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
               />
-              Outro
+              Sedentário
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="atividadeDiaria"
+                value={1}
+                checked={form.atividadeDiaria === 1}
+                onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
+              />
+              Moderadamente ativo
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="atividadeDiaria"
+                value={2}
+                checked={form.atividadeDiaria === 2}
+                onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
+              />
+              Bastante ativo
             </label>
           </div>
         </fieldset>
-        <div className='flex gap-3 justify-between'>
-          <label className='flex-1'>
-            <legend className="font-semibold text-nowrap">Altura (cm):</legend>
-            <input
-              type="number"
-              name="height"
-              value={formData.height}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              placeholder="ex: 175"
-              min="0"
-              max="270"
-            />
-          </label>
 
-          <label className='flex-1'>
-            <legend className="font-semibold text-nowrap">Peso (kg):</legend>
-            <input
-              type="number"
-              name="weight"
-              value={formData.weight}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              placeholder="ex: 70"
-              min="0"
-            />
-          </label>
-
-          <label className='flex-1'>
-            <legend className="font-semibold text-nowrap">Idade (anos):</legend>
-            <input
-              type="number"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              placeholder="ex: 25"
-              min="0"
-              max="120"
-            />
-          </label>
-        </div>
 
         <label>
-          <p className='font-semibold'>Como você descreveria seu nível de atividade (fora da academia) ?</p>
-          <select name="outExerc" value={formData.outExerc} onChange={handleChange} className="w-full border p-2 rounded">
-            <option value="">Selecione</option>
-            <option value="Sedentário">Sedentário</option>
-            <option value="Moderadamente">Moderadamente ativo</option>
-            <option value="ativo">Bastante ativo</option>
-          </select>
+          Frequência de musculação (por semana):
+          <input name="freqMusculacao" type="number" value={form.freqMusculacao} onChange={handleChange} className="w-full" />
         </label>
 
-        <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
-          Enviar
-        </button>
-      </form>
+        <label>
+          Duração média do treino de musculação (min):
+          <input name="duracaoMusculacao" type="number" value={form.duracaoMusculacao} onChange={handleChange} className="w-full" />
+        </label>
+
+        <fieldset>
+          <div className="flex gap-2 w-full justify-between pr-2">
+            <legend className="font-semibold">Intensidade da musculação:</legend>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="intensidadeMusculacao"
+                value={0}
+                checked={form.intensidadeMusculacao === 0}
+                onChange={(e) => setForm({ ...form, intensidadeMusculacao: Number(e.target.value) })}
+              />
+              Leve
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="intensidadeMusculacao"
+                value={1}
+                checked={form.intensidadeMusculacao === 1}
+                onChange={(e) => setForm({ ...form, intensidadeMusculacao: Number(e.target.value) })}
+              />
+              Moderada
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="intensidadeMusculacao"
+                value={2}
+                checked={form.intensidadeMusculacao === 2}
+                onChange={(e) => setForm({ ...form, intensidadeMusculacao: Number(e.target.value) })}
+              />
+              Alta
+            </label>
+          </div>
+        </fieldset>
+
+        <label>
+          Frequência de aeróbicos (por semana):
+          <input name="freqAerobico" type="number" value={form.freqAerobico} onChange={handleChange} className="w-full" />
+        </label>
+
+        <label>
+          Duração média dos aeróbicos (min):
+          <input name="duracaoAerobico" type="number" value={form.duracaoAerobico} onChange={handleChange} className="w-full" />
+        </label>
+
+        <fieldset>
+          <div className="flex gap-2 w-full justify-between pr-2">
+            <legend className="font-semibold">Intensidade dos aeróbicos:</legend>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="intensidadeAerobico"
+                value={0}
+                checked={form.intensidadeAerobico === 0}
+                onChange={(e) => setForm({ ...form, intensidadeAerobico: Number(e.target.value) })}
+              />
+              Leve
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="intensidadeAerobico"
+                value={1}
+                checked={form.intensidadeAerobico === 1}
+                onChange={(e) => setForm({ ...form, intensidadeAerobico: Number(e.target.value) })}
+              />
+              Moderada
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="intensidadeAerobico"
+                value={2}
+                checked={form.intensidadeAerobico === 2}
+                onChange={(e) => setForm({ ...form, intensidadeAerobico: Number(e.target.value) })}
+              />
+              Alta
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <button
+        onClick={calcularTDEE}
+        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        Calcular TDEE
+      </button>
+
+      {resultado && (
+        <div className="mt-4 text-lg">
+          <strong>Seu TDEE é:</strong> {resultado} kcal/dia
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 

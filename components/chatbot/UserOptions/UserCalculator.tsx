@@ -52,11 +52,11 @@ const UserCalculator = (props: Props) => {
     const duracaoAerobicoNum = parseInt(duracaoAerobico);
 
     // TMB (Mifflin-St Jeor)
-    setTMB(
-      sexo === "masculino"
-        ? 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum + 5
-        : 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum - 161
-    )
+    const TMBupttaded = sexo === "masculino"
+      ? 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum + 5
+      : 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum - 161
+
+    setTMB(TMBupttaded);
 
     // Multiplicador da atividade diária
     const fatoresAtividade = [
@@ -85,14 +85,14 @@ const UserCalculator = (props: Props) => {
     const kcalAerobico =
       freqAerobicoNum * duracaoAerobicoNum * intensidadeAerobicoMap[intensidadeAerobico] * 0.1 * pesoNum / 7;
 
-    const TDEE = TMB * multAtividade + kcalMusculacao + kcalAerobico;
+    const TDEE = TMBupttaded * multAtividade + kcalMusculacao + kcalAerobico;
 
     setResultado(Number.parseFloat(TDEE.toFixed(2)));
   };
 
   return (
     <div className="mt-10 flex-1 px-10 flex flex-col overflow-y-auto overflow-hidden">
-      <h1 className="text-[1.5em] font-bold">Calculadora de TDEE</h1>
+      <h2 className="text-[1.5em] font-bold">Calculadora de TDEE</h2>
       <Separator.Root
         className="h-[1px] w-auto bg-secondary-color"
         decorative
@@ -103,9 +103,9 @@ const UserCalculator = (props: Props) => {
 
         <h2 className='font-semibold text-[1.2em]'>Passo 1: Dados Pessoais</h2>
 
-        <div className='flex flex-col gap-2 px-3 rounded-lg'>
+        <div className='flex flex-col gap-2 px-3 '>
           <fieldset>
-            <div className="flex gap-2 w-full">
+            <div className="flex gap-2 w-full px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color">
               <legend className="font-semibold ">Sexo:</legend>
               <label className="flex items-center gap-1">
                 <input
@@ -130,19 +130,19 @@ const UserCalculator = (props: Props) => {
             </div>
           </fieldset>
 
-          <div className='flex justify-between gap-5'>
-            <label className='flex w-fit items-center gap-2'>
+          <div className='flex justify-between gap-5 '>
+            <label className='flex items-center gap-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color'>
               <legend className="font-semibold ">Peso (kg):</legend>
-              <input name="peso" min={0} max={400} type="number" value={form.peso} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+              <input name="peso" min={0} max={400} type="number" value={form.peso} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color'>
               <legend className="font-semibold ">Altura (cm):</legend>
-              <input name="altura" min={0} max={260} type="number" value={form.altura} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+              <input name="altura" min={0} max={260} type="number" value={form.altura} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
             </label>
 
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color'>
               <legend className="font-semibold ">Idade:</legend>
-              <input name="idade" min={0} max={120} type="number" value={form.idade} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+              <input name="idade" min={0} max={120} type="number" value={form.idade} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
             </label>
           </div>
         </div>
@@ -151,52 +151,54 @@ const UserCalculator = (props: Props) => {
 
         <div className='flex flex-col gap-3 px-3 rounded-lg'>
           <fieldset>
-            <legend className="font-semibold">Atividade diária:</legend>
-            <div className="flex gap-2 w-full justify-between pr-2">
-              <label className="flex items-center gap-1">
-                <input
-                  type="radio"
-                  name="atividadeDiaria"
-                  value={0}
-                  checked={form.atividadeDiaria === 0}
-                  onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
-                />
-                Sedentário
-              </label>
-              <label className="flex items-center gap-1">
-                <input
-                  type="radio"
-                  name="atividadeDiaria"
-                  value={1}
-                  checked={form.atividadeDiaria === 1}
-                  onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
-                />
-                Moderadamente ativo
-              </label>
-              <label className="flex items-center gap-1">
-                <input
-                  type="radio"
-                  name="atividadeDiaria"
-                  value={2}
-                  checked={form.atividadeDiaria === 2}
-                  onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
-                />
-                Bastante ativo
-              </label>
+            <div className='px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color'>
+              <legend className="font-semibold">Atividade diária:</legend>
+              <div className="flex gap-2 w-full justify-between pr-2">
+                <label className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    name="atividadeDiaria"
+                    value={0}
+                    checked={form.atividadeDiaria === 0}
+                    onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
+                  />
+                  Sedentário
+                </label>
+                <label className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    name="atividadeDiaria"
+                    value={1}
+                    checked={form.atividadeDiaria === 1}
+                    onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
+                  />
+                  Moderadamente ativo
+                </label>
+                <label className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    name="atividadeDiaria"
+                    value={2}
+                    checked={form.atividadeDiaria === 2}
+                    onChange={(e) => setForm({ ...form, atividadeDiaria: Number(e.target.value) })}
+                  />
+                  Bastante ativo
+                </label>
+              </div>
             </div>
           </fieldset>
-          <label className='flex gap-3 justify-between'>
+          <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
             <legend className=" text-wrap">Frequência de musculação (por semana):</legend>
-            <input name="freqMusculacao" min={0} max={28} type="number" value={form.freqMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+            <input name="freqMusculacao" min={0} max={28} type="number" value={form.freqMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
-          <label className='flex gap-3 justify-between'>
+          <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
             <legend className=" text-wrap">Duração média do treino de musculação (min):</legend>
-            <input name="duracaoMusculacao" min={0} max={1000} type="number" value={form.duracaoMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+            <input name="duracaoMusculacao" min={0} max={1000} type="number" value={form.duracaoMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
           <fieldset>
-            <div className="flex gap-2 w-full justify-between pr-2">
+            <div className="flex gap-2 w-full justify-between pr-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color">
               <legend className="">Intensidade da musculação:</legend>
               <label className="flex items-center gap-1">
                 <input
@@ -235,18 +237,18 @@ const UserCalculator = (props: Props) => {
         <h2 className='font-semibold text-[1.2em] mt-5'>Passo 3: Exercícios Aeróbicos</h2>
 
         <div className='flex flex-col gap-3 px-3 rounded-lg'>
-          <label className='flex gap-3 justify-between'>
+          <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
             <legend className="text-wrap">Frequência de aeróbicos (por semana):</legend>
-            <input name="freqAerobico" min={0} max={28} type="number" value={form.freqAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+            <input name="freqAerobico" min={0} max={28} type="number" value={form.freqAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
-          <label className='flex gap-3 justify-between'>
+          <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
             <legend className="text-wrap">Duração média dos aeróbicos (min):</legend>
-            <input name="duracaoAerobico" min={0} max={1000} type="number" value={form.duracaoAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-b-2 border-black" />
+            <input name="duracaoAerobico" min={0} max={1000} type="number" value={form.duracaoAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
           <fieldset>
-            <div className="flex gap-2 w-full justify-between pr-2">
+            <div className="flex gap-2 w-full pr-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color">
               <legend className="">Intensidade dos aeróbicos:</legend>
               <label className="flex items-center gap-1">
                 <input
@@ -282,6 +284,13 @@ const UserCalculator = (props: Props) => {
           </fieldset>
         </div>
       </div>
+
+      <h2 className="text-[1.5em] font-bold mt-5">Seu Objetivo:</h2>
+      <Separator.Root
+        className="h-[1px] w-auto bg-secondary-color"
+        decorative
+        orientation="horizontal"
+      />
 
       <button
         onClick={calcularTDEE}

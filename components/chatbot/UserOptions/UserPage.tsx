@@ -2,6 +2,7 @@ import { api } from '@/convex/_generated/api';
 import { useQuery } from 'convex/react';
 import { Avatar, Dialog } from 'radix-ui'
 import React from 'react'
+import CircularDashboard from './models/circularDashboard';
 
 type Props = {}
 
@@ -26,6 +27,8 @@ const UserPage = (props: Props) => {
                     <Dialog.DialogTitle className='text-[1.2em]'>{user?.username}</Dialog.DialogTitle>
                 </div>
             </div>
+            <CircularDashboard />
+            
         </div>
     )
 }

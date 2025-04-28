@@ -16,9 +16,8 @@ export default defineSchema({
     altura: v.optional(v.string()),
     sexo: v.optional(v.string()),
     peso: v.optional(v.string()),
-    atividades: v.optional(v.string()),
-    calculoBasal: v.optional(v.number()),
-
+    TMB: v.optional(v.number()),
+    TDEE: v.optional(v.number()),
   })
     .index("by_email", ["email"])
     .index("by_clerkId", ["clerkId"]),

@@ -1,11 +1,20 @@
 'use client'
 
+import { api } from '@/convex/_generated/api';
+import { useMutation } from 'convex/react';
 import { Separator } from 'radix-ui';
 import React, { useState } from 'react'
 
 type Props = {}
 
 const UserCalculator = (props: Props) => {
+
+
+  const [customOption1, setCustomOption1] = useState(0);
+  const [customOption2, setCustomOption2] = useState(0);
+
+  const updateUserinfos = useMutation(api.my.update);
+
   const [form, setForm] = useState({
     sexo: "masculino",
     peso: "70",
@@ -18,6 +27,15 @@ const UserCalculator = (props: Props) => {
     freqAerobico: "2",
     duracaoAerobico: "30",
     intensidadeAerobico: 0,
+    proteinaPorKg: 0,
+    gorduraPorKg: 0,
+  });
+
+  const [result, setResult] = useState({
+    proteinas: 0,
+    gorduras: 0,
+    carbos: 0,
+    calorias: 0
   });
 
   const [resultado, setResultado] = useState(0);
@@ -26,6 +44,22 @@ const UserCalculator = (props: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
+  };
+
+  const calcularMacros = (tdee: number, peso: number) => {
+    const proteinas = form.proteinaPorKg * peso;
+    const gorduras = form.gorduraPorKg * peso;
+    const kcalProteinas = proteinas * 4;
+    const kcalGorduras = gorduras * 9;
+    const kcalCarbos = tdee - (kcalProteinas + kcalGorduras);
+    const carbos = kcalCarbos / 4;
+
+    setResult({
+      proteinas: Math.round(proteinas),
+      gorduras: Math.round(gorduras),
+      carbos: Math.round(carbos),
+      calorias: Math.round(tdee)
+    });
   };
 
   const calcularTDEE = () => {
@@ -51,7 +85,7 @@ const UserCalculator = (props: Props) => {
     const freqAerobicoNum = parseInt(freqAerobico);
     const duracaoAerobicoNum = parseInt(duracaoAerobico);
 
-    // TMB (Mifflin-St Jeor)
+    // TMB
     const TMBupttaded = sexo === "masculino"
       ? 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum + 5
       : 10 * pesoNum + 6.25 * alturaNum - 5 * idadeNum - 161
@@ -88,6 +122,18 @@ const UserCalculator = (props: Props) => {
     const TDEE = TMBupttaded * multAtividade + kcalMusculacao + kcalAerobico;
 
     setResultado(Number.parseFloat(TDEE.toFixed(2)));
+
+    calcularMacros(TDEE, pesoNum);
+
+    updateUserinfos({
+      idade,
+      altura,
+      sexo,
+      peso,
+      TMB: TMBupttaded,
+      TDEE,
+    });
+
   };
 
   return (
@@ -188,18 +234,18 @@ const UserCalculator = (props: Props) => {
             </div>
           </fieldset>
           <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
-            <legend className=" text-wrap">Frequência de musculação (por semana):</legend>
+            <legend className="font-semibold text-wrap">Frequência de musculação (por semana):</legend>
             <input name="freqMusculacao" min={0} max={28} type="number" value={form.freqMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
           <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
-            <legend className=" text-wrap">Duração média do treino de musculação (min):</legend>
+            <legend className="font-semibold text-wrap">Duração média do treino de musculação (min):</legend>
             <input name="duracaoMusculacao" min={0} max={1000} type="number" value={form.duracaoMusculacao} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
           <fieldset>
-            <div className="flex gap-2 w-full justify-between pr-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color">
-              <legend className="">Intensidade da musculação:</legend>
+            <div className="flex gap-2 w-full pr-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color">
+              <legend className="font-semibold">Intensidade da musculação:</legend>
               <label className="flex items-center gap-1">
                 <input
                   type="radio"
@@ -238,18 +284,18 @@ const UserCalculator = (props: Props) => {
 
         <div className='flex flex-col gap-3 px-3 rounded-lg'>
           <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
-            <legend className="text-wrap">Frequência de aeróbicos (por semana):</legend>
+            <legend className="text-wrap font-semibold">Frequência de aeróbicos (por semana):</legend>
             <input name="freqAerobico" min={0} max={28} type="number" value={form.freqAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
           <label className='flex gap-3 justify-between px-2 py-1 rounded-2xl border-solid border-[2px] border-secondary-color'>
-            <legend className="text-wrap">Duração média dos aeróbicos (min):</legend>
+            <legend className="text-wrap font-semibold">Duração média dos aeróbicos (min):</legend>
             <input name="duracaoAerobico" min={0} max={1000} type="number" value={form.duracaoAerobico} onChange={handleChange} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
           </label>
 
           <fieldset>
             <div className="flex gap-2 w-full pr-2 px-3 py-1 justify-between rounded-2xl border-solid border-[2px] border-secondary-color">
-              <legend className="">Intensidade dos aeróbicos:</legend>
+              <legend className="font-semibold">Intensidade dos aeróbicos:</legend>
               <label className="flex items-center gap-1">
                 <input
                   type="radio"
@@ -285,12 +331,112 @@ const UserCalculator = (props: Props) => {
         </div>
       </div>
 
-      <h2 className="text-[1.5em] font-bold mt-5">Seu Objetivo:</h2>
+      <h2 className="text-[1.5em] font-bold mt-5">Seus macronutrientes :</h2>
       <Separator.Root
-        className="h-[1px] w-auto bg-secondary-color"
+        className="h-[1px] my-2 w-auto bg-secondary-color"
         decorative
         orientation="horizontal"
       />
+      <div className=' flex flex-col gap-3'>
+        <fieldset>
+          <div className="flex gap-2 w-full px-4 py-2 rounded-2xl justify-between border-solid border-[2px] border-secondary-color">
+            <legend className="font-semibold">Proteína (4 calorias por grama):</legend>
+            <div className='flex flex-col'>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="proteinaPorKg"
+                  value={1.6}
+                  onChange={(e) => setForm({ ...form, proteinaPorKg: Number(e.target.value) })}
+                />
+                1.6 gramas de proteína por kg
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="proteinaPorKg"
+                  value={1.8}
+                  onChange={(e) => setForm({ ...form, proteinaPorKg: Number(e.target.value) })}
+                />
+                1.8 gramas de proteína por kg
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="proteinaPorKg"
+                  value={2}
+                  onChange={(e) => setForm({ ...form, proteinaPorKg: Number(e.target.value) })}
+                />
+                2 gramas de proteína por kg
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="proteinaPorKg"
+                  value={customOption1}
+                  onChange={(e) => setForm({ ...form, proteinaPorKg: Number(e.target.value) })}
+                />
+                custom:
+                <input min={0} max={100} type="number" onChange={(e) => {
+                  setCustomOption1(Number(e.target.value))
+                  setForm({ ...form, proteinaPorKg: Number(e.target.value) })
+                }} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div className="flex gap-2 w-full px-4 py-2 rounded-2xl justify-between border-solid border-[2px] border-secondary-color">
+            <legend className="font-semibold">Gordura (9 calorias por grama):</legend>
+            <div className='flex flex-col'>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="gorduraPorKg"
+                  value={1.6}
+                  checked={form.gorduraPorKg === 1.6}
+                  onChange={(e) => setForm({ ...form, gorduraPorKg: Number(e.target.value) })}
+                />
+                0,5g de gordura por kg
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="gorduraPorKg"
+                  value={1.8}
+                  checked={form.gorduraPorKg === 1.8}
+                  onChange={(e) => setForm({ ...form, gorduraPorKg: Number(e.target.value) })}
+                />
+                0,7g de gordura por kg
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="gorduraPorKg"
+                  value={2}
+                  checked={form.gorduraPorKg === 2}
+                  onChange={(e) => setForm({ ...form, gorduraPorKg: Number(e.target.value) })}
+                />
+                1g de gordura por kg
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="gorduraPorKg"
+                  value={customOption2}
+                  onChange={(e) => setForm({ ...form, gorduraPorKg: Number(e.target.value) })}
+                />
+                custom:
+                <input min={0} max={100} type="number" onChange={(e) => {
+                  setCustomOption2(Number(e.target.value))
+                  setForm({ ...form, gorduraPorKg: Number(e.target.value) })
+                }} className="w-[75px] bg-transparent border-l-2 px-2 border-secondary-color focus:outline-none focus:ring-0" />
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
 
       <button
         onClick={calcularTDEE}
@@ -309,6 +455,29 @@ const UserCalculator = (props: Props) => {
           <strong>Seu TMB é:</strong> {TMB} kcal/dia
         </div>
       )}
+
+      <table>
+        <thead>
+          <tr>
+            <th>Gramas por dia</th>
+            <th>Carboidratos</th>
+            <th>Proteínas</th>
+            <th>Gorduras</th>
+            <th>Fibras</th>
+            <th>Calorias</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>{result.carbos}g</td>
+            <td>{result.proteinas}g</td>
+            <td>{result.gorduras}g</td>
+            <td>{Math.round(parseInt(form.peso) * 0.5)}g</td>
+            <td>{result.calorias}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }

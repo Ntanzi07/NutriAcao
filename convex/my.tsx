@@ -34,7 +34,8 @@ export const update = mutation({
         altura: v.optional(v.string()),
         sexo: v.optional(v.string()),
         peso: v.optional(v.string()),
-        atividades: v.optional(v.string()),
+        TMB: v.optional(v.number()),
+        TDEE: v.optional(v.number()),
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -51,19 +52,13 @@ export const update = mutation({
             throw new ConvexError("User not founded")
         }
 
-
-        // TODO...
-        if(args.sexo === "H"){
-
-        }
-        const calculo = 2;
-
         await ctx.db.patch(currentUser._id, { 
             idade: args.idade,
             altura: args.altura,
             sexo: args.sexo,
             peso: args.peso,
-            calculoBasal: calculo,
+            TMB: args.TMB,
+            TDEE: args.TDEE,
         });
 
     }

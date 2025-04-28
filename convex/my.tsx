@@ -36,6 +36,12 @@ export const update = mutation({
         peso: v.optional(v.string()),
         TMB: v.optional(v.number()),
         TDEE: v.optional(v.number()),
+        results: v.object({
+            carboidratos: v.number(),
+            proteinas: v.number(),
+            gorduras: v.number(),
+            calorias: v.number(),
+          })
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -59,6 +65,7 @@ export const update = mutation({
             peso: args.peso,
             TMB: args.TMB,
             TDEE: args.TDEE,
+            results: args.results
         });
 
     }

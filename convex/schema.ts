@@ -18,6 +18,12 @@ export default defineSchema({
     peso: v.optional(v.string()),
     TMB: v.optional(v.number()),
     TDEE: v.optional(v.number()),
+    results: v.optional(v.object({
+      carboidratos: v.number(),
+      proteinas: v.number(),
+      gorduras: v.number(),
+      calorias: v.number(),
+    }))
   })
     .index("by_email", ["email"])
     .index("by_clerkId", ["clerkId"]),

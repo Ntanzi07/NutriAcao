@@ -32,10 +32,10 @@ const UserCalculator = (props: Props) => {
   });
 
   const [result, setResult] = useState({
+    carboidratos: 0,
     proteinas: 0,
     gorduras: 0,
-    carbos: 0,
-    calorias: 0
+    calorias: 0,
   });
 
   const [resultado, setResultado] = useState(0);
@@ -55,9 +55,9 @@ const UserCalculator = (props: Props) => {
     const carbos = kcalCarbos / 4;
 
     setResult({
-      proteinas: Math.round(proteinas),
-      gorduras: Math.round(gorduras),
-      carbos: Math.round(carbos),
+      carboidratos: Math.round(proteinas),
+      proteinas: Math.round(gorduras),
+      gorduras: Math.round(carbos),
       calorias: Math.round(tdee)
     });
   };
@@ -132,12 +132,13 @@ const UserCalculator = (props: Props) => {
       peso,
       TMB: TMBupttaded,
       TDEE,
+      results: result
     });
 
   };
 
   return (
-    <div className="mt-10 flex-1 px-10 flex flex-col overflow-y-auto overflow-hidden">
+    <div className="py-10 flex-1 px-10 flex flex-col overflow-y-auto overflow-hidden">
       <h2 className="text-[1.5em] font-bold">Calculadora de TDEE</h2>
       <Separator.Root
         className="h-[1px] w-auto bg-secondary-color"
@@ -444,40 +445,6 @@ const UserCalculator = (props: Props) => {
       >
         Calcular TDEE
       </button>
-
-      {resultado && (
-        <div className="mt-4 text-lg">
-          <strong>Seu TDEE é:</strong> {resultado} kcal/dia
-        </div>
-      )}
-      {TMB && (
-        <div className="mt-4 text-lg">
-          <strong>Seu TMB é:</strong> {TMB} kcal/dia
-        </div>
-      )}
-
-      <table>
-        <thead>
-          <tr>
-            <th>Gramas por dia</th>
-            <th>Carboidratos</th>
-            <th>Proteínas</th>
-            <th>Gorduras</th>
-            <th>Fibras</th>
-            <th>Calorias</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td>{result.carbos}g</td>
-            <td>{result.proteinas}g</td>
-            <td>{result.gorduras}g</td>
-            <td>{Math.round(parseInt(form.peso) * 0.5)}g</td>
-            <td>{result.calorias}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   );
 }

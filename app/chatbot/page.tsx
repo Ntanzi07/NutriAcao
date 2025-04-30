@@ -17,10 +17,10 @@ export default function ChatBot() {
 
   return (
     <ConvexClientProvider>
-      <main className="flex items-start overflow-hidden">
+      <main className="flex items-start overflow-hidden bg-secundary-bg">
         <ChatOptions chatid={id} activedOptions={activedOptions} setOptions={changeOption} />
         <div className='flex items-center px-3 padding-y'>
-          <button className={` bg-primary-bg rounded-full
+          <button className={` rounded-full
             ${activedOptions
               ? 'hidden rotate-180'
               : 'rotate-0 '}`

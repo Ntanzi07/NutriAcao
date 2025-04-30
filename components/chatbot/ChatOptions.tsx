@@ -1,12 +1,13 @@
 'use client'
 
 import { api } from '@/convex/_generated/api'
-import UserButton from './UserButton'
 import { useQuery } from 'convex/react'
 import React from 'react'
 import DMConversationItem from './DMConversationItem'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import UserButton from './UserButton'
+
 
 type Props = {
   chatid: string | null,
@@ -19,7 +20,7 @@ const ChatOptions = (props: Props) => {
   const router = useRouter();
 
   return (
-    <div className={`chatOptions overflow-hidden w-[18rem] bg-primary-bg
+    <div className={`chatOptions overflow-hidden w-[18rem]
       ${props.activedOptions
         ? 'lg:w-[400px] left-0 border-r-[2px]'
         : 'lg:left-0 lg:w-0 left-[-18rem] border-r-0'
@@ -28,7 +29,7 @@ const ChatOptions = (props: Props) => {
       <div className='flex items-center px-3'>
         <div className='flex h-14'>
           <Image
-            src="/logo2.png"
+            src="/logo.png"
             alt="Nutriação logo"
             width={300}
             height={300}
@@ -47,7 +48,7 @@ const ChatOptions = (props: Props) => {
       </div>
       <button className={`button__newchat`} onClick={() => router.push('/chatbot')}>Novo chat</button>
       <div className={`flex-1 flex-col px-3 text-nowrap ${props.activedOptions ? 'flex' : 'lg:flex hidden'}`}>
-        <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 border-secondary-color mb-1'>Seus chats:</h3>
+        <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 text-white border-secondary-color mb-1'>Seus chats:</h3>
         {conversations
           ? conversations.length === 0
             ? <p>Sem conversa</p>
@@ -62,8 +63,9 @@ const ChatOptions = (props: Props) => {
           : <p>carregando...</p>
         }
       </div>
+
       <div className='flex justify-between items-center px-3'>
-        <UserButton/>
+        <UserButton />
       </div>
     </div>
   )

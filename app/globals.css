@@ -403,11 +403,11 @@ body {
 /* Start: ChatBot styles */
 
 .chat__input-container {
-  @apply flex items-end bg-secondary-color py-2 px-4 rounded-3xl;
+  @apply flex items-end bg-userText-bg py-2 px-4 rounded-3xl;
 }
 
 .chat__input {
-  @apply flex-1 flex text-primary-bg py-2 px-4 resize-none overflow-hidden border-none rounded bg-transparent h-[10px] items-end;
+  @apply flex-1 flex text-white py-2 px-4 resize-none overflow-hidden border-none rounded bg-transparent h-[10px] items-end;
 }
 
 .chat__input:focus {
@@ -415,11 +415,11 @@ body {
 }
 
 .markdown-content {
-  @apply py-2 px-4 w-fit rounded-full text-[1.1em];
+  @apply py-2 px-4 w-fit rounded-3xl text-[1.1em];
 }
 
 .markdown-content-firstmessage {
-  @apply w-fit h-fit items-center text-center self-center text-[1.5em] px-[13%] mb-4;
+  @apply w-fit h-fit items-center text-center self-center text-white text-[1.5em] px-[13%] mb-4;
 }
 
 .markdown-content-firstmessage p {
@@ -427,11 +427,11 @@ body {
 }
 
 .markdown-content-user {
-  @apply bg-primary-green self-end mb-4;
+  @apply bg-userText-bg self-end mb-4 text-white;
 }
 
 .markdown-content-ai {
-  @apply text-left;
+  @apply text-left text-white;
 }
 
 .markdown-content-ai p {
@@ -456,11 +456,11 @@ ol {
 /* Start: ChatOptions styles */
 
 .chatOptions {
-  @apply gap-5 lg:relative h-screen padding-y flex flex-col border-solid border-secondary-color transition-all ease-in-out duration-300;
+  @apply gap-5 lg:relative h-screen padding-y flex flex-col border-solid border-secondary-color transition-all ease-in-out duration-300 bg-secundary-bg;
 }
 
 .chatbot__itens {
-  @apply relative flex rounded-lg w-full overflow-hidden px-2 text-black hover:bg-secondary-color transition-all gap-1 duration-150 justify-between items-center;
+  @apply relative flex rounded-lg w-full overflow-hidden px-2 hover:bg-secondary-color transition-all gap-1 duration-150 justify-between items-center;
 }
 
 .chatbot__itens-textlink {
@@ -468,23 +468,31 @@ ol {
 }
 
 .button__newchat {
-  @apply bg-secondary-color hover:bg-primary-green mx-3 px-3 py-2 rounded-xl transition-all duration-150 text-primary-bg text-nowrap w-[90%];
+  @apply bg-secundary-bg hover:bg-userText-bg border-2 border-userText-bg mx-3 px-3 py-2 rounded-xl transition-all duration-150 text-white text-nowrap w-[90%];
 }
 
 .chatbot__itens-text {
-  @apply text-transparent bg-clip-text bg-gradient-to-r from-black from-90% via-black via-90% to-transparent;
+  @apply text-transparent text-white bg-clip-text bg-gradient-to-r from-white from-90% via-white via-90% to-transparent;
 }
 
 .chatbot__itens:hover .chatbot__itens-text {
-  @apply font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary-bg from-80% via-primary-bg via-80% to-transparent;
+  @apply font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white from-80% via-white via-80% to-transparent;
 }
 
 .chatbot__itens-text-active .chatbot__itens-text {
-  @apply font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary-bg from-90% via-primary-bg via-90% to-transparent;
+  @apply font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white from-90% via-white via-90% to-transparent;
 }
 
 .chatbot__itens-button {
-  @apply hidden opacity-0 rounded-lg border-solid border-2 text-primary-bg transition-all duration-100 text-center hover:bg-primary-green;
+  @apply hidden opacity-0 rounded-lg border-solid border-2 text-white transition-all duration-100 text-center hover:bg-white;
+}
+
+.chatbot__SVG {
+  @apply fill-white p-[5px];
+}
+
+.chatbot__itens-button:hover .chatbot__SVG{
+  @apply fill-primary-bg;
 }
 
 .chatbot__itens:hover .chatbot__itens-button {
@@ -500,7 +508,7 @@ ol {
 }
 
 .DialogContent {
-  @apply bg-primary-bg rounded-lg shadow-md fixed top-1/2 left-1/2
+  @apply bg-userText-bg text-white rounded-lg shadow-md fixed top-1/2 left-1/2
   transform -translate-x-1/2 -translate-y-1/2 max-w-[110vh]
   max-h-[85vh] animate-[contentShow_150ms_cubic-bezier(0.16,1,0.3,1)];
 }
@@ -510,7 +518,7 @@ ol {
 }
 
 .DialogButton {
-  @apply hover:bg-primary-green px-3 py-2 rounded-lg;
+  @apply hover:bg-secondary-color px-3 py-2 rounded-lg;
 }
 
 .DialogTitle {
@@ -539,8 +547,8 @@ ol {
 }
 
 .AvatarImage {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   object-fit: cover;
   border-radius: inherit;
 }
@@ -571,11 +579,11 @@ ol {
 }
 
 .avatarbutton {
-  @apply hover:bg-secondary-color py-2 px-3 gap-2 rounded-lg items-center flex transition-all duration-150;
+  @apply hover:bg-secondary-color py-[.12rem] px-2 gap-2 w-full rounded-3xl items-center flex transition-all duration-150;
 }
 
 .avatarbutton h3 {
-  @apply text-[1em] text-black transition-all duration-150;
+  @apply text-[1em] text-white transition-all duration-150;
 }
 
 .avatarbutton:hover h3 {
@@ -583,7 +591,7 @@ ol {
 }
 
 .avatarbutton p {
-  @apply text-[0.8em] text-gray-600 transition-all duration-150;
+  @apply text-[0.8em] text-gray-300 transition-all duration-150;
 }
 
 .avatarbutton:hover p {

@@ -183,7 +183,7 @@ const Chat = (props: Props) => {
           />
           <button
             onClick={handleSendMessage}
-            className="ml-2 py-2 px-4 bg-primary-green text-white rounded-full disabled:bg-gray-400"
+            className="ml-2 py-2 px-4 bg-secondary-color text-white rounded-full disabled:bg-gray-400"
             disabled={loading}
           >
             {loading ? '...' : 'Send'}

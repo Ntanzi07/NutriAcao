@@ -17,3 +17,10 @@ export interface CustomCardProps {
 export interface OurValuesItenProps {
   text: string;
 }
+
+export type ArticleItem = {
+  id: string
+  title: string
+  date: string
+  category: string
+}

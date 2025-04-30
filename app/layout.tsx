@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ClerkProvider, SignedOut } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "NutriAção",
@@ -14,7 +15,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className="relative">
-          {children}
+        <ClerkProvider>
+          <SignedOut>
+            {children}
+          </SignedOut>
+        </ClerkProvider>
       </body>
     </html>
   );

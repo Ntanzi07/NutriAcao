@@ -1,15 +1,16 @@
 
 import { Footer, Navbar } from "@/components";
-import { Hero, About, Nutricionista, StartAI } from "@/components/home";
+import { Hero, About, Nutricionista, StartAI, Equipe } from "@/components/home";
 
 export default function Home() {
   return (
     <main className="overflow-hidden">
       <Navbar />
       <Hero />
-      <About />
-      <Nutricionista />
       <StartAI />
+      <About />
+      <Equipe />
+      <Nutricionista />
       <Footer />
     </main>
   );

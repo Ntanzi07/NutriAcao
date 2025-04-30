@@ -1,34 +1,124 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect } from 'react'
 import Image from 'next/image'
+import { SignInButton } from '@clerk/nextjs'
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
 
 const Nutricionista = () => {
+  const text = "Seus objetivos na saúde agora mesmo.";
+  const words = text.split(' ');
+
+  const [refH2, inViewH2] = useInView({ threshold: 0.5, triggerOnce: true });
+  const [refImg, inViewImg] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [refButtom, inViewButtom] = useInView({ threshold: 0.2, triggerOnce: true });
+
+  const controlsH2 = useAnimation();
+  const controlsImg = useAnimation();
+  const controlsButtom = useAnimation();
+
+  useEffect(() => {
+    if (inViewH2) controlsH2.start("visible");
+    if (inViewImg) controlsImg.start("visible");
+    if (inViewButtom) controlsButtom.start("visible");
+  }, [inViewH2, inViewImg, inViewButtom]);
+
+  const wordAnimation = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const container = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15, // Delay between each word
+      },
+    },
+  };
+
+  const appearBot = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const appear = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
   return (
-    <section className='relative bg-secondary-color z-[-2]'>
-      <Image src="/food.jpg" alt='food' fill className='object-cover z-[-1] brightness-[0.5]' />
-      <div className=' flex flex-col gap-10 padding-x py-16 z-10'>
-        <h1 className='nutri__title'>Seu Nutricionista Virtual <b>24/7</b></h1>
-        <div className='flex flex-wrap justify-around gap-10'>
-          <div className='nutri__text-container'>
-            <h2>Acesso Imediato</h2>
-            <p>
-              Obtenha respostas instantâneas para suas perguntas sobre nutrição a qualquer hora, em qualquer lugar.
-            </p>
-          </div>
-          <div className='nutri__text-container'>
-            <h2>Interativo e Engajador</h2>
-            <p>
-              Nossa tecnologia de IA simula uma conversa real com um nutricionista, tornando o aprendizado 
-              sobre nutrição divertido e acessível.
-            </p>
-          </div>
-          <div className='nutri__text-container'>
-            <h2>Suporte Personalizado</h2>
-            <p>
-              Nosso chat considera suas informações pessoais para oferecer conselhos adaptados,
-              ajudando você a tomar decisões alimentares mais informadas.
-            </p>
-          </div>
-        </div>
+    <section className='padding-x py-10 flex gap-10 h-screen'>
+      <div className='nutri__images-container'>
+        <motion.div
+          ref={refImg}
+          variants={appearBot}
+          transition={{ delay: 0, duration: 1 }}
+          initial="hidden"
+          animate={controlsImg}
+          className='relative w-full [grid-area:f1]'>
+          <Image src="/esporte1.jpg" alt='esporte1' fill className='nutri__images' />
+          <div className='noiseFull' />
+        </motion.div>
+        <motion.div
+          ref={refImg}
+          variants={appearBot}
+          transition={{ delay: .25, duration: 1 }}
+          initial="hidden"
+          animate={controlsImg}
+          className='relative [grid-area:f2]'>
+          <Image src="/esporte2.jpg" alt='esporte2' fill className='nutri__images' />
+          <div className='noiseFull' />
+        </motion.div>
+        <motion.div
+          ref={refImg}
+          variants={appearBot}
+          transition={{ delay: .5, duration: 1 }}
+          initial="hidden"
+          animate={controlsImg}
+          className='relative [grid-area:f3]'>
+          <Image src="/esporte3.jpg" alt='esporte3' fill className='nutri__images' />
+          <div className='noiseFull' />
+        </motion.div>
+      </div >
+      <div className='flex-[1.5] flex flex-col justify-center items-center gap-7'>
+        <motion.h2
+          ref={refH2}
+          variants={container}
+          initial="hidden"
+          animate={controlsH2} // useAnimation trigger here
+          className="nutri__text"
+        >
+          {words.map((word, index) => (
+            <motion.span
+              key={index}
+              variants={wordAnimation} // ONLY variants here
+              className="inline-block mr-5"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </motion.h2>
+        <SignInButton forceRedirectUrl="/chatbot">
+          <motion.button
+            ref={refButtom}
+            variants={appear}
+            transition={{ delay: 0, duration: 1 }}
+            initial="hidden"
+            animate={controlsButtom}
+            className='nutri__button'>
+            Testar IA
+          </motion.button>
+        </SignInButton>
       </div>
     </section>
   )

@@ -8,14 +8,21 @@ module.exports = {
   mode: "jit",
   theme: {
     extend: {
+      textStrokeWidth: {
+        DEFAULT: '1px',
+        2: '2px',
+        4: '4px',
+      },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        alumni: ['"Alumni Sans Pinstripe"', 'sans-serif'],
       },
       colors: {
         "black-100": "#2B2C35",
-        "primary-green": "#8FB339",
+        "primary-green": "#bfff91",
+        "primary-color": "#c6c99d",
         "secondary-color":"#70663e",
-        "primary-bg": "#f4f4eb",
+        "primary-bg": "rgba(15, 15, 15, 1)",
       },
       backgroundImage: {
         'pattern': "url('/pattern.png')",
@@ -23,5 +30,5 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-text-stroke')],
 };

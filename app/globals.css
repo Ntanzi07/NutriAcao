@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -45,62 +46,143 @@ body {
   display: none !important;
 }
 
+.noise::after{
+  content: "";
+  @apply absolute w-full h-full inset-0 mix-blend-overlay pointer-events-none rounded-3xl text-center opacity-[.7];
+  background: 
+  url("data:image/svg+xml;utf8,<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'><filter id='noiseFilter'><feTurbulence type='fractalNoise' baseFrequency='1.74' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noiseFilter)'/></svg>");
+}
+
+.noiseFull::after{
+  content: "";
+  @apply absolute w-full h-full inset-0 mix-blend-overlay pointer-events-none rounded-3xl text-center opacity-[1];
+  background: 
+  url("data:image/svg+xml;utf8,<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'><filter id='noiseFilter'><feTurbulence type='fractalNoise' baseFrequency='1.74' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noiseFilter)'/></svg>");
+}
+
 /* END: General styles */
 
 /* START: Hero styles */
 .hero {
-  @apply flex lg:flex-row flex-col relative h-screen justify-around items-center z-0 mx-auto;
+  @apply flex flex-col relative h-screen justify-around items-center z-0 mx-auto gap-10;
 }
 
 .hero__text-container {
-  @apply lg:flex-1 flex flex-col items-start justify-center padding-y padding-x;
+  @apply flex-1 flex h-full justify-center w-full flex-col padding-y padding-x;
 }
 
 .hero__title {
-  @apply 2xl:text-[4.5em] lg:text-[3.2em] text-[2.9em] text-primary-green;
+  @apply relative w-fit leading-[.6em] font-alumni ;
 }
 
 .hero__subtitle {
-  @apply text-[1.5em] text-secondary-color font-light mt-5;
+  @apply relative text-[1.3em] tracking-[1.3em] text-primary-green;
+}
+
+.MarqueeHero {
+  @apply top-[90%] absolute z-[-1];
+}
+
+.MarqueeHero::after {
+  content: "";
+  z-index: 1;
+  @apply w-full top-0 left-0 h-full absolute;
+  background-image: linear-gradient(90deg, rgba(15, 15, 15, 1) 0%, rgba(0, 0, 0, 0) 10%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0) 90%, rgba(15, 15, 15, 1) 100%);
 }
 
 .hero__video-container {
-  @apply xl:flex-[2] lg:flex-[1.4] flex w-full lg:h-[75vh] h-[40vh] overflow-hidden lg:rounded-l-3xl;
+  @apply absolute z-[-1] xl:flex-[2] right-[5%] flex h-[75vh] w-[60%];
+}
+
+.hero__video-container::after {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-full;
+  background: linear-gradient(90deg, rgba(15, 15, 15, 1) 20%, rgba(0, 0, 0, 0) 35%);
+}
+
+.noiseFilter{
+  @apply absolute w-full h-full inset-0 mix-blend-overlay pointer-events-none rounded-3xl;
+  background: 
+  url("data:image/svg+xml;utf8,<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'><filter id='noiseFilter'><feTurbulence type='fractalNoise' baseFrequency='1.74' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noiseFilter)'/></svg>");
 }
 
 .hero__video {
-  @apply object-cover w-full;
+  @apply object-cover w-full hue-rotate-[200deg] rounded-3xl;
 }
 
 /* END: Hero styles */
 
 /* START: Header styles */
 .header__button {
-  @apply text-secondary-color py-2 px-3 underline;
+  @apply relative text-white py-1 px-3 flex justify-center items-center overflow-visible bg-primary-bg;
+}
+
+.header__button::after {
+  content: "";
+  @apply absolute w-full h-full;
+  z-index: -1;
+  background-color: #99f5ff;
+  background-image:
+    radial-gradient(at 62% 16%, hsla(261, 77%, 78%, 1) 0px, transparent 50%),
+    radial-gradient(at 4% 29%, hsla(176, 86%, 79%, 1) 0px, transparent 50%),
+    radial-gradient(at 41% 42%, hsla(112, 90%, 69%, 1) 0px, transparent 50%),
+    radial-gradient(at 24% 19%, hsla(114, 80%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 85% 34%, hsla(244, 94%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 1% 43%, hsla(85, 88%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 38% 19%, hsla(312, 75%, 63%, 1) 0px, transparent 50%);
 
 }
 
-.header__button:hover {
-  @apply text-primary-bg bg-secondary-color
+.header__button:hover::after {
+  @apply top-1;
 }
 
 .header__button-login {
-  @apply text-primary-bg bg-secondary-color rounded-full py-2 px-6
+  @apply relative text-white bg-primary-bg rounded-full py-2 px-6 flex overflow-visible justify-center items-center;
+}
+
+.header__button-login:hover {
+  @apply text-primary-bg bg-black;
+  background-color: #99f5ff;
+  background-image:
+    radial-gradient(at 62% 16%, hsla(261, 77%, 78%, 1) 0px, transparent 50%),
+    radial-gradient(at 4% 29%, hsla(176, 86%, 79%, 1) 0px, transparent 50%),
+    radial-gradient(at 41% 42%, hsla(112, 90%, 69%, 1) 0px, transparent 50%),
+    radial-gradient(at 24% 19%, hsla(114, 80%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 85% 34%, hsla(244, 94%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 1% 43%, hsla(85, 88%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 38% 19%, hsla(312, 75%, 63%, 1) 0px, transparent 50%);
+}
+
+.header__button-login::after {
+  content: "";
+  @apply absolute w-[calc(100%+4px)] h-[calc(100%+4px)] rounded-full;
+  z-index: -1;
+  background-color: #99f5ff;
+  background-image:
+    radial-gradient(at 62% 16%, hsla(261, 77%, 78%, 1) 0px, transparent 50%),
+    radial-gradient(at 4% 29%, hsla(176, 86%, 79%, 1) 0px, transparent 50%),
+    radial-gradient(at 41% 42%, hsla(112, 90%, 69%, 1) 0px, transparent 50%),
+    radial-gradient(at 24% 19%, hsla(114, 80%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 85% 34%, hsla(244, 94%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 1% 43%, hsla(85, 88%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 38% 19%, hsla(312, 75%, 63%, 1) 0px, transparent 50%);
 }
 
 /* END: Header styles */
 
 /* START: Footer styles */
 .footer__button-email {
-  @apply text-primary-bg bg-primary-green rounded-full py-1 px-6
+  @apply text-primary-bg bg-white rounded-full py-1 px-6
 }
 
 .footer__text {
-  @apply text-primary-bg
+  @apply text-white
 }
 
 .footer__input {
-  @apply text-xl w-full border-solid border-b-2 border-primary-bg py-1 bg-transparent outline-none text-[18px] min-w-[250px];
+  @apply text-xl w-full border-solid border-b-2 border-white py-1 bg-transparent outline-none text-[18px] min-w-[250px];
 }
 
 .footer__label {
@@ -114,34 +196,125 @@ body {
 
 /* END: Footer styles */
 
+/* Start: Ai styles */
+.Ai__ImageContainer{
+  @apply inline w-full h-full z-[-1] rounded-3xl overflow-hidden;
+}
+
+.Ai__Image{
+  @apply rounded-3xl;
+}
+
+.Ai__TextContainer{
+  @apply flex w-full justify-center items-center flex-col gap-7 py-20;
+}
+
+.Ai__text{
+  @apply text-[4em] text-white mr-5;
+}
+
+.Ai__button {
+  @apply relative text-white text-[2em] bg-black  py-2 px-6 flex overflow-visible justify-center items-center transition-all ;
+}
+
+.Ai__button:hover {
+  @apply  bg-primary-bg;
+}
+
+/* .Ai__button::after {
+  content: "";
+  @apply absolute w-[calc(100%+4px)] h-[calc(100%+4px)] rounded-3xl;
+  z-index: -1;
+  background-color: #99f5ff;
+  background-image:
+    radial-gradient(at 62% 16%, hsla(261, 77%, 78%, 1) 0px, transparent 50%),
+    radial-gradient(at 4% 29%, hsla(176, 86%, 79%, 1) 0px, transparent 50%),
+    radial-gradient(at 41% 42%, hsla(112, 90%, 69%, 1) 0px, transparent 50%),
+    radial-gradient(at 24% 19%, hsla(114, 80%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 85% 34%, hsla(244, 94%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 1% 43%, hsla(85, 88%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 38% 19%, hsla(312, 75%, 63%, 1) 0px, transparent 50%);
+} */
+
+
+/* END: Ai  styles */
+
 /* Start: About styles */
+.about {
+  @apply flex flex-col justify-center gap-10 padding-x py-20;
+  /* background-color: #99ff9c;
+  background-image:
+    linear-gradient(180deg, rgba(15, 15, 15, 1) 0%, rgba(0, 0, 0, 0) 20%),
+    radial-gradient(at 4% 14%, hsla(103, 85%, 75%, 1) 0px, transparent 50%),
+    radial-gradient(at 55% 44%, hsla(192, 63%, 75%, 1) 0px, transparent 50%),
+    radial-gradient(at 74% 97%, hsla(150, 85%, 79%, 1) 0px, transparent 50%),
+    radial-gradient(at 61% 91%, hsla(183, 77%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 72% 86%, hsla(257, 98%, 64%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 26%, hsla(301, 81%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 88% 33%, hsla(255, 93%, 70%, 1) 0px, transparent 50%); */
+}
 
 .about__title {
-  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-green;
+  @apply text-[9em] w-[70%] text-primary-color italic leading-[1.1em];
 }
 
 .about__text-container {
-  @apply flex flex-col gap-5 lg:w-[350px] w-full text-secondary-color;
+  @apply flex flex-col gap-5 w-[35%] text-[1.5em] self-end text-justify text-primary-color;
 }
 
-.about__text-container h2 {
-  @apply 2xl:text-[2.5em] text-[2em];
+.about__video-container {
+  @apply relative flex h-[75vh] w-[100%] pl-[5%] items-center;
+}
+
+.about_noiseFilter{
+  @apply absolute w-full h-full inset-0 mix-blend-overlay pointer-events-none rounded-3xl text-center;
+  background: 
+  url("data:image/svg+xml;utf8,<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'><filter id='noiseFilter'><feTurbulence type='fractalNoise' baseFrequency='1.74' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noiseFilter)'/></svg>");
+}
+
+.about_video-text{
+  @apply relative text-white text-[10em] tracking-widest font-alumni italic;
+}
+
+.about_video-text::after{
+  content: "";
+  @apply absolute w-full h-[2px] bg-white bottom-[20%] left-0;
+}
+
+.about__video {
+  @apply absolute h-full left-0 top-0 object-cover w-full rounded-3xl;
 }
 
 /* END: About styles */
 
 /* Start: Nutricionista styles */
 
-.nutri__title {
-  @apply 2xl:text-[4em] lg:text-[3.2em] text-[2.9em] text-primary-bg;
+.nutri__images-container{
+  @apply relative grid flex-[1] gap-5;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+  "f1 f1 .  .  "
+  "f1 f1 f2 f2 "
+  "f1 f1 f2 f2 "
+  "f3 f3 f2 f2 "
+  "f3 f3 .  . ";
 }
 
-.nutri__text-container {
-  @apply flex flex-col gap-5 lg:w-[350px] w-full text-primary-bg;
+.nutri__images{
+  @apply saturate-0;
 }
 
-.nutri__text-container h2 {
-  @apply 2xl:text-[2.5em] text-[2em];
+.nutri__text{
+  @apply text-[3em] text-white text-center;
+}
+
+.nutri__button {
+  @apply relative text-white text-[2em] bg-black  py-2 px-6 flex overflow-visible justify-center items-center transition-all ;
+}
+
+.nutri__button:hover {
+  @apply  bg-primary-bg;
 }
 
 /* END: Nutricionista styles */
@@ -171,15 +344,15 @@ body {
 
 /* Start: equipe styles */
 .equipe {
-  @apply padding-x padding-y;
+  @apply padding-x pb-32;
 }
 
 .equipe__text {
-  @apply lg:text-[3.5em] text-[3em] text-primary-green;
+  @apply  text-[8em] text-secondary-color italic uppercase;
 }
 
 .equipe__card-container {
-  @apply w-full flex flex-row gap-5 flex-wrap justify-around;
+  @apply w-full flex gap-1;
 }
 
 /* END: equipe styles */
@@ -187,19 +360,19 @@ body {
 /* Start: cards styles */
 
 .card {
-  @apply flex flex-col gap-5 w-auto p-3 rounded-[1.75rem];
+  @apply flex flex-col w-fit p-3 ;
 }
 
 .card__image-container {
-  @apply relative w-[250px] h-[250px] overflow-hidden rounded-[1rem] justify-center;
+  @apply relative w-[300px] h-fit overflow-hidden justify-center;
 }
 
 .card__text-container {
-  @apply flex flex-col items-center justify-around text-secondary-color;
+  @apply flex flex-col justify-around;
 }
 
 .card__name {
-  @apply lg:text-[1.6em] text-[1.4em];
+  @apply text-[2.5em] text-white italic font-alumni;
 }
 
 /* END: cards styles */
@@ -234,9 +407,7 @@ body {
 }
 
 .chat__input {
-  @apply flex-1 flex text-primary-bg py-2 
-  px-4 resize-none overflow-hidden border-none 
-  rounded bg-transparent h-[10px] items-end;
+  @apply flex-1 flex text-primary-bg py-2 px-4 resize-none overflow-hidden border-none rounded bg-transparent h-[10px] items-end;
 }
 
 .chat__input:focus {
@@ -250,7 +421,8 @@ body {
 .markdown-content-firstmessage {
   @apply w-fit h-fit items-center text-center self-center text-[1.5em] px-[13%] mb-4;
 }
-.markdown-content-firstmessage p{
+
+.markdown-content-firstmessage p {
   @apply text-center;
 }
 
@@ -284,54 +456,47 @@ ol {
 /* Start: ChatOptions styles */
 
 .chatOptions {
-  @apply gap-5 lg:relative  h-screen padding-y 
-  flex flex-col border-solid
-  border-secondary-color transition-all ease-in-out duration-300;
+  @apply gap-5 lg:relative h-screen padding-y flex flex-col border-solid border-secondary-color transition-all ease-in-out duration-300;
 }
 
-.chatbot__itens{
-  @apply relative flex rounded-lg w-full overflow-hidden px-2 text-black
-  hover:bg-secondary-color transition-all gap-1 duration-150 justify-between items-center;
-}
-.chatbot__itens-textlink{
-  @apply flex-1  overflow-hidden py-2;
+.chatbot__itens {
+  @apply relative flex rounded-lg w-full overflow-hidden px-2 text-black hover:bg-secondary-color transition-all gap-1 duration-150 justify-between items-center;
 }
 
-.button__newchat{
-  @apply bg-secondary-color hover:bg-primary-green mx-3 px-3 py-2 rounded-xl 
-  transition-all duration-150 text-primary-bg text-nowrap w-[90%];
+.chatbot__itens-textlink {
+  @apply flex-1 overflow-hidden py-2;
 }
 
-.chatbot__itens-text{
-  @apply  text-transparent bg-clip-text 
-  bg-gradient-to-r from-black from-90% via-black via-90% to-transparent ;
+.button__newchat {
+  @apply bg-secondary-color hover:bg-primary-green mx-3 px-3 py-2 rounded-xl transition-all duration-150 text-primary-bg text-nowrap w-[90%];
 }
 
-.chatbot__itens:hover .chatbot__itens-text{
-  @apply font-semibold text-transparent bg-clip-text 
-  bg-gradient-to-r from-primary-bg from-80% via-primary-bg via-80% to-transparent ;
+.chatbot__itens-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-black from-90% via-black via-90% to-transparent;
 }
 
-.chatbot__itens-text-active .chatbot__itens-text{
-  @apply font-semibold text-transparent bg-clip-text 
-  bg-gradient-to-r from-primary-bg from-90% via-primary-bg via-90% to-transparent ;
+.chatbot__itens:hover .chatbot__itens-text {
+  @apply font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary-bg from-80% via-primary-bg via-80% to-transparent;
 }
 
-.chatbot__itens-button{
-  @apply hidden opacity-0 rounded-lg border-solid border-2 text-primary-bg
-  transition-all duration-100 text-center hover:bg-primary-green; 
+.chatbot__itens-text-active .chatbot__itens-text {
+  @apply font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary-bg from-90% via-primary-bg via-90% to-transparent;
 }
 
-.chatbot__itens:hover .chatbot__itens-button{
+.chatbot__itens-button {
+  @apply hidden opacity-0 rounded-lg border-solid border-2 text-primary-bg transition-all duration-100 text-center hover:bg-primary-green;
+}
+
+.chatbot__itens:hover .chatbot__itens-button {
   @apply inline opacity-100;
 }
 
 .DialogOverlay {
-	background-color: black;
+  background-color: black;
   opacity: 0.3;
-	position: fixed;
-	inset: 0;
-	animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .DialogContent {
@@ -339,8 +504,9 @@ ol {
   transform -translate-x-1/2 -translate-y-1/2 max-w-[110vh]
   max-h-[85vh] animate-[contentShow_150ms_cubic-bezier(0.16,1,0.3,1)];
 }
+
 .DialogContent:focus {
-	outline: none;
+  outline: none;
 }
 
 .DialogButton {
@@ -348,48 +514,48 @@ ol {
 }
 
 .DialogTitle {
-	margin: 0;
-	font-weight: 500;
-	font-size: 1.5rem;
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 
 .DialogDescription {
-	margin: 10px 0 20px;
-	font-size: 1.1rem;
-	line-height: 1.5;
+  margin: 10px 0 20px;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 
 .AvatarRoot {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	vertical-align: middle;
-	overflow: hidden;
-	user-select: none;
-	width: 55px;
-	height: 55px;
-	border-radius: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  overflow: hidden;
+  user-select: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 100%;
 }
 
 .AvatarImage {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .AvatarFallback {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-	color: var(--violet-11);
-	font-size: 15px;
-	line-height: 1;
-	font-weight: 500;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: var(--violet-11);
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 500;
 }
 
 .IconButton {
@@ -408,21 +574,24 @@ ol {
   @apply hover:bg-secondary-color py-2 px-3 gap-2 rounded-lg items-center flex transition-all duration-150;
 }
 
-.avatarbutton h3{
+.avatarbutton h3 {
   @apply text-[1em] text-black transition-all duration-150;
 }
-.avatarbutton:hover h3{
+
+.avatarbutton:hover h3 {
   @apply text-white;
 }
 
-.avatarbutton p{
+.avatarbutton p {
   @apply text-[0.8em] text-gray-600 transition-all duration-150;
 }
-.avatarbutton:hover p{
+
+.avatarbutton:hover p {
   @apply text-gray-300;
 }
 
 .userOptionButton {
-  @apply w-full  rounded-lg px-3 py-1 hover:bg-secondary-color hover:text-primary-bg transition-all duration-150;
+  @apply w-full rounded-lg px-3 py-1 hover:bg-secondary-color hover:text-primary-bg transition-all duration-150;
 }
+
 /* END: ChatOptions styles */

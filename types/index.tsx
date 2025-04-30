@@ -11,6 +11,7 @@ export interface CustomCardProps {
   name: string;
   style: string;
   path: string;
+  delay: number;
 }
 
 export interface OurValuesItenProps {

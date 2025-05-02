@@ -2,6 +2,7 @@
 
 import { ArrowLeftIcon } from "@radix-ui/react-icons"
 import { useTransitionRouter } from "next-view-transitions"
+import Image from 'next/image'
 
 
 type Props = {
@@ -13,7 +14,7 @@ type Props = {
     img: any,
 }
 
-const ArticleBlog = ({props}: Props) => {
+const ArticleBlog = (props: Props) => {
 
     const router = useTransitionRouter();
 
@@ -63,7 +64,12 @@ const ArticleBlog = ({props}: Props) => {
                     <ArrowLeftIcon width={20} height={20} />
                     <p>back to blog</p>
                 </a>
+                <p>{props.date.toString()}</p>
             </div>
+            <div className='relative w-full h-[400px] rounded-3xl'>
+                <Image src={`/${props.img}`} alt={`${props.img}`} fill className='object-cover' />
+            </div>
+            <article className="article" dangerouslySetInnerHTML={{__html: props.contentHtml}} />
         </div>
     )
 }

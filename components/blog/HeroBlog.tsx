@@ -5,10 +5,10 @@ type Props = {}
 
 const HeroBlog = (props: Props) => {
   return (
-    <div className='relative'>
-      <div className="flex items-center justify-center padding-x h-[50vh] ">
-        <Image src="/blog.jpg" alt='blogImg' fill className='relative object-cover' />
-        <h2 className="relative text-center text-white text-[10em] tracking-widest">Our <i>Blog.</i></h2>
+    <div className="relative h-[50vh] top-0">
+      <Image src="/blog.jpg" alt="blog" fill className="object-cover" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h2 className="text-center text-white text-[10em] tracking-widest">Our <i>Blog.</i></h2>
       </div>
     </div>
   )

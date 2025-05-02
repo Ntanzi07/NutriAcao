@@ -9,7 +9,7 @@ import type { ArticleItem } from "@/types"
 
 const articleDirectory = path.join(process.cwd(), "articles")
 
-const getSortedArticles = (): ArticleItem[] => {
+export const getSortedArticles = (): ArticleItem[] => {
     const fileNames = fs.readdirSync(articleDirectory)
 
     const allArticlesData = fileNames.map((fileName) => {
@@ -25,6 +25,7 @@ const getSortedArticles = (): ArticleItem[] => {
             title: matterResult.data.title,
             date: matterResult.data.date,
             category: matterResult.data.category,
+            img: matterResult.data.img,   
         }
     })
 
@@ -39,7 +40,20 @@ const getSortedArticles = (): ArticleItem[] => {
         } else {
             return 0
         }
-
     })
+}
+
+export const getCategorisedArticles = (): Record<string, ArticleItem[]> => {
+    const sortedArticles = getSortedArticles()
+    const categorisedArticles: Record<string, ArticleItem[]> = {}
+
+    sortedArticles.forEach((article) => {
+        if(!categorisedArticles[article.category]){
+            categorisedArticles[article.category] = []
+        }
+        categorisedArticles[article.category].push(article)
+    })
+
+    return categorisedArticles
 }
 

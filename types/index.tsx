@@ -23,4 +23,5 @@ export type ArticleItem = {
   title: string
   date: string
   category: string
+  img: string
 }

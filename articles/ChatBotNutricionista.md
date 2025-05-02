@@ -1,8 +1,9 @@
------
+---
 title: Como Criamos um ChatBot Nutricionista com Next.js, Clerk e Convex
 category: Desenvolvimento Web
 date: "2025-04-30"
------
+img: "artigo2.jpg"
+---
 
 ## Como Criamos um ChatBot Nutricionista com Next.js, Clerk e Convex
 

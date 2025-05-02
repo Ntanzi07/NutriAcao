@@ -15,8 +15,11 @@ module.exports = {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
-        alumni: ['"Alumni Sans Pinstripe"', 'sans-serif'],
-        STIX: ['"STIX Two Text"', 'serif'],
+        alumni: ["Alumni Sans Pinstripe", 'sans-serif'],
+        STIX: ["STIX Two Text", 'serif'],
+        Cormorant: ["Cormorant Garamond", 'serif'],
+        Poppins: ["Poppins", 'sans-serif'],
+
       },
       colors: {
         "black-100": "#2B2C35",

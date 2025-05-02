@@ -18,3 +18,5 @@ Estamos desenvolvendo um **ChatBot Nutricionista** com o objetivo de oferecer re
 O resultado está ficando bem interessante, e seguimos aprimorando com base em testes e feedbacks. Nossa ideia é lançar algo funcional e com valor real para quem busca auxílio nutricional com praticidade.
 
 Mais novidades em breve! 🚀
+
+![my img](https://wallpapers.com/images/high/4k-ultra-hd-landscape-wallpaper-rupqxofsbmbrbzod.webp)

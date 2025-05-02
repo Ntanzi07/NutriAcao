@@ -1,8 +1,5 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { getSortedArticles } from '@/app/api/APIarticles/articles'
+import { getSortedArticles } from '@/lib/articles'
 import { ItemBlog } from '.'
-
 
 type Props = {}
 

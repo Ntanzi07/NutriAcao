@@ -1,3 +1,4 @@
+'use client'
 
 import { Footer, Navbar } from "@/components";
 import { Hero, About, Nutricionista, StartAI, Equipe } from "@/components/home";

@@ -57,7 +57,7 @@ export const getCategorisedArticles = (): Record<string, ArticleItem[]> => {
     return categorisedArticles
 }
 
-export async function getArticleData(id: string) {
+export const getArticleData = async (id: string) => {
     const fullPath = path.join(articleDirectory, `${id}.md`)
 
     const fileContent = fs.readFileSync(fullPath, "utf-8")
@@ -79,27 +79,3 @@ export async function getArticleData(id: string) {
         img: matterResult.data.img,
     }
 }
-
-
-// export const getArticleData = async (id: string) => {
-//     const fullPath = path.join(articleDirectory, `${id}.md`)
-
-//     const fileContent = fs.readFileSync(fullPath, "utf-8")
-
-//     const matterResult = matter(fileContent)
-
-//     const processedContent = await remark()
-//         .use(html)
-//         .process(matterResult.content)
-
-//     const contentHtml = processedContent.toString()
-
-//     return {
-//         id,
-//         contentHtml,
-//         title: matterResult.data.title,
-//         date: moment(matterResult.data.date, "DD-MM-YYYY").format("MMMM Do YYYY"),
-//         category: matterResult.data.category,
-//         img: matterResult.data.img,
-//     }
-// }

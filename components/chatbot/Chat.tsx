@@ -47,10 +47,6 @@ const Chat = (props: Props) => {
   }, [input]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages])
-
-  useEffect(() => {
     if (!conversations) return
     
     if (!isWriting) {
@@ -84,29 +80,29 @@ const Chat = (props: Props) => {
   
     const userMessage = { role: 'user', content: input };
     const updatedMessages = [...messages, userMessage];
-    
+  
     setMessages(updatedMessages);
     setInput('');
     setLoading(true);
     setIsWriting(true);
   
-    let currentChatId = props.chatid; // Store the current chat ID
+    let currentChatId = props.chatid;
   
     try {
       // Handle new conversation case
       if (currentChatId === null) {
         const firstMessage = updatedMessages?.[1]?.content || "New Conversation!!";
-        
-        const conversation = await createConversation({ 
-          firstMessage, 
-          messages: updatedMessages 
+  
+        const conversation = await createConversation({
+          firstMessage,
+          messages: updatedMessages
         });
-        
-        currentChatId = conversation._id; // Update with the new ID
+  
+        currentChatId = conversation._id;
         router.push(`/chatbot?id=${currentChatId}`);
       }
   
-      // Get AI response
+      // Start streaming AI response
       const response = await fetch('/api/chat', {
         method: 'POST',
         body: JSON.stringify(updatedMessages),
@@ -132,20 +128,27 @@ const Chat = (props: Props) => {
           updatedMessages[updatedMessages.length - 1] = botMessage;
           return updatedMessages;
         });
-        
-        handleUpdate(currentChatId as Id<"conversations">, [...updatedMessages, botMessage]);
       }
+  
+      if (currentChatId !== null) {
+        await handleUpdate(currentChatId as Id<"conversations">, [
+          ...updatedMessages,
+          botMessage
+        ]);
+      }
+  
     } catch (error) {
       console.error('Error:', error);
-      setMessages((prev) => [...prev, { 
-        role: 'assistant', 
-        content: 'Error: Unable to fetch response.' 
+      setMessages((prev) => [...prev, {
+        role: 'assistant',
+        content: 'Error: Unable to fetch response.'
       }]);
     } finally {
       setLoading(false);
       setIsWriting(false);
     }
   };
+  
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -156,7 +159,7 @@ const Chat = (props: Props) => {
 
   return (
     <div className="flex flex-col w-full h-screen pb-10 items-center">
-      <div className='flex justify-center h-full w-full overflow-auto pt-20'>
+      <div data-lenis-prevent className='flex justify-center h-full w-full overflow-auto pt-20'>
         <div className={`flex max-w-[60rem] flex-col h-full rounded overflow-visible padding-x 
         ${(messages.length === 1) ? 'justify-center' : 'justify-start'}`
         }>
@@ -167,7 +170,6 @@ const Chat = (props: Props) => {
               </ReactMarkdown>
             </div>
           ))}
-          <div ref={messagesEndRef} />
         </div>
       </div>
 

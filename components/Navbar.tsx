@@ -5,8 +5,8 @@ import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
 
 const Navbar = () => {
   return (
-    <header className='w-full fixed top-0 left-0 z-10'>
-      <nav className='relative max-w-[1440px] mx-auto bg-primary-bg flex justify-between items-center sm:px-16 px-6 py-1 mt-2 rounded-full'>
+    <header className='w-full fixed top-0 left-0 z-10 bg-primary-bg'>
+      <nav className='relative max-w-[1440px] mx-auto  flex justify-between items-center sm:px-16 px-6 py-3 rounded-full'>
         <Link href="/" className="flex justify-center items-center">
           <Image
             src="/logo.png"

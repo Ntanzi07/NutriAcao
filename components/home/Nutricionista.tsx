@@ -57,7 +57,7 @@ const Nutricionista = () => {
   };
 
   return (
-    <section className='padding-x py-10 flex gap-10 h-screen'>
+    <section className='padding-x py-10 flex xl:flex-row flex-col gap-10 xl:h-screen h-[50vh] xl:bg-primary-bg bg-userText-bg'>
       <div className='nutri__images-container'>
         <motion.div
           ref={refImg}
@@ -102,7 +102,7 @@ const Nutricionista = () => {
             <motion.span
               key={index}
               variants={wordAnimation} // ONLY variants here
-              className="inline-block mr-5"
+              className="inline-block mr-5 leading-[1em]"
             >
               {word}
             </motion.span>

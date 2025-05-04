@@ -20,9 +20,7 @@ export default function RootLayout({
                 <ReactLenis root>
                     <body>
                         <ClerkProvider>
-                            <SignedOut>
-                                {children}
-                            </SignedOut>
+                            {children}
                         </ClerkProvider>
                     </body>
                 </ReactLenis>

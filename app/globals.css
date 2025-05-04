@@ -128,23 +128,43 @@ body {
 
 /* START: Hero styles */
 .hero {
-  @apply flex flex-col relative h-screen justify-around items-center z-0 mx-auto gap-10;
+  @apply flex flex-col relative lg:h-screen md:h-[75vh] h-[50vh] padding-x justify-around items-center z-0 mx-auto gap-10;
 }
 
 .hero__text-container {
-  @apply flex-1 flex h-full justify-center w-full flex-col padding-y padding-x;
+  @apply flex h-full items-center justify-between w-full flex-row;
 }
 
 .hero__title {
-  @apply relative w-fit leading-[.6em] font-alumni ;
+  @apply relative w-fit leading-[1em] font-alumni text-white italic tracking-widest xl:text-[16em] lg:text-[14em] md:text-[11em] text-[8em];
 }
 
 .hero__subtitle {
-  @apply relative text-[1.3em] tracking-[1.3em] text-primary-green;
+  @apply relative text-[1.3em] tracking-[1.3em] text-white;
+}
+
+.hero__video-container {
+  @apply relative flex h-screen w-[60%];
+}
+
+/* .hero__video-container::after {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-full;
+  background: linear-gradient(90deg, rgba(15, 15, 15, 1) 20%, rgba(0, 0, 0, 0) 35%);
+} */
+
+/* .noiseFilter{
+  @apply absolute w-full h-full inset-0 mix-blend-overlay pointer-events-none rounded-3xl;
+  background: 
+  url("data:image/svg+xml;utf8,<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'><filter id='noiseFilter'><feTurbulence type='fractalNoise' baseFrequency='1.74' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noiseFilter)'/></svg>");
+} */
+
+.hero__video {
+  @apply object-cover w-full hue-rotate-[200deg] rounded-3xl;
 }
 
 .MarqueeHero {
-  @apply top-[90%] absolute z-[-1];
+  @apply bottom-[5%] absolute z-[-1] bg-primary-bg py-5;
 }
 
 .MarqueeHero::after {
@@ -153,26 +173,6 @@ body {
   @apply w-full top-0 left-0 h-full absolute;
   background-image: linear-gradient(90deg, rgba(15, 15, 15, 1) 0%, rgba(0, 0, 0, 0) 10%),
     linear-gradient(90deg, rgba(0, 0, 0, 0) 90%, rgba(15, 15, 15, 1) 100%);
-}
-
-.hero__video-container {
-  @apply absolute z-[-1] xl:flex-[2] right-[5%] flex h-[75vh] w-[60%];
-}
-
-.hero__video-container::after {
-  content: "";
-  @apply absolute top-0 left-0 w-full h-full;
-  background: linear-gradient(90deg, rgba(15, 15, 15, 1) 20%, rgba(0, 0, 0, 0) 35%);
-}
-
-.noiseFilter{
-  @apply absolute w-full h-full inset-0 mix-blend-overlay pointer-events-none rounded-3xl;
-  background: 
-  url("data:image/svg+xml;utf8,<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'><filter id='noiseFilter'><feTurbulence type='fractalNoise' baseFrequency='1.74' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noiseFilter)'/></svg>");
-}
-
-.hero__video {
-  @apply object-cover w-full hue-rotate-[200deg] rounded-3xl;
 }
 
 /* END: Hero styles */
@@ -274,7 +274,7 @@ body {
 }
 
 .Ai__text{
-  @apply text-[4em] text-white mr-5;
+  @apply lg:text-[4em] text-[2.5em] text-center flex flex-wrap gap-x-5 justify-center text-white;
 }
 
 .Ai__button {
@@ -319,15 +319,15 @@ body {
 }
 
 .about__title {
-  @apply text-[9em] w-[70%] text-primary-color italic leading-[1.1em];
+  @apply 2xl:text-[8em] md:text-[6em] text-[4.5em] xl:w-[70%] text-primary-color italic leading-[1.1em];
 }
 
 .about__text-container {
-  @apply flex flex-col gap-5 w-[35%] text-[1.5em] self-end text-justify text-primary-color;
+  @apply flex flex-col gap-5 lg:w-[25em] lg:text-[1.5em] text-[1.3em] lg:self-end text-justify text-primary-color;
 }
 
 .about__video-container {
-  @apply relative flex h-[75vh] w-[100%] pl-[5%] items-center;
+  @apply relative flex lg:h-[75vh] h-[30em]  w-[100%] pl-[5%] items-center;
 }
 
 .about_noiseFilter{
@@ -337,7 +337,7 @@ body {
 }
 
 .about_video-text{
-  @apply relative text-white text-[10em] tracking-widest font-alumni italic;
+  @apply relative text-white lg:text-[10em] text-[5em] tracking-widest font-alumni italic;
 }
 
 .about_video-text::after{
@@ -354,7 +354,7 @@ body {
 /* Start: Nutricionista styles */
 
 .nutri__images-container{
-  @apply relative grid flex-[1] gap-5;
+  @apply hidden relative xl:grid w-[40em] gap-5;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
@@ -406,17 +406,24 @@ body {
 
 /* END: whoweare styles */
 
+/* Start: blogHome styles */
+
+.blogHome__itensContent{
+  @apply mx-auto xl:columns-4 md:columns-2;
+}
+/* END: blogHome styles */
+
 /* Start: equipe styles */
 .equipe {
-  @apply padding-x pb-32;
+  @apply padding-x py-20;
 }
 
 .equipe__text {
-  @apply  text-[8em] text-secondary-color italic uppercase;
+  @apply  lg:text-[5em] text-[3.5em] text-white font-Poppins font-semibold uppercase;
 }
 
 .equipe__card-container {
-  @apply w-full flex gap-1;
+  @apply w-full 2xl:columns-5 lg:columns-4 md:columns-3 sm:columns-2 gap-3;
 }
 
 /* END: equipe styles */
@@ -424,11 +431,11 @@ body {
 /* Start: cards styles */
 
 .card {
-  @apply flex flex-col w-fit p-3 ;
+  @apply relative flex flex-col w-fit px-3 h-fit mx-auto;
 }
 
 .card__image-container {
-  @apply relative w-[300px] h-fit overflow-hidden justify-center;
+  @apply relative w-full overflow-hidden justify-center;
 }
 
 .card__text-container {
@@ -436,7 +443,7 @@ body {
 }
 
 .card__name {
-  @apply text-[2.5em] text-white italic font-alumni;
+  @apply text-[2.5em] text-white italic leading-[1em] font-alumni;
 }
 
 /* END: cards styles */

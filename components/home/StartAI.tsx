@@ -73,7 +73,7 @@ const StartAI = () => {
             <motion.span
               key={index}
               variants={wordAnimation} // ONLY variants here
-              className="inline-block mr-5"
+              className="inline-block"
             >
               {word}
             </motion.span>

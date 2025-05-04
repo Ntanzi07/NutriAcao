@@ -55,19 +55,28 @@ const Equipe = () => {
           <motion.span
             key={index}
             variants={wordAnimation} // ONLY variants here
-            className="inline-block mr-14"
+            className="inline-block xl:mr-14 lg:mr-8 mr-5"
           >
             {word}
           </motion.span>
         ))}
       </motion.h2>
       <div className='equipe__card-container'>
-        <Cards name="Amanda Silva" path="Amanda.jpg" delay={0.5} style="object-[50%_70%]  " />
-        <Cards name="João Pedro" path="Joao.jpg" delay={0.3} style="object-[0%_75%]" />
-        <Cards name="Leonardo Godinho" path="Leo.jpg" delay={0.9} style="object-[0%_60%]" />
-        <Cards name="Marisol Marques" path="Marisol.jpg" delay={1.2} style="object-[0%_10%] " />
-        <Cards name="Nathan Tanzi" path="Nathan.jpg" delay={1.5} style="object-[0%_30%] backdrop-contrast-[.9] saturate-[1.3]" />
-      </div>
+        <div className="break-inside-avoid my-auto">
+          <Cards name="Amanda Silva" path="Amanda.jpg" delay={0} style="object-[50%_70%]" />
+        </div>
+        <div className="break-inside-avoid my-auto">
+          <Cards name="João Pedro" path="Joao.jpg" delay={0} style="object-[0%_75%]" />
+        </div>
+        <div className="break-inside-avoid my-auto">
+          <Cards name="Leonardo Godinho" path="Leo.jpg" delay={0} style="object-[0%_60%]" />
+        </div>
+        <div className="break-inside-avoid my-auto">
+          <Cards name="Marisol Marques" path="Marisol.jpg" delay={0} style="object-[0%_10%]" />
+        </div>
+        <div className="break-inside-avoid my-auto">
+          <Cards name="Nathan Tanzi" path="Nathan.jpg" delay={0} style="object-[0%_30%] backdrop-contrast-[.9] saturate-[1.3]" />
+        </div></div>
     </section>
   )
 }

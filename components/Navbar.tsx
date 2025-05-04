@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import CustomButton from './CustomButton'
 import Link from 'next/link'
-import { SignInButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
 
 const Navbar = () => {
   return (
@@ -18,9 +17,16 @@ const Navbar = () => {
           />
         </Link>
         <div className='relative flex flex-row gap-2 z-[1] items-center'>
-          <SignInButton forceRedirectUrl="/chatbot">
-            <button className='header__button-login'>Sign in</button>
-          </SignInButton>
+          <SignedOut>
+            <SignInButton forceRedirectUrl="/chatbot">
+              <button className='header__button-login'>Sign in</button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <SignInButton forceRedirectUrl="/chatbot">
+              <button className='header__button-login'>Seu Chat</button>
+            </SignInButton>
+          </SignedIn>
         </div>
       </nav>
     </header>

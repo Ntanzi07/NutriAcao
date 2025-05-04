@@ -1,18 +1,12 @@
-'use client'
-
-import { Footer, Navbar } from "@/components";
-import { Hero, About, Nutricionista, StartAI, Equipe } from "@/components/home";
+import { getSortedArticles } from "@/lib/articles";
+import HomePage from "./HomePage";
 
 export default function Home() {
+  const articles = getSortedArticles().slice(0,4);
+  
   return (
     <main className="overflow-hidden">
-      <Navbar />
-      <Hero />
-      <StartAI />
-      <About />
-      <Equipe />
-      <Nutricionista />
-      <Footer />
+      <HomePage articles={articles}/>
     </main>
   );
 }

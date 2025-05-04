@@ -18,9 +18,7 @@ export default function RootLayout({
             <html lang="pt-br">
                 <body>
                     <ClerkProvider>
-                        <SignedOut>
-                            {children}
-                        </SignedOut>
+                        {children}
                     </ClerkProvider>
                 </body>
             </html>

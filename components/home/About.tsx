@@ -113,7 +113,7 @@ const About = () => {
         initial="hidden"
         animate={controlsVideo} // useAnimation trigger here
         className="about__video-container">
-        <video src={require('../../public/videos/heroVideo.mp4')}
+        <video src={'heroVideo.mp4'}
           autoPlay
           muted
           playsInline

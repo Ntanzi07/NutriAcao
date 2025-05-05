@@ -7,6 +7,7 @@ import DMConversationItem from './DMConversationItem'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import UserButton from './UserButton'
+import Link from 'next/link'
 
 
 type Props = {
@@ -64,7 +65,13 @@ const ChatOptions = (props: Props) => {
         }
       </div>
 
-      <div className='flex justify-between items-center px-3'>
+      <div className='flex flex-col justify-between items-center px-3 gap-4'>
+        <Link href="/blog" 
+        className="flex w-full px-3 py-2 justify-center 
+        text-[1.3em] text-white hover:text-primary-bg 
+        hover:bg-secondary-color transition-all rounded-2xl">
+          <button>Nosso Blog</button>
+        </Link>
         <UserButton />
       </div>
     </div>

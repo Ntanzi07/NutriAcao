@@ -15,8 +15,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ViewTransitions>
-            <html lang="pt-br">
+        <html lang="pt-br">
+            <ViewTransitions>
                 <ReactLenis root>
                     <body>
                         <ClerkProvider>
@@ -24,7 +24,7 @@ export default function RootLayout({
                         </ClerkProvider>
                     </body>
                 </ReactLenis>
-            </html>
-        </ViewTransitions>
+            </ViewTransitions>
+        </html>
     );
 }

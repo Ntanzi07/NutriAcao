@@ -58,7 +58,7 @@ body {
 }
 
 .article > h1{
-  @apply font-STIX text-5xl text-center tracking-tight font-bold my-3;
+  @apply font-STIX md:text-5xl text-4xl md:text-center tracking-tight font-bold my-3;
 }
 
 .article > h2{
@@ -66,7 +66,7 @@ body {
 }
 
 .article > ol{
-  @apply list-decimal flex flex-col mx-10 gap-2;
+  @apply list-decimal flex flex-col mx-10 gap-2 text-justify;
 }
 
 .article > ul{
@@ -478,11 +478,11 @@ body {
 }
 
 .markdown-content-firstmessage {
-  @apply w-fit h-fit items-center text-center self-center text-white text-[1.5em] px-[13%] mb-4;
+  @apply w-fit h-fit items-center self-center text-white sm:text-[1.5em] text-[5vw] sm:px-[13%] px-4 mb-4;
 }
 
 .markdown-content-firstmessage p {
-  @apply text-center;
+  @apply sm:text-center;
 }
 
 .markdown-content-user {

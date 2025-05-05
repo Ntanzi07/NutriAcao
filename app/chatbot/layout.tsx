@@ -14,14 +14,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ViewTransitions>
-            <html lang="pt-br">
+        <html lang="pt-br">
+            <ViewTransitions>
                 <body>
                     <ClerkProvider>
                         {children}
                     </ClerkProvider>
                 </body>
-            </html>
-        </ViewTransitions>
+            </ViewTransitions>
+        </html>
     );
 }

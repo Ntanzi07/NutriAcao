@@ -16,7 +16,7 @@ const HomePage = (props: Props) => {
             <StartAI />
             <About />
             <NossoBlog articles={props.articles}/>
-            <Equipe />
+            {/* <Equipe /> */}
             <Nutricionista />
             <Footer />
         </section>

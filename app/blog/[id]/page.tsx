@@ -1,6 +1,6 @@
 
-import ArticleBlog from "./ArticleBlog";
-import { getArticleData, getSortedArticles } from "@/lib/articles";
+//import ArticleBlog from "./ArticleBlog";
+//import { getArticleData, getSortedArticles } from "@/lib/articles";
 
 type ArticleProps = {
   params: {

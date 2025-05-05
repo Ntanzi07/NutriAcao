@@ -74,7 +74,7 @@ const ItemBlog = ({ article }: Props) => {
                 hidden: { opacity: 0, y: 50 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
             }}
-            className='w-[55vw] min-w-[35em] flex flex-col gap-3'>
+            className='md:w-[55vw] w-[90vw] md:min-w-[35em] flex flex-col gap-3'>
 
             <a onClick={(e) => {
                 e.preventDefault();
@@ -84,10 +84,10 @@ const ItemBlog = ({ article }: Props) => {
                 });
             }}
                 href={`/blog/${article.id}`}>
-                <h2 className='font-STIX text-[3em] leading-[1em] padding-x hover:text-gray-300'>{article.title}</h2>
+                <h2 className='font-STIX sm:text-[3em] text-[8vw]  leading-[1em] md:padding-x hover:text-gray-300'>{article.title}</h2>
             </a>
-            <p className='text-[1em] tracking-widest italic padding-x'>-{article.category}</p>
-            <div className='relative w-full h-[400px] rounded-3xl'>
+            <p className='sm:text-[1em] text-[3vw] tracking-widest italic sm:padding-x'>-{article.category}</p>
+            <div className='relative w-full md:h-[400px] h-[50vw] rounded-3xl'>
                 <Image src={`/${article.img}`} alt={`${article.img}`} fill className='object-cover' />
             </div>
         </motion.div>

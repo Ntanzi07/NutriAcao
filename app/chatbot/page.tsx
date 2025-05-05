@@ -17,9 +17,9 @@ function ChatBotContent() {
   return (
     <main className="flex items-start overflow-hidden bg-secundary-bg">
       <ChatOptions chatid={id} activedOptions={activedOptions} setOptions={changeOption} />
-      <div className='flex items-center px-3 padding-y'>
+      <div className='absolute flex items-center my-4 bg-primary-bg z-0'>
         <button 
-          className={`rounded-full ${activedOptions ? 'hidden rotate-180' : 'rotate-0'}`} 
+          className={` pl-2 ${activedOptions ? 'hidden rotate-180' : 'rotate-0'}`} 
           onClick={() => setActivedOptions(!activedOptions)}
         >
           <svg width="60" height="60" className="fill-secondary-color" viewBox="0 0 128 128">

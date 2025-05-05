@@ -102,7 +102,7 @@ const Nutricionista = () => {
             <motion.span
               key={index}
               variants={wordAnimation} // ONLY variants here
-              className="inline-block mr-5 leading-[1em]"
+              className="inline-block leading-[1em]"
             >
               {word}
             </motion.span>

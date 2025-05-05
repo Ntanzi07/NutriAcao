@@ -55,7 +55,7 @@ const Equipe = () => {
           <motion.span
             key={index}
             variants={wordAnimation} // ONLY variants here
-            className="inline-block xl:mr-14 lg:mr-8 mr-5"
+            className="inline-block mr-5 leading-[1em]"
           >
             {word}
           </motion.span>

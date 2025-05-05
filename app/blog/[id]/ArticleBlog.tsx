@@ -66,7 +66,7 @@ const ArticleBlog = (props: Props) => {
                 </a>
                 <p>{props.date.toString()}</p>
             </div>
-            <div className='relative w-full h-[400px] rounded-3xl'>
+            <div className='relative w-full md:h-[400px] h-[40vw] rounded-3xl'>
                 <Image src={`/${props.img}`} alt={`${props.img}`} fill className='object-cover' />
             </div>
             <article className="article" dangerouslySetInnerHTML={{__html: props.contentHtml}} />

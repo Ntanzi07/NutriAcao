@@ -20,7 +20,7 @@ const ChatOptions = (props: Props) => {
   const router = useRouter();
 
   return (
-    <div className={`chatOptions overflow-hidden w-[18rem]
+    <div className={`chatOptions z-[1] overflow-hidden w-[18rem]
       ${props.activedOptions
         ? 'lg:w-[400px] left-0 border-r-[2px]'
         : 'lg:left-0 lg:w-0 left-[-18rem] border-r-0'

@@ -54,7 +54,7 @@ body {
 }
 
 .article > p > img {
-  @apply w-2/3 mx-auto;
+  @apply md:w-2/3 w-full mx-auto;
 }
 
 .article > h1{
@@ -128,19 +128,19 @@ body {
 
 /* START: Hero styles */
 .hero {
-  @apply flex flex-col relative 
-  xl:h-screen md:h-[75vh] h-[50vh] 
+  @apply flex flex-col relative h-screen
   padding-x xl:pt-0 md:pt-[2em] pt-[3em] 
-  justify-around items-center z-0 mx-auto gap-10;
+  justify-around items-center z-0 mx-auto gap-10
+  overflow-hidden;
 }
 
 .hero__text-container {
-  @apply flex h-full items-center justify-between w-full flex-row;
+  @apply flex h-full md:items-center items-end md:justify-between justify-center gap-4 w-full flex-row;
 }
 
 .hero__title {
   @apply relative w-fit leading-[1em] font-alumni text-white italic tracking-widest
-  xl:text-[16em] md:text-[10em] text-[4.5em];
+  xl:text-[16em] md:text-[10em] text-[20vw];
 }
 
 .hero__subtitle {
@@ -148,7 +148,7 @@ body {
 }
 
 .hero__imgContent{
-  @apply absolute xl:w-[40em] md:w-[30em] w-[15em] z-[-1] md:h-[90%] h-[80%]  bottom-0;
+  @apply md:absolute relative xl:w-[40em] md:w-[30em] w-[80vw] z-[-1] md:h-[90%] h-[200vh]  bottom-0;
 }
 
 .MarqueeHero {
@@ -315,7 +315,7 @@ body {
 }
 
 .about__video-container {
-  @apply relative flex lg:h-[75vh] h-[30em]  w-[100%] pl-[5%] items-center;
+  @apply relative flex lg:h-[75vh] h-[30em] w-[100%] pl-[5%] md:justify-start justify-center items-center;
 }
 
 .about_noiseFilter{
@@ -325,7 +325,7 @@ body {
 }
 
 .about_video-text{
-  @apply relative text-white lg:text-[10em] text-[5em] tracking-widest font-alumni italic;
+  @apply relative text-white lg:text-[10em] text-[14vw] tracking-widest font-alumni italic;
 }
 
 .about_video-text::after{
@@ -358,7 +358,7 @@ body {
 }
 
 .nutri__text{
-  @apply text-[3em] text-white text-center;
+  @apply md:text-[3em] text-[10vw] flex flex-row gap-5 flex-wrap justify-center  text-white text-center;
 }
 
 .nutri__button {
@@ -407,7 +407,7 @@ body {
 }
 
 .equipe__text {
-  @apply  lg:text-[5em] text-[3.5em] text-white font-Poppins font-semibold uppercase;
+  @apply  lg:text-[5em] text-[3.5em] font-Poppins leading-[1em] font-semibold text-white uppercase overflow-hidden;
 }
 
 .equipe__card-container {
@@ -515,7 +515,7 @@ ol {
 /* Start: ChatOptions styles */
 
 .chatOptions {
-  @apply gap-5 lg:relative h-screen padding-y flex flex-col border-solid border-secondary-color transition-all ease-in-out duration-300 bg-secundary-bg;
+  @apply gap-5 lg:relative absolute h-screen padding-y flex flex-col border-solid border-secondary-color transition-all ease-in-out duration-300 bg-secundary-bg;
 }
 
 .chatbot__itens {
@@ -543,11 +543,7 @@ ol {
 }
 
 .chatbot__itens-button {
-  @apply hidden opacity-0 rounded-lg border-solid border-2 text-white transition-all duration-100 text-center hover:bg-white;
-}
-
-.chatbot__SVG {
-  @apply fill-white p-[5px];
+  @apply sm:hidden inline sm:opacity-0 opacity-100 rounded-lg  text-white transition-all duration-100 text-center hover:bg-userText-bg;
 }
 
 .chatbot__itens-button:hover .chatbot__SVG{

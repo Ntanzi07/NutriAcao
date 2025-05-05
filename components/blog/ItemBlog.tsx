@@ -87,8 +87,8 @@ const ItemBlog = ({ article }: Props) => {
                 <h2 className='font-STIX sm:text-[3em] text-[8vw]  leading-[1em] md:padding-x hover:text-gray-300'>{article.title}</h2>
             </a>
             <p className='sm:text-[1em] text-[3vw] tracking-widest italic sm:padding-x'>-{article.category}</p>
-            <div className='relative w-full md:h-[400px] h-[50vw] rounded-3xl'>
-                <Image src={`/${article.img}`} alt={`${article.img}`} fill className='object-cover' />
+            <div className='relative w-full'>
+                <img src={`${article.img}`} alt={`${article.img}`}  className='w-full md:h-[400px] h-[50vw] object-cover' />
             </div>
         </motion.div>
     );

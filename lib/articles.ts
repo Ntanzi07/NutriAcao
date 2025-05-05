@@ -74,7 +74,7 @@ export const getArticleData = async (id: string) => {
         id,
         contentHtml,
         title: matterResult.data.title,
-        date: moment(matterResult.data.date, "DD-MM-YYYY").format("MMMM Do YYYY"),
+        date: moment(matterResult.data.date, "YYYY-MM-DD").format("MMMM Do YYYY"),
         category: matterResult.data.category,
         img: matterResult.data.img,
     }

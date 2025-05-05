@@ -87,7 +87,7 @@ const NossoBlog = ({ articles }: Props) => {
                             key={index}
                             className='break-inside-avoid flex flex-col gap-2 mb-5'>
                             <div className='relative overflow-hidden'>
-                                <Image src={`/${item.img}`} alt={`${item.img}`} height={500} width={1000} className='object-fill' />
+                                <img src={`${item.img}`} alt={`${item.img}`} className='relative object-fill' />
                                 <motion.div
                                     variants={disappearRight}
                                     transition={{ delay: .5, duration: 1.5 }}

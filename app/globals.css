@@ -58,11 +58,11 @@ body {
 }
 
 .article > h1{
-  @apply font-Cormorant text-5xl text-center tracking-tight font-bold mb-3;
+  @apply font-STIX text-5xl text-center tracking-tight font-bold my-3;
 }
 
 .article > h2{
-  @apply font-Cormorant text-5xl tracking-tight font-bold mb-3;
+  @apply font-STIX text-3xl tracking-tight font-bold mb-3 mt-5;
 }
 
 .article > ol{
@@ -307,7 +307,7 @@ body {
 }
 
 .about__title {
-  @apply 2xl:text-[8em] md:text-[6em] text-[4.5em] xl:w-[70%] text-primary-color italic leading-[1.1em];
+  @apply 2xl:text-[8em] md:text-[6em] text-[13vw] xl:w-[70%] text-primary-color italic leading-[1.1em];
 }
 
 .about__text-container {
@@ -397,7 +397,7 @@ body {
 /* Start: blogHome styles */
 
 .blogHome__itensContent{
-  @apply mx-auto xl:columns-4 md:columns-2;
+  @apply mx-auto xl:columns-4 w-full md:columns-2;
 }
 /* END: blogHome styles */
 

@@ -60,7 +60,7 @@ const StartAI = () => {
   };
 
   return (
-    <section className=' bg-secondary-color'>
+    <section className='overflow-hidden bg-secondary-color'>
       <div className='Ai__TextContainer'>
         <motion.h2
           ref={refH2}

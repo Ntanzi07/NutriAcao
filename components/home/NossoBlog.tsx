@@ -48,10 +48,10 @@ const NossoBlog = ({ articles }: Props) => {
 
     const disappearRight = {
         hidden: {
-            x:0
+            x: 0
         },
         visible: {
-            x:"100%"
+            x: "100%"
         },
     }
 
@@ -82,34 +82,34 @@ const NossoBlog = ({ articles }: Props) => {
             <div ref={refImg} className='blogHome__itensContent gap-10 sm:px-0'>
                 {
                     articles.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            className='break-inside-avoid flex flex-col gap-2 mb-5'>
-                            <div className='relative overflow-hidden'>
-                                <img src={`${item.img}`} alt={`${item.img}`} className='relative object-fill' />
+                        <Link href={`/blog/${item.id}`} className="">
+                            <motion.div
+                                key={index}
+                                className='break-inside-avoid flex flex-col gap-2 mb-5'>
+                                <div className='relative overflow-hidden'>
+                                    <img src={`${item.img}`} alt={`${item.img}`} className='relative object-fill' />
+                                    <motion.div
+                                        variants={disappearRight}
+                                        transition={{ delay: .5, duration: 1.5 }}
+                                        initial="hidden"
+                                        animate={controlsImg}
+                                        className='absolute h-full w-full bg-primary-bg top-0 right-0'
+                                    />
+                                </div>
                                 <motion.div
-                                    variants={disappearRight}
-                                    transition={{ delay: .5, duration: 1.5 }}
+                                    variants={appear}
+                                    transition={{ delay: .5, duration: 1 }}
                                     initial="hidden"
                                     animate={controlsImg}
-                                    className='absolute h-full w-full bg-primary-bg top-0 right-0'
-                                />
-                            </div>
-                            <motion.div
-                                variants={appear}
-                                transition={{ delay: .5, duration: 1 }}
-                                initial="hidden"
-                                animate={controlsImg}
-                                className='flex flex-col gap-2'>
-                                <Link href={`/blog/${item.id}`} className="flex justify-center items-center pt-3">
-                                    <h2 className='text-[1.8em] leading-[1.2em] font-STIX hover:text-gray-400'>{item.title}</h2>
-                                </Link>
-                                <div className='flex justify-between gap-2 items-center text-[1em]'>
-                                    <p className='tracking-[.15em] italic'>-{item.category}</p>
-                                    <p className='italic'>{item.date}</p>
-                                </div>
+                                    className='flex flex-col gap-2'>
+                                    <h2 className='text-[1.8em] leading-[1.2em] font-STIX hover:text-gray-400 mt-2'>{item.title}</h2>
+                                    <div className='flex justify-between gap-2 text-[1em]'>
+                                        <p className='tracking-[.15em] italic'>-{item.category}</p>
+                                        <p className='italic flex-1 text-right'>{item.date}</p>
+                                    </div>
+                                </motion.div>
                             </motion.div>
-                        </motion.div>
+                        </Link>
                     ))
                 }
             </div>

@@ -588,24 +588,19 @@ ol {
   line-height: 1.5;
 }
 
-
 .AvatarRoot {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
   overflow: hidden;
   user-select: none;
-  width: 55px;
-  height: 55px;
+  width: fit-content;
+  height: fit-content;
   border-radius: 100%;
 }
 
 .AvatarImage {
-  width: 80%;
-  height: 80%;
-  object-fit: cover;
-  border-radius: inherit;
+  @apply object-cover w-[45px] h-[45px];
 }
 
 .AvatarFallback {
@@ -634,11 +629,11 @@ ol {
 }
 
 .avatarbutton {
-  @apply hover:bg-secondary-color py-[.12rem] px-2 gap-2 w-full rounded-3xl items-center flex transition-all duration-150;
+  @apply hover:bg-secondary-color py-[.4rem] px-2 gap-2 w-full rounded-3xl items-center flex transition-all duration-150;
 }
 
 .avatarbutton h3 {
-  @apply text-[1em] text-white transition-all duration-150;
+  @apply text-[1em] text-white transition-all duration-150 text-left;
 }
 
 .avatarbutton:hover h3 {
@@ -646,7 +641,7 @@ ol {
 }
 
 .avatarbutton p {
-  @apply text-[0.8em] text-gray-300 transition-all duration-150;
+  @apply text-[.75em] text-gray-300 transition-all duration-150;
 }
 
 .avatarbutton:hover p {

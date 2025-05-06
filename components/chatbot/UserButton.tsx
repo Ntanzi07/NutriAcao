@@ -31,7 +31,7 @@ const UserButton = (props: Props) => {
       }, []);
 
     return (
-        <div ref={dropdownRef} className="relative inline-block text-left w-full">
+        <div ref={dropdownRef} className="relative inline-block w-full ">
             <button onClick={handleToggle} className="avatarbutton">
                 <Avatar.Root className="AvatarRoot">
                     <Avatar.Image
@@ -43,9 +43,9 @@ const UserButton = (props: Props) => {
                         {user?.username.charAt(0)}
                     </Avatar.Fallback>
                 </Avatar.Root>
-                <div className="flex text-nowrap flex-col items-start">
-                    <h3>{user?.username}</h3>
-                    <p>{user?.email}</p>
+                <div className="relative flex flex-col">
+                    <h3 className=''>{user?.username}</h3>
+                    <p className=''>{user?.email}</p>
                 </div>
             </button>
 

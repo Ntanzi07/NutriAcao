@@ -65,9 +65,9 @@ const ChatOptions = (props: Props) => {
         }
       </div>
 
-      <div className='flex flex-col justify-between items-center px-3 gap-4'>
+      <div className='flex flex-col justify-between items-center px-3 gap-1 '>
         <Link href="/blog" 
-        className="flex w-full px-3 py-2 justify-center 
+        className="flex w-full px-3 justify-center 
         text-[1.3em] text-white hover:text-primary-bg 
         hover:bg-secondary-color transition-all rounded-2xl">
           <button>Nosso Blog</button>

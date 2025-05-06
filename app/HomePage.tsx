@@ -1,7 +1,7 @@
 'use client'
 
 import { Footer, Navbar } from "@/components";
-import { Hero, About, Nutricionista, StartAI, Equipe, NossoBlog } from "@/components/home";
+import { Hero, About, Nutricionista, StartAI, NossoBlog } from "@/components/home";
 import { ArticleItem } from "@/types";
 
 type Props = {
@@ -16,7 +16,6 @@ const HomePage = (props: Props) => {
             <StartAI />
             <About />
             <NossoBlog articles={props.articles}/>
-            {/* <Equipe /> */}
             <Nutricionista />
             <Footer />
         </section>

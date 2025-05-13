@@ -554,6 +554,20 @@ ol {
   @apply inline opacity-100;
 }
 
+.typing-animation {
+  display: inline-block;
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .DialogOverlay {
   background-color: black;
   opacity: 0.3;

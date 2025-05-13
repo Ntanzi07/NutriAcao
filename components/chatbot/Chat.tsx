@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { api } from '@/convex/_generated/api';
 import React, { useEffect, useRef, useState } from 'react';
@@ -18,20 +18,19 @@ interface Message {
 const Chat = (props: Props) => {
   const user = useQuery(api.my.get);
 
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>([
+  const [messages, setMessages] = useState<Message[]>([
     {
       role: "system",
-      content:
-        "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
+      content: "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
     }
   ]);
+  const [displayedMessages, setDisplayedMessages] = useState<Message[]>(messages);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [isWriting, setIsWriting] = useState(false);
-  
+
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const conversations = useQuery(api.conversations.get);
   const createConversation = useMutation(api.convertation.create);
@@ -40,7 +39,7 @@ const Chat = (props: Props) => {
   const adjustHeight = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "10px";
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Expand dynamically
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   };
 
@@ -49,29 +48,38 @@ const Chat = (props: Props) => {
   }, [input]);
 
   useEffect(() => {
-    if (!conversations) return
-    
+    if (!conversations) return;
     if (!isWriting) {
-      const foundConversation = conversations?.find(c => c._id === props.chatid);
-
-      if (foundConversation) {
-        setMessages(foundConversation.messages);
-      } else {
-        setMessages([{
-          role: "system",
-          content:
-            "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
-        }]);
-      }
+      const foundConversation = conversations.find(c => c._id === props.chatid);
+      const defaultMsg = [{
+        role: "system",
+        content: "Olá Meu nome é Sarah, sua IA nutricionista, estou aqui para te ajudar com qualquer duvida!!",
+      }];
+      const newMessages = foundConversation ? foundConversation.messages : defaultMsg;
+      setMessages(newMessages);
+      setDisplayedMessages(newMessages);
     }
   }, [props.chatid, conversations]);
 
+  const animateWords = async (text: string) => {
+    const words = text.split(' ');
+    let current = '';
+
+    for (let i = 0; i < words.length; i++) {
+      current += (i > 0 ? ' ' : '') + words[i];
+      await new Promise(res => setTimeout(res, 100)); // control speed here
+
+      setDisplayedMessages(prev => {
+        const newMsgs = [...prev];
+        newMsgs[newMsgs.length - 1] = { role: 'assistant', content: current };
+        return newMsgs;
+      });
+    }
+  };
+
   const handleUpdate = async (idchat: Id<"conversations">, newMessages: Message[]) => {
     try {
-      await updateMessage({
-        conversationId: idchat,
-        messages: newMessages
-      });
+      await updateMessage({ conversationId: idchat, messages: newMessages });
     } catch (error) {
       console.error("Failed to update messages:", error);
     }
@@ -79,82 +87,66 @@ const Chat = (props: Props) => {
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
-  
+
     const userMessage = { role: 'user', content: input };
     const updatedMessages = [...messages, userMessage];
-  
     setMessages(updatedMessages);
+    setDisplayedMessages(updatedMessages);
     setInput('');
     setLoading(true);
     setIsWriting(true);
-  
+
     let currentChatId = props.chatid;
-  
+
     try {
-      // Handle new conversation case
       if (currentChatId === null) {
-        const firstMessage = updatedMessages?.[1]?.content || "New Conversation!!";
-  
+        const firstMessage = updatedMessages[1]?.content || "New Conversation";
         const conversation = await createConversation({
           firstMessage,
-          messages: updatedMessages
+          messages: updatedMessages,
         });
-  
         currentChatId = conversation._id;
         router.push(`/chatbot?id=${currentChatId}`);
       }
-  
-      // Start streaming AI response
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userInfos: user,
-          message: updatedMessages
-        }),
+        body: JSON.stringify({ userInfos: user, message: updatedMessages }),
       });
-  
+
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-  
+
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      let botMessage = { role: 'assistant', content: '' };
-  
-      setMessages((prev) => [...prev, botMessage]);
-  
+      let fullMessage = '';
+
       while (true) {
         const { value, done } = await reader?.read() ?? {};
         if (done) break;
-  
-        botMessage.content += decoder.decode(value, { stream: true });
-  
-        setMessages((prev) => {
-          const updatedMessages = [...prev];
-          updatedMessages[updatedMessages.length - 1] = botMessage;
-          return updatedMessages;
-        });
+        fullMessage += decoder.decode(value, { stream: true });
       }
-  
-      if (currentChatId !== null) {
-        await handleUpdate(currentChatId as Id<"conversations">, [
-          ...updatedMessages,
-          botMessage
-        ]);
+
+      const botMessage = { role: 'assistant', content: fullMessage };
+      const newMessageList = [...updatedMessages, botMessage];
+      setMessages(newMessageList);
+      setDisplayedMessages([...updatedMessages, { role: 'assistant', content: '' }]);
+      await animateWords(fullMessage);
+
+      if (currentChatId) {
+        await handleUpdate(currentChatId as Id<"conversations">, newMessageList);
       }
-  
+
     } catch (error) {
       console.error('Error:', error);
-      setMessages((prev) => [...prev, {
-        role: 'assistant',
-        content: 'Error: Unable to fetch response.'
-      }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Erro ao buscar resposta.' }]);
+      setDisplayedMessages(prev => [...prev, { role: 'assistant', content: 'Erro ao buscar resposta.' }]);
     } finally {
       setLoading(false);
       setIsWriting(false);
     }
   };
-  
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -165,17 +157,28 @@ const Chat = (props: Props) => {
 
   return (
     <div className="flex flex-col w-full h-screen pb-10 items-center">
-      <div data-lenis-prevent className='flex justify-center h-full w-full overflow-auto pt-20'>
-        <div className={`flex max-w-[60rem] flex-col h-full rounded overflow-visible padding-x 
-        ${(messages.length === 1) ? 'justify-center' : 'justify-start'}`
-        }>
-          {messages.map((msg, index) => (
-            <div key={index} className={`${index === 0 ? 'markdown-content-firstmessage' : 'markdown-content'} ${msg.role === 'user' ? 'markdown-content-user' : 'markdown-content-ai'}`}>
-              <ReactMarkdown>
+      <div data-lenis-prevent className='flex flex-col-reverse items-center h-full w-full overflow-auto pt-10'>
+        <div className={`flex max-w-[60rem] flex-col-reverse h-max overflow-visible padding-x my-auto
+        ${(messages.length === 1) ? 'justify-center' : 'justify-start'}`}>
+          {displayedMessages.map((msg, index) => (
+            <div
+              key={index}
+              className={`
+                ${index === 0 ? 'markdown-content-firstmessage' : 'markdown-content'}
+                ${msg.role === 'user' ? 'markdown-content-user' : 'markdown-content-ai'}
+              `}
+            >
+              <ReactMarkdown
+                components={{
+                  text: ({ node, children }) => (
+                    <span className="inline-block animate-fade">{children}</span>
+                  )
+                }}
+              >
                 {msg.content}
               </ReactMarkdown>
             </div>
-          ))}
+          )).reverse()}
         </div>
       </div>
 

@@ -82,9 +82,8 @@ const NossoBlog = ({ articles }: Props) => {
             <div ref={refImg} className='blogHome__itensContent gap-10 sm:px-0'>
                 {
                     articles.map((item, index) => (
-                        <Link href={`/blog/${item.id}`} className="">
+                        <Link key={index} href={`/blog/${item.id}`} className="">
                             <motion.div
-                                key={index}
                                 className='break-inside-avoid flex flex-col gap-2 mb-5'>
                                 <div className='relative overflow-hidden'>
                                     <img src={`${item.img}`} alt={`${item.img}`} className='relative object-fill' />

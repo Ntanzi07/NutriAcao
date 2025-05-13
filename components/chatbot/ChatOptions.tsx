@@ -54,7 +54,7 @@ const ChatOptions = (props: Props) => {
         <h3 className='px-2 tracking-[0.2em] text-[1.2em] border-b-2 text-white border-secondary-color mb-1'>Seus chats:</h3>
         {conversations
           ? conversations.length === 0
-            ? <p>Sem conversa</p>
+            ? <p className='text-white'>Sem conversa</p>
             : conversations.map((conversations) => {
               return <DMConversationItem
                 key={conversations._id}
@@ -68,7 +68,6 @@ const ChatOptions = (props: Props) => {
       </div>
 
       <div className='flex flex-col justify-between items-center px-3 gap-1 '>
-        <UserButton />
 
         <Dialog.Root>
           <Dialog.Trigger asChild>
@@ -89,6 +88,8 @@ const ChatOptions = (props: Props) => {
           className="w-full px-3 text-[1.2em] text-white hover:bg-secondary-color transition-all rounded-md">
           <button>Nosso Blog</button>
         </Link>
+
+        <UserButton />
       </div>
     </div>
   )

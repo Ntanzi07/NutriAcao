@@ -9,6 +9,13 @@ type Props = {}
 
 const UserButton = (props: Props) => {
     const user = useQuery(api.my.get);
+    let userName = user?.username;
+
+    if(user){
+        const userNameParts = user.username.split(" ")
+        userName = userNameParts[0] + " " + userNameParts[1]
+    }
+
     const { signOut, openUserProfile } = useClerk();
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -44,7 +51,7 @@ const UserButton = (props: Props) => {
                     </Avatar.Fallback>
                 </Avatar.Root>
                 <div className="relative flex flex-col">
-                    <h3 className=''>{user?.username}</h3>
+                    <h3 className=''>{userName}</h3>
                     <p className=''>{user?.email}</p>
                 </div>
             </button>

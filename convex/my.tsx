@@ -8,7 +8,7 @@ export const get = query({
         const identity = await ctx.auth.getUserIdentity();
 
         if (!identity) {
-            throw new ConvexError("Unautthorized");
+            throw new ConvexError("Unauthorized");
         }
 
         const currentUser = await getUserByClerkId({
@@ -20,9 +20,13 @@ export const get = query({
         }
 
         const user = await ctx.db
-        .query("users")
-        .withIndex("by_clerkId", q => q.eq("clerkId", identity.subject))
-        .unique();
+            .query("users")
+            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+            .unique();
+
+        if (!user) {
+            throw new ConvexError("User not found");
+        }
 
         return user;
     },
@@ -41,7 +45,7 @@ export const update = mutation({
             proteinas: v.number(),
             gorduras: v.number(),
             calorias: v.number(),
-          })
+        })
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -58,7 +62,7 @@ export const update = mutation({
             throw new ConvexError("User not founded")
         }
 
-        await ctx.db.patch(currentUser._id, { 
+        await ctx.db.patch(currentUser._id, {
             idade: args.idade,
             altura: args.altura,
             sexo: args.sexo,

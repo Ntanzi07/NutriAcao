@@ -16,6 +16,8 @@ interface Message {
 }
 
 const Chat = (props: Props) => {
+  const user = useQuery(api.my.get);
+
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([
     {
       role: "system",
@@ -105,8 +107,12 @@ const Chat = (props: Props) => {
       // Start streaming AI response
       const response = await fetch('/api/chat', {
         method: 'POST',
-        body: JSON.stringify(updatedMessages),
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userInfos: user,
+          message: updatedMessages
+        }),
       });
   
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);

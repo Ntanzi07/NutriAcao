@@ -5,7 +5,31 @@ import OpenAI from "openai";
 const model = "gpt-4o"
 
 export async function POST(req: Request) {
-  const messages = await req.json();
+  const request = await req.json();
+  
+  const user = request.userInfos;
+  const messagesUser = request.message;
+
+
+  const messages = [
+    {
+      role: "system",
+      content: "You are a nutritionist and you should never talk about anything other than general health.",
+    },
+    {
+      role: "user",
+      content: `caso nessesario, lembrese que meus dados: 
+        TDEE =  ${user?.TDEE} 
+        TMB = ${user?.TMB} 
+        altura =  ${user?.altura} 
+        idade =  ${user?.idade} 
+        peso =  ${user?.peso} 
+        sexo =  ${user?.sexo}`
+
+    },
+    ...messagesUser
+  ]
+
   const client = new OpenAI({
     baseURL: "https://models.inference.ai.azure.com",
     apiKey: process.env.GITHUB_TOKEN

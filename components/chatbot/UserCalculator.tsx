@@ -1,14 +1,14 @@
 'use client'
 
 import { api } from '@/convex/_generated/api';
-import { useMutation } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { Dialog, Separator } from 'radix-ui';
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
 
 type Props = {}
 
 const UserCalculator = (props: Props) => {
-
+  const user = useQuery(api.my.get);
 
   const [customOption1, setCustomOption1] = useState(0);
   const [customOption2, setCustomOption2] = useState(0);
@@ -16,30 +16,30 @@ const UserCalculator = (props: Props) => {
   const updateUserinfos = useMutation(api.my.update);
 
   const [form, setForm] = useState({
-    sexo: "masculino",
-    peso: "70",
-    altura: "175",
-    idade: "25",
-    atividadeDiaria: 0,
-    freqMusculacao: "3",
-    duracaoMusculacao: "60",
-    intensidadeMusculacao: 0,
-    freqAerobico: "2",
-    duracaoAerobico: "30",
-    intensidadeAerobico: 0,
-    proteinaPorKg: 0,
-    gorduraPorKg: 0,
+    sexo: user?.sexo || "",
+    peso: user?.peso || "",
+    altura: user?.altura || "",
+    idade: user?.idade || "",
+    atividadeDiaria: -1,
+    freqMusculacao: "0",
+    duracaoMusculacao: "0",
+    intensidadeMusculacao: -1,
+    freqAerobico: "0",
+    duracaoAerobico: "0",
+    intensidadeAerobico: -1,
+    proteinaPorKg: -1,
+    gorduraPorKg: -1,
   });
 
   const [result, setResult] = useState({
-    carboidratos: 0,
-    proteinas: 0,
-    gorduras: 0,
-    calorias: 0,
+    carboidratos: user?.results?.carboidratos || 0,
+    proteinas: user?.results?.proteinas || 0,
+    gorduras: user?.results?.gorduras || 0,
+    calorias: user?.results?.calorias || 0,
   });
 
-  const [resultado, setResultado] = useState(0);
-  const [TMB, setTMB] = useState(0);
+  const [resultado, setResultado] = useState(user?.TDEE || 0);
+  const [TMB, setTMB] = useState(user?.TMB || 0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -139,6 +139,10 @@ const UserCalculator = (props: Props) => {
 
   return (
     <section className="py-5 flex-1 padding-x flex flex-col">
+
+
+
+
       <Dialog.Title className="md:text-[1.5em] text-[1.4em] font-bold">
         Calculadora de TDEE
       </Dialog.Title>
@@ -442,7 +446,7 @@ const UserCalculator = (props: Props) => {
       <Dialog.Close asChild>
         <button
           onClick={calcularTDEE}
-          className="mt-6 bg-primary-color text-primary-bg px-4 py-2 rounded hover:bg-blue-700"
+          className="mt-6 bg-primary-color text-primary-bg px-4 py-2 rounded hover:bg-userText-bg hover:text-primary-color border-2 border-primary-color "
         >
           Calcular TDEE
         </button>

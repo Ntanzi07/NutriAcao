@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import UserButton from './UserButton'
 import Link from 'next/link'
+import { Dialog } from 'radix-ui'
+import UserCalculator from './UserCalculator'
 
 
 type Props = {
@@ -66,13 +68,27 @@ const ChatOptions = (props: Props) => {
       </div>
 
       <div className='flex flex-col justify-between items-center px-3 gap-1 '>
-        <Link href="/blog" 
-        className="flex w-full px-3 justify-center 
-        text-[1.3em] text-white hover:text-primary-bg 
-        hover:bg-secondary-color transition-all rounded-2xl">
+        <UserButton />
+
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <button
+              className='w-full text-[1.2em] flex px-3 text-white hover:bg-secondary-color transition-all rounded-md'>
+              <span className=''>Calculadora</span>
+            </button>
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Dialog.Overlay className="DialogOverlay" />
+            <Dialog.Content data-lenis-prevent className="DialogContent overflow-y-auto md:w-[90vw] w-[90vw] z-50 ">
+              <UserCalculator />
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+
+        <Link href="/blog"
+          className="w-full px-3 text-[1.2em] text-white hover:bg-secondary-color transition-all rounded-md">
           <button>Nosso Blog</button>
         </Link>
-        <UserButton />
       </div>
     </div>
   )

@@ -20,15 +20,15 @@ const UserCalculator = (props: Props) => {
     peso: user?.peso || "",
     altura: user?.altura || "",
     idade: user?.idade || "",
-    atividadeDiaria: -1,
-    freqMusculacao: "0",
-    duracaoMusculacao: "0",
-    intensidadeMusculacao: -1,
-    freqAerobico: "0",
-    duracaoAerobico: "0",
-    intensidadeAerobico: -1,
-    proteinaPorKg: -1,
-    gorduraPorKg: -1,
+    atividadeDiaria: user?.infos?.atividadeDiaria ||  -1,
+    freqMusculacao: user?.infos?.freqMusculacao || "0",
+    duracaoMusculacao: user?.infos?.duracaoMusculacao || "0",
+    intensidadeMusculacao: user?.infos?.intensidadeMusculacao || -1,
+    freqAerobico: user?.infos?.freqAerobico ||  "0",
+    duracaoAerobico: user?.infos?.duracaoAerobico || "0",
+    intensidadeAerobico: user?.infos?.intensidadeAerobico || -1,
+    proteinaPorKg: user?.infos?.proteinaPorKg || -1,
+    gorduraPorKg: user?.infos?.gorduraPorKg || -1,
   });
 
   const [result, setResult] = useState({
@@ -75,6 +75,8 @@ const UserCalculator = (props: Props) => {
       freqAerobico,
       duracaoAerobico,
       intensidadeAerobico,
+      proteinaPorKg,
+      gorduraPorKg,
     } = form;
 
     const pesoNum = parseFloat(peso);
@@ -132,7 +134,18 @@ const UserCalculator = (props: Props) => {
       peso,
       TMB: TMBupttaded,
       TDEE,
-      results: result
+      results: result,
+      infos: {
+        atividadeDiaria: atividadeDiaria,
+        freqMusculacao: freqMusculacao,
+        duracaoMusculacao: duracaoMusculacao,
+        intensidadeMusculacao: intensidadeMusculacao,
+        freqAerobico: freqAerobico,
+        duracaoAerobico: duracaoAerobico,
+        intensidadeAerobico: intensidadeAerobico,
+        proteinaPorKg: proteinaPorKg,
+        gorduraPorKg: gorduraPorKg,
+      }
     });
 
   };
@@ -140,8 +153,31 @@ const UserCalculator = (props: Props) => {
   return (
     <section className="py-5 flex-1 padding-x flex flex-col">
 
-
-
+      <div className='w-full my-10'>
+        <h2 className='md:text-[1.5em] text-[1.4em] font-bold'>Seus Resultados</h2>
+        <div className='flex gap-3 flex-wrap '>
+          <div className="border-solid  border-[1px] flex-1 w-max rounded-2xl border-secondary-color p-5">
+            <h3 className=''>TDEE</h3>
+            <h2 className='text-[1.4em]'>{user?.TDEE?.toFixed(2)}</h2>
+          </div>
+          <div className="border-solid  border-[1px] flex-1 w-max rounded-2xl border-secondary-color p-5">
+            <h3 className=''>TMB</h3>
+            <h2 className='text-[1.4em]'>{user?.TMB}</h2>
+          </div>
+          <div className="border-solid  border-[1px] flex-1 w-max rounded-2xl border-secondary-color p-5">
+            <h3 className=''>Idade</h3>
+            <h2 className='text-[1.4em]'>{user?.idade}</h2>
+          </div>
+          <div className="border-solid  border-[1px] flex-1 w-max rounded-2xl border-secondary-color p-5">
+            <h3 className=''>Peso</h3>
+            <h2 className='text-[1.4em]'>{user?.peso}</h2>
+          </div>
+          <div className="border-solid  border-[1px] flex-1 w-max rounded-2xl border-secondary-color p-5">
+            <h3 className=''>Altura</h3>
+            <h2 className='text-[1.4em]'>{user?.altura}</h2>
+          </div>
+        </div>
+      </div>
 
       <Dialog.Title className="md:text-[1.5em] text-[1.4em] font-bold">
         Calculadora de TDEE
@@ -353,6 +389,7 @@ const UserCalculator = (props: Props) => {
                   type="radio"
                   name="proteinaPorKg"
                   value={1.6}
+                  checked={form.proteinaPorKg === 1.6}
                   onChange={(e) => setForm({ ...form, proteinaPorKg: Number(e.target.value) })}
                 />
                 1.6 gramas de proteína por kg
@@ -362,6 +399,7 @@ const UserCalculator = (props: Props) => {
                   type="radio"
                   name="proteinaPorKg"
                   value={1.8}
+                  checked={form.proteinaPorKg === 1.8}
                   onChange={(e) => setForm({ ...form, proteinaPorKg: Number(e.target.value) })}
                 />
                 1.8 gramas de proteína por kg
@@ -371,6 +409,7 @@ const UserCalculator = (props: Props) => {
                   type="radio"
                   name="proteinaPorKg"
                   value={2}
+                  checked={form.proteinaPorKg === 2}
                   onChange={(e) => setForm({ ...form, proteinaPorKg: Number(e.target.value) })}
                 />
                 2 gramas de proteína por kg
@@ -443,14 +482,14 @@ const UserCalculator = (props: Props) => {
           </div>
         </fieldset>
       </div>
-      <Dialog.Close asChild>
-        <button
-          onClick={calcularTDEE}
-          className="mt-6 bg-primary-color text-primary-bg px-4 py-2 rounded hover:bg-userText-bg hover:text-primary-color border-2 border-primary-color "
-        >
-          Calcular TDEE
-        </button>
-      </Dialog.Close>
+
+      <button
+        onClick={calcularTDEE}
+        className="mt-6 bg-primary-color text-primary-bg px-4 py-2 rounded hover:bg-userText-bg hover:text-primary-color border-2 border-primary-color "
+      >
+        Calcular TDEE
+      </button>
+
     </section>
   );
 }

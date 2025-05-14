@@ -40,12 +40,23 @@ export const update = mutation({
         peso: v.optional(v.string()),
         TMB: v.optional(v.number()),
         TDEE: v.optional(v.number()),
-        results: v.object({
+        results: v.optional(v.object({
             carboidratos: v.number(),
             proteinas: v.number(),
             gorduras: v.number(),
             calorias: v.number(),
-        })
+        })),
+        infos: v.optional(v.object({
+            atividadeDiaria: v.number(),
+            freqMusculacao: v.string(),
+            duracaoMusculacao: v.string(),
+            intensidadeMusculacao: v.number(),
+            freqAerobico: v.string(),
+            duracaoAerobico: v.string(),
+            intensidadeAerobico: v.number(),
+            proteinaPorKg: v.number(),
+            gorduraPorKg: v.number(),
+        }))
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -69,7 +80,8 @@ export const update = mutation({
             peso: args.peso,
             TMB: args.TMB,
             TDEE: args.TDEE,
-            results: args.results
+            results: args.results,
+            infos: args.infos,
         });
 
     }

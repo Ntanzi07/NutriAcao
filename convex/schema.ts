@@ -23,6 +23,17 @@ export default defineSchema({
       proteinas: v.number(),
       gorduras: v.number(),
       calorias: v.number(),
+    })),
+    infos: v.optional(v.object({
+      atividadeDiaria: v.number(),
+      freqMusculacao: v.string(),
+      duracaoMusculacao: v.string(),
+      intensidadeMusculacao: v.number(),
+      freqAerobico: v.string(),
+      duracaoAerobico: v.string(),
+      intensidadeAerobico: v.number(),
+      proteinaPorKg: v.number(),
+      gorduraPorKg: v.number(),
     }))
   })
     .index("by_email", ["email"])

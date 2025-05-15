@@ -3,6 +3,7 @@ import "./globals.css";
 import { ClerkProvider, SignedOut } from "@clerk/nextjs";
 import { ViewTransitions } from "next-view-transitions"
 import { ReactLenis } from '../util/lenis'
+import Head from "next/head";
 
 export const metadata: Metadata = {
     title: "NutriAção",

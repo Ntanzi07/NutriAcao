@@ -1,6 +1,6 @@
-# NutriView
+# NutriAção
 
-NutriView é um site/aplicativo voltado para promover hábitos alimentares saudáveis e auxiliar usuários a adotarem uma rotina nutricional equilibrada. O objetivo principal do projeto é educar e inspirar as pessoas a cuidarem melhor da sua saúde por meio da alimentação. O público-alvo inclui interessados em nutrição, dietas balanceadas, bem como profissionais da área de saúde e fitness que desejam acompanhar conteúdo e dicas de alimentação saudável.
+NutriAção é um site/aplicativo voltado para promover hábitos alimentares saudáveis e auxiliar usuários a adotarem uma rotina nutricional equilibrada. O objetivo principal do projeto é educar e inspirar as pessoas a cuidarem melhor da sua saúde por meio da alimentação. O público-alvo inclui interessados em nutrição, dietas balanceadas, bem como profissionais da área de saúde e fitness que desejam acompanhar conteúdo e dicas de alimentação saudável.
 
 ## Tecnologias Utilizadas
 

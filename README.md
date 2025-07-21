@@ -25,3 +25,5 @@ O projeto foi desenvolvido com as seguintes tecnologias e frameworks principais:
 - 🗃️ Backend serverless com Convex (opcional).
 
 Ou utilize a seção de Issues para sugestões e bugs.
+
+
